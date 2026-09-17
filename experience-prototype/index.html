@@ -1614,7 +1614,7 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
   <span id="globalBackText">BACK</span>
 </a>
-<a class="site-home" id="siteHome" href="../touch-hands/" aria-label="トップページへ戻る">HOME</a>
+<a class="site-home" id="siteHome" href="../" aria-label="トップページへ戻る">HOME</a>
 
 <div class="stage">
   <canvas id="canvas"></canvas>
@@ -4459,7 +4459,7 @@ updateCmpBadge();
   const index=document.getElementById('workIndex');
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
-  document.getElementById('siteHome').href='../touch-hands/';
+  document.getElementById('siteHome').href='../';
   const route=(name,value)=>{
     const query=new URLSearchParams();
     if(name&&value) query.set(name,value);

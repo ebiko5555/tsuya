@@ -2,9 +2,10 @@
 
 ネイル試着アプリ「艶」に、デザインと爪の形を足した版。
 
-- 公開URL: https://ebiko5555.github.io/tsuya-v2/
+- **通常試作の最新URL: https://ebiko5555.github.io/tsuya-v2/**
+- 現行の通常試作: `experience-prototype/` / `mobile106`。特別試作の `light-lens-prototype/` とは別。
 - 旧版（永久版・無傷）: https://ebiko5555.github.io/tsuya-atelier/
-- ローカル: `~/Desktop/tsuya-v2/index.html`
+- ローカル: `/Volumes/blender/tsuya/index.html`
 
 ## 中身について
 
