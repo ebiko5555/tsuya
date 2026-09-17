@@ -6,10 +6,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<!-- 試作47: 作品の正式入口をルートへ統一する。旧単体試着は ?legacy=1 で保持。 -->
+<!-- 通常試作の固定入口。旧単体試着は ?legacy=1 で保持。 -->
 <script>
   if(new URLSearchParams(location.search).get('legacy')!=='1'){
-    location.replace('touch-hands/');
+    location.replace('experience-prototype/'+location.search);
   }
 </script>
 <title>艶 II — 手と光のアトリエ</title>
