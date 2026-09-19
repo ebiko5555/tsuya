@@ -8,6 +8,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Denk+One&family=Hina+Mincho&display=swap" rel="stylesheet">
 <title>HAND &amp; LIGHT — 自分の手から、作品へ</title>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js"
         onerror="window.__mpFailed=true"></script>
@@ -1101,6 +1104,21 @@
     text-decoration:none; font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.14em; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   }
+  .language-switch{
+    position:fixed; z-index:113; right:82px; top:calc(13px + env(safe-area-inset-top));
+    min-width:48px; min-height:44px; padding:0 10px; border:1px solid rgba(255,255,255,.28);
+    color:#fff; background:rgba(8,9,12,.68); font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.08em; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  }
+  html[data-language="ja"] body,html[data-language="ja"] button,html[data-language="ja"] a,
+  html[data-language="ja"] input,html[data-language="ja"] select,html[data-language="ja"] textarea,
+  html[data-language="ja"] .opening-mark,html[data-language="ja"] .invite,html[data-language="ja"] .work-film-mark,
+  html[data-language="ja"] .source-entry,html[data-language="ja"] .nail-set-viewer{font-family:"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif!important;font-synthesis:none}
+  html[data-language="en"] body,html[data-language="en"] button,html[data-language="en"] a,
+  html[data-language="en"] input,html[data-language="en"] select,html[data-language="en"] textarea,
+  html[data-language="en"] .opening-mark,html[data-language="en"] .invite,html[data-language="en"] .work-film-mark,
+  html[data-language="en"] .source-entry,html[data-language="en"] .nail-set-viewer{font-family:"Denk One","Helvetica Neue",Arial,sans-serif!important;font-synthesis:none}
+  html[data-language="en"] .invite,html[data-language="en"] .opening-work-title,html[data-language="en"] .work-film-title{letter-spacing:.035em}
   body.custom-mode header .overline,body.work-tryon header .overline{display:none}
   .opening-guide{
     position:relative; z-index:2; width:min(100%,340px); margin:-8px 0 18px;
@@ -1615,6 +1633,7 @@
   <span id="globalBackText">BACK</span>
 </a>
 <a class="site-home" id="siteHome" href="../" aria-label="トップページへ戻る">HOME</a>
+<button type="button" class="language-switch" id="languageSwitch" aria-label="表示言語を英語へ切り替える">EN</button>
 
 <div class="stage">
   <canvas id="canvas"></canvas>
@@ -1930,7 +1949,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile106';
+const BUILD_VERSION = 'mobile107';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -5262,6 +5281,112 @@ updateCmpBadge();
   }else{
     prepareHub();
   }
+})();
+</script>
+<script>
+/* mobile107: 表示言語と書体だけを切り替える。追跡・カメラ・ネイル描画は変更しない。 */
+(()=>{
+  const titles={
+    ja:{COLOR:'色',SURFACE:'表面',SCULPT:'FORMWORK',LIGHT:'光',HAND:'手',TRACE:'痕跡',SPACE:'宇宙と手',THINKING:'思惟する手',ORB:'White Orb',FRAME:'二つの手の輪舞曲'},
+    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'Formwork',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux'}
+  };
+  const descriptions={
+    en:{
+      COLOR:'Paint, pigment, and crossing gestures spread into a field of colour across the hand.',
+      SURFACE:'Gloss, film, liquid, reflection — a material surface held just beyond the skin.',
+      SCULPT:'Lines, joints, and voids form a hand in the air. Ornament becomes a small-scale sculpture.',
+      LIGHT:'Light lingering at the fingertips travels around a hand and a sphere, drawing a space of its own.',
+      HAND:'A hand opens into gestures of care, work, prayer, and thought. It is a form, and a memory.',
+      TRACE:'Particles and shadow remain after motion. The work follows contact as it fades.',
+      SPACE:'In the dark, a hand reaches toward spheres like stars or moons — held at the distance just before touch.',
+      THINKING:'A turning hand and its soft shadow accumulate time. The hand becomes the outline of thought.',
+      ORB:'A red-nailed hand circles a white orb. Small adornment and monumental form exchange their scale.',
+      FRAME:'White hands, pale pink planes, and gold lines change their boundaries across 240 frames.'
+    },
+    ja:{
+      COLOR:'色を選ぶ行為から、身体の表面に模様が増殖する作品へ。爪の小さな面が、手全体の色彩へひらく。',
+      SURFACE:'光沢、膜、液体、反射。触れられない画面のなかで、素材の重さと皮膚の距離を想像する。',
+      SCULPT:'爪先を伸ばす操作から、線だけで立ち上がる手の構造へ。装飾は小さな彫刻へ変わる。',
+      LIGHT:'指先に残る光が、手と球体をめぐる空間へ広がる。試着は見ることから、光で描くことへ逸脱する。',
+      HAND:'自分の手を入口に、祈り、思惟、労働、ケアの身振りへ入る。手は形であると同時に記憶でもある。',
+      TRACE:'動いたあとに残る粒子と影。完成した形ではなく、触れた時間と消えていく過程を見る。',
+      SPACE:'暗い空間で、手が星や月のような球体へ伸びていく。触れる前の距離と、身体を越えて広がる想像を映す。',
+      THINKING:'回転する手の線と淡い影が、考える時間をゆっくりと重ねる。手は道具ではなく、思考そのものの輪郭になる。',
+      ORB:'白い球体のまわりを、赤いネイルを持つ手が巡る。小さな装飾と大きな形が、互いのスケールを反転させる。',
+      FRAME:'白い手、淡いピンクの面、金色の線。240のフレームのなかで、皮膚と膜と装飾の境界が組み替わる。'
+    }
+  };
+  const text=(selector,value)=>document.querySelectorAll(selector).forEach(el=>{if(el.textContent!==value)el.textContent=value;});
+  const attr=(selector,name,value)=>document.querySelectorAll(selector).forEach(el=>el.setAttribute(name,value));
+  const steps=values=>document.querySelectorAll('.opening-steps span').forEach((el,index)=>{
+    const number=String(index+1).padStart(2,'0');
+    const value=values[index]||'';
+    const next=number+value;
+    if(el.textContent!==next)el.innerHTML='<b>'+number+'</b>'+value;
+  });
+  const workKey=()=>{
+    const value=[document.getElementById('openingWorkCode')?.textContent,document.getElementById('workFilmCode')?.textContent,document.getElementById('tryIdentityText')?.textContent].join(' ');
+    return Object.keys(titles.ja).find(key=>new RegExp('\\b'+key+'\\b').test(value))||'COLOR';
+  };
+  const stored=()=>{try{return localStorage.getItem('tsuya-language');}catch(_){return null;}};
+  let language=stored()==='en'?'en':'ja';
+  const apply=()=>{
+    const isEnglish=language==='en', key=workKey(), name=titles[language][key];
+    const isCustom=document.body.classList.contains('custom-mode');
+    const isTryOn=document.body.classList.contains('work-tryon');
+    document.documentElement.lang=language;
+    document.documentElement.dataset.language=language;
+    const toggle=document.getElementById('languageSwitch');
+    toggle.textContent=isEnglish?'日本語':'EN';
+    toggle.setAttribute('aria-label',isEnglish?'表示言語を日本語へ切り替える':'Switch display language to English');
+    document.title=isEnglish?'HAND & LIGHT — Artwork, Worn Daily':'HAND & LIGHT — 自分の手から、作品へ';
+    if(isEnglish){
+      text('.guide-text','Place your hand in the frame');
+      text('.sg-tag','SOURCE · COLLECT LIGHT'); text('.sg-title','Gather a colour or a glimmer that catches you'); text('.sg-sub','Hold it up to light or a scene around you');
+      text('.bigbtn',isCustom?'CHOOSE A PHOTO':isTryOn?'START CAMERA':'CHOOSE A WORK');
+      text('.make-link',isCustom?'CREATE FROM A PHOTO':'CREATE FREELY');
+      steps(['CHOOSE A WORK','VIEW THE NAILS','TRY ON WITH CAMERA']);
+      text('.opening-work-cue span','ENTER THE WORK');
+      text('.source-intro','Gather colour, line, and light from around you, then compose them into five nails.');
+      text('#sourcePhoto','CHOOSE A PHOTO'); text('#sourceOriginReset','ARTWORK NAILS'); text('#sourceMotifPick','TAP A MOTIF TO SELECT IT');
+      text('.source-exhibit','VIEW AS ARTWORK'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','BACK');
+      text('#saveSetLink','SAVE THIS SET'); text('#resetPal','RESET TO STANDARD'); text('.tonelabel','TONE');
+      text('.source-entry-sub','CREATE FROM A PHOTO'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
+      text('#setViewerTry','TRY THIS SET ON'); text('#nailSetBack','BACK TO THE WORK');
+      text('.shTxt','This image has not been saved yet. Press and hold it, choose “Save to Photos”, then return here.');
+      text('#saveHintDone','CLOSE AND RETURN TO TRY-ON'); text('.cmpTitle','COMPARE'); text('#cmpClose','CLOSE');
+      attr('.site-home','aria-label','Return to home'); attr('#globalBack','aria-label','Return to previous screen');
+    }else{
+      text('.guide-text','枠に手をかざしてください');
+      text('.sg-tag','SOURCE · 光の採集'); text('.sg-title','心惹かれる光や色を、写しとる'); text('.sg-sub','身のまわりの光や景色にかざしてください');
+      text('.bigbtn',isCustom?'写真を選ぶ':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
+      text('.make-link',isCustom?'写真からつくる':'自由にデザインする');
+      steps(['作品を選ぶ','ネイルを見る','カメラで試着']);
+      text('.opening-work-cue span','触れて、作品へ');
+      text('.source-intro','身のまわりの色・線・光を採集して、5本のネイルへ組み替える。');
+      text('#sourcePhoto','写真を選ぶ'); text('#sourceOriginReset','作品ネイル'); text('#sourceMotifPick','モチーフをタップして指定');
+      text('.source-exhibit','作品として見る'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','戻る');
+      text('#saveSetLink','この組み合わせを保存'); text('#resetPal','標準にもどす'); text('.tonelabel','濃淡');
+      text('.source-entry-sub','写真からつくる'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
+      text('#setViewerTry','このセットを試着する'); text('#nailSetBack','作品ページへ戻る');
+      text('.shTxt','まだ端末には保存されていません画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。');
+      text('#saveHintDone','保存画面を閉じて試着へ戻る'); text('.cmpTitle','比べる'); text('#cmpClose','閉じる');
+      attr('.site-home','aria-label','トップページへ戻る'); attr('#globalBack','aria-label','前の画面へ戻る');
+    }
+    text('#openingWorkTitle',name); text('#workFilmTitle',name); text('#nailSetTitle',name); text('#workText',descriptions[language][key]);
+    attr('#openingEnter','aria-label',isEnglish?'Open '+name:name+'の作品ページへ入る');
+  };
+  document.getElementById('languageSwitch').addEventListener('click',()=>{
+    language=language==='ja'?'en':'ja';
+    try{localStorage.setItem('tsuya-language',language);}catch(_){}
+    apply();
+  });
+  let queued=false;
+  new MutationObserver(()=>{
+    if(queued)return;
+    queued=true;requestAnimationFrame(()=>{queued=false;apply();});
+  }).observe(document.body,{subtree:true,childList:true,characterData:true});
+  apply();
 })();
 </script>
 </body>
