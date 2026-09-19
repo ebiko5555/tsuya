@@ -1,10 +1,15 @@
 # 艶 II — PROJECT STATUS
 
-### 通常試作の現在地（2026-09-18・固定）
+### 通常試作の現在地（2026-09-19・固定）
 
-- **通常試作の最新は `experience-prototype/` / `mobile106`。** Git上では `d9e099f` が最後の通常試作の実装コミットで、その後の `light-lens-prototype/` は特別試作。
-- 常に開くURLは **`https://ebiko5555.github.io/tsuya-v2/`**。リポジトリ直下と `top.html` は通常試作へ転送し、通常試作内のHOMEも同じ固定URLへ戻る。
+- **通常試作の最新は `experience-prototype/` / `mobile107`。** `light-lens-prototype/` は特別試作。
+- 常に開くURLは **`https://ebiko5555.github.io/tsuya/`**。リポジトリ直下と `top.html` は通常試作へ転送し、通常試作内のHOMEも同じ固定URLへ戻る。
 - 今後、通常試作を更新したら `experience-prototype/` を更新し、この見出しの版番号・コミット・日付を更新する。特別試作やローカル試作はこの入口を変更しない。
+
+### 試作107 / mobile107 — 表示言語と書体の切替（2026-09-19・公開）
+
+- 通常試作に日本語／英語の切替を追加。日本語はHina Mincho、英語はDenk Oneを使用する。切替状態はこの端末のブラウザ内に保持する。
+- 作品名と作品説明、入口、写真制作、5本見本、保存・比較などの主要表示を英語へ切り替える。カメラ、MediaPipe、爪追跡、ネイル描画、写真解析、10作品、固定プリセット、画面の配置は変更していない。
 
 ### 九十八 / NINETY EIGHT（2026-09-16・未公開）
 
