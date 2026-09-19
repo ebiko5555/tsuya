@@ -731,6 +731,7 @@
   }
   .source-reference-stack{display:none}
   .source-reference-stack img{position:absolute; display:block; object-fit:contain; background:#fff; box-shadow:0 12px 30px rgba(0,0,0,.24)}
+  .source-sequence-flow{display:none}
   .opening-mark{
     position:absolute; z-index:2; top:calc(94px + env(safe-area-inset-top)); left:22px;
     font:500 8px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -932,7 +933,7 @@
   body.custom-mode .opening-film.b,body.custom-mode .opening-film.c{display:none}
   body.custom-mode .opening-film.a{display:none}
   body.custom-mode .source-reference-stack{display:block; position:absolute; inset:0; background:#fff}
-  body.custom-mode .source-reference-stack img{top:0; left:0; width:100%; height:82%; object-fit:cover; opacity:0; animation:sourceReferenceCycle 12s ease-in-out infinite}
+  body.custom-mode .source-reference-stack img{top:0; left:0; width:100%; height:74%; object-fit:cover; opacity:0; animation:sourceReferenceCycle 12s ease-in-out infinite}
   body.custom-mode .source-reference-stack .source-reference-art{object-position:center 65%}
   body.custom-mode .source-reference-stack .source-reference-tips{object-position:center center}
   body.custom-mode .source-reference-stack .source-reference-hand{object-position:center 35%}
@@ -944,6 +945,7 @@
   body.custom-mode #startOverlay{justify-content:flex-end; padding-bottom:calc(28px + env(safe-area-inset-bottom))}
   body.custom-mode #startOverlay .invite,body.custom-mode .opening-guide,body.custom-mode .make-link{display:none}
   body.custom-mode .opening-actions{width:min(100%,340px); margin:0 auto; position:relative; z-index:3}
+  body.custom-mode .source-sequence-flow{display:block; position:relative; z-index:3; margin:0 auto 14px; color:rgba(255,255,255,.84); font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.13em; text-align:center}
   body.custom-mode .opening-films::after{
     background:linear-gradient(180deg,rgba(8,9,12,.08),rgba(8,9,12,.06) 50%,rgba(8,9,12,.86) 92%);
   }
@@ -1677,6 +1679,7 @@
         <img class="source-reference-hand" src="source-assets/source-tsuya-hand.png" alt="">
       </div>
     </div>
+    <p class="source-sequence-flow">作品 → ネイル → 手</p>
     <div class="opening-mark">TRY ON / ART WORK<br>TRACE / SKIN — 2026</div>
     <p class="invite"></p>
     <p class="opening-guide" id="openingGuide"></p>
@@ -1968,7 +1971,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile112';
+const BUILD_VERSION = 'mobile113';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -5216,7 +5219,7 @@ updateCmpBadge();
     }
     document.querySelector('#startOverlay .invite').innerHTML='COLOUR ATELIER<span class="invite-sub">CREATE YOUR OWN NAIL</span>';
     document.getElementById('openingGuide').textContent=origin?(origin.title+' / 身のまわりから採集する'):'身のまわりから採集する';
-    document.getElementById('startBtn').textContent='写真を選ぶ';
+    document.getElementById('startBtn').textContent='写真を選んでつくる';
     document.getElementById('tryIdentityText').textContent=origin?('SOURCE / '+fromKey):'SOURCE';
     const backHref=origin?route('work',fromKey):homeRoute();
     const workBack=document.getElementById('tryWorkBack'); workBack.textContent='BACK'; workBack.href=backHref;
