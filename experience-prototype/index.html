@@ -1947,7 +1947,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile107';
+const BUILD_VERSION = 'mobile108';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -3147,6 +3147,29 @@ const LOOKS = {
   }},
 };
 
+/* SOURCE / COLOR の5本構成。写真から採った色を使いながら、
+   「濃色・線・粒・円・フレンチ」という役割を必ず固定する。 */
+LOOKS.sourceDeep={name:'SOURCE・深い色面',paint(c,w,h,col){
+  const g=c.createLinearGradient(-w*.45,-h*.55,w*.45,h*.55);
+  g.addColorStop(0,shade(col,-42)); g.addColorStop(.58,shade(col,-12)); g.addColorStop(1,shade(col,-56));
+  c.fillStyle=g;c.fillRect(-w/2,-h/2,w,h*1.2);
+  c.fillStyle=hexA(shade(col,42),.16);c.beginPath();c.ellipse(-w*.22,h*.12,w*.50,h*.66,-.45,0,Math.PI*2);c.fill();
+}};
+LOOKS.sourceContour={name:'SOURCE・採集した線',flat:true,paint(c,w,h,col){
+  base(c,w,h,'#f5f5f0','#e9ebe5'); c.lineCap='round';
+  ['rgba(255,255,255,.9)',hexA(col,.72)].forEach((stroke,i)=>{c.strokeStyle=stroke;c.lineWidth=Math.max(.7,w*(i?0.024:.012));c.beginPath();c.moveTo(-w*.44,h*.40);c.bezierCurveTo(-w*.15,h*.10,w*.10,-h*.14,w*.42,-h*.46);c.stroke();});
+}};
+LOOKS.sourceSpeckle={name:'SOURCE・粒の密度',flat:true,paint(c,w,h,col,seed){
+  base(c,w,h,'#f3f4ef','#e8eee9');const rnd=seeded(8100+seed*17);
+  for(let i=0;i<48;i++){const x=(rnd()-.5)*w*.84,y=(rnd()-.5)*h*.92,r=Math.max(.45,w*(.008+rnd()*.030));c.fillStyle=i%4===0?hexA(shade(col,-18),.82):hexA(col,.52);c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();}
+}};
+LOOKS.sourceOrb={name:'SOURCE・円の余白',flat:true,paint(c,w,h,col){
+  base(c,w,h,hexA(col,.46),hexA(shade(col,-12),.62)); c.fillStyle='rgba(250,250,247,.96)';c.beginPath();c.arc(0,h*.02,w*.22,0,Math.PI*2);c.fill();c.strokeStyle=hexA(col,.36);c.lineWidth=Math.max(.6,w*.014);c.stroke();
+}};
+LOOKS.sourceFrenchArc={name:'SOURCE・光のフレンチ',flat:true,paint(c,w,h,col){
+  base(c,w,h,'#f5f4f0','#e9eae4');c.strokeStyle=hexA(col,.84);c.lineWidth=Math.max(2,w*.13);c.beginPath();c.arc(0,-h*.53,w*.61,.12,Math.PI-.12);c.stroke();c.strokeStyle=hexA(shade(col,-28),.74);c.lineWidth=Math.max(.7,w*.025);c.beginPath();c.arc(0,-h*.43,w*.54,.16,Math.PI-.16);c.stroke();
+}};
+
 /* ================= マイデザイン（自作を乗せる） ================= */
 const customLooks = [];   // {name, img}
 const DESIGN_KEY = 'tsuya.designs';
@@ -3609,7 +3632,8 @@ function extractPalette(img,n){
 /* ================= SOURCE：身のまわりから5本セットをつくる =================
    画像生成AIは使わない。入力画像を小さなCanvasに写し、色・輪郭・明暗を数値化して
    筆者が決めた「主役／背景／抜け／光／ポイント」の規則へ割り当てる。 */
-let sourceMode='MIX';
+/* 写真を選んだ直後は、5本の役割が最も読み取りやすいCOLORを最初に表示する。 */
+let sourceMode='COLOR';
 let sourceSets=[];
 let selectedSourceSet=null;
 let sourceTryLength='short';
@@ -3827,7 +3851,7 @@ function sourceRecipes(mode, profile){
   const pField = contrast > 0.42 ? 'sourcefield' : 'nuance';
   const pGlow = light > 0.42 ? 'sourceglow' : 'pearl';
   const recipes={
-    COLOR:[['COLOR',['nuance','sheer',pField,'pearl','onecolor']]],
+    COLOR:[['COLOR',['sourceDeep','sourceContour','sourceSpeckle','sourceOrb','sourceFrenchArc']]],
     PATTERN:[['PATTERN',[pForm,'line',pField,'pearl','onecolor']]],
     LIGHT:[['LIGHT',[pGlow,'mizuhikari','stardust','pearl','sheer']]],
     MIX:[['MIX',[pField,pForm,pField,pGlow,'onecolor']]],
@@ -3882,7 +3906,10 @@ function makeSourceSets(mode){
     const variants=sourceProfile.paletteVariants||[sourceProfile.palette];
     const p=variants[idx%variants.length]||sourceProfile.palette;
     let looks;
-    if(isExtra){
+    if(mode==='COLOR'){
+      /* COLORは写真ごとに色だけ変え、5本の役割は入れ替えない。 */
+      looks=baseLooks.slice();
+    }else if(isExtra){
       const baseExtra=extraSourceRecipes(mode, sourceProfile);
       looks=[0,1,2,3,4].map((look,i)=>baseExtra[(i+Math.floor(rnd()*baseExtra.length))%baseExtra.length]);
       if(mode==='COLOR'&&!looks.includes('sourceclash')) looks[0]='sourceclash';
@@ -3899,7 +3926,7 @@ function makeSourceSets(mode){
       const order=[0,1,2,3,4].map(()=>Math.floor(rnd()*p.length));
       colors=order.map(i=>p[i%p.length]);
     }
-    const name=isExtra?`EXTRA / 03 ${mode}`:(idx===0?`${baseName} / 01 調和`:`${baseName} / 02 ニュアンス`);
+    const name=mode==='COLOR' ? (idx===0?'COLOR / 01 5つの役割':idx===1?'COLOR / 02 採集色の違い':'COLOR / 03 強い採集色') : (isExtra?`EXTRA / 03 ${mode}`:(idx===0?`${baseName} / 01 調和`:`${baseName} / 02 ニュアンス`));
     return {
       name, isExtra, looks, colors, sourcePalette:p.slice(), paletteTuning:sourceProfile.paletteTunings&&sourceProfile.paletteTunings[idx],
       tune:{
