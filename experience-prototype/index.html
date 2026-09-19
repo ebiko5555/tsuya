@@ -932,12 +932,18 @@
   body.custom-mode .opening-film.b,body.custom-mode .opening-film.c{display:none}
   body.custom-mode .opening-film.a{display:none}
   body.custom-mode .source-reference-stack{display:block; position:absolute; inset:0; background:#fff}
-  body.custom-mode .source-reference-stack img{top:2%; left:0; width:100%; height:44%; object-fit:contain; opacity:0; animation:sourceReferenceCycle 12s ease-in-out infinite}
+  body.custom-mode .source-reference-stack img{top:0; left:0; width:100%; height:82%; object-fit:cover; opacity:0; animation:sourceReferenceCycle 12s ease-in-out infinite}
+  body.custom-mode .source-reference-stack .source-reference-art{object-position:center 65%}
+  body.custom-mode .source-reference-stack .source-reference-tips{object-position:center center}
+  body.custom-mode .source-reference-stack .source-reference-hand{object-position:center 35%}
   body.custom-mode .source-reference-stack .source-reference-art{animation-delay:0s}
   body.custom-mode .source-reference-stack .source-reference-tips{animation-delay:4s}
   body.custom-mode .source-reference-stack .source-reference-hand{animation-delay:8s}
   @keyframes sourceReferenceCycle{0%,28%{opacity:1;transform:scale(1)}33%,95%{opacity:0;transform:scale(1.025)}100%{opacity:1;transform:scale(1)}}
   body.custom-mode .opening-mark{display:none}
+  body.custom-mode #startOverlay{justify-content:flex-end; padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+  body.custom-mode #startOverlay .invite,body.custom-mode .opening-guide,body.custom-mode .make-link{display:none}
+  body.custom-mode .opening-actions{width:min(100%,340px); margin:0 auto; position:relative; z-index:3}
   body.custom-mode .opening-films::after{
     background:linear-gradient(180deg,rgba(8,9,12,.08),rgba(8,9,12,.06) 50%,rgba(8,9,12,.86) 92%);
   }
@@ -1962,7 +1968,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile111';
+const BUILD_VERSION = 'mobile112';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
