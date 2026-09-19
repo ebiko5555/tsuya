@@ -5,6 +5,7 @@
 - **通常試作の最新は `experience-prototype/` / `mobile107`。** `light-lens-prototype/` は特別試作。
 - 常に開くURLは **`https://ebiko5555.github.io/tsuya/`**。リポジトリ直下と `top.html` は通常試作へ転送し、通常試作内のHOMEも同じ固定URLへ戻る。
 - 今後、通常試作を更新したら `experience-prototype/` を更新し、この見出しの版番号・コミット・日付を更新する。特別試作やローカル試作はこの入口を変更しない。
+- GitHub Pagesにはこの固定入口と現行の `experience-prototype/` だけを置く。旧試作は公開せず、必要時はGit履歴から復元する。
 
 ### 試作107 / mobile107 — 表示言語と書体の切替（2026-09-19・公開）
 
