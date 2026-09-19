@@ -729,6 +729,8 @@
     left:18%; bottom:3%; width:72%; height:36%;
     clip-path:polygon(8% 0,100% 17%,82% 100%,0 84%); opacity:.48;
   }
+  .source-reference-stack{display:none}
+  .source-reference-stack img{position:absolute; display:block; object-fit:contain; background:#fff; box-shadow:0 12px 30px rgba(0,0,0,.24)}
   .opening-mark{
     position:absolute; z-index:2; top:calc(94px + env(safe-area-inset-top)); left:22px;
     font:500 8px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -928,6 +930,11 @@
     opacity:.82; filter:saturate(.88) contrast(1.04);
   }
   body.custom-mode .opening-film.b,body.custom-mode .opening-film.c{display:none}
+  body.custom-mode .opening-film.a{display:none}
+  body.custom-mode .source-reference-stack{display:block; position:absolute; inset:0; background:#fff}
+  body.custom-mode .source-reference-stack .source-reference-art{left:3%; top:5%; width:40%; height:38%}
+  body.custom-mode .source-reference-stack .source-reference-tips{right:3%; top:5%; width:52%; height:38%}
+  body.custom-mode .source-reference-stack .source-reference-hand{left:18%; bottom:1%; width:64%; height:55%}
   body.custom-mode .opening-films::after{
     background:linear-gradient(180deg,rgba(8,9,12,.08),rgba(8,9,12,.06) 50%,rgba(8,9,12,.86) 92%);
   }
@@ -1655,6 +1662,11 @@
       <video class="opening-film a" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <video class="opening-film b" src="art-assets/surface-gold.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <video class="opening-film c" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
+      <div class="source-reference-stack">
+        <img class="source-reference-art" src="source-assets/source-glass-reference.webp" alt="">
+        <img class="source-reference-tips" src="source-assets/source-tsuya-nail-set.png" alt="">
+        <img class="source-reference-hand" src="source-assets/source-tsuya-hand.png" alt="">
+      </div>
     </div>
     <div class="opening-mark">TRY ON / ART WORK<br>TRACE / SKIN — 2026</div>
     <p class="invite"></p>
@@ -1947,7 +1959,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile108';
+const BUILD_VERSION = 'mobile109';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
