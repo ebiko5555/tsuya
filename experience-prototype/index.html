@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta http-equiv="refresh" content="0; url=../light-lens-prototype/">
-<script>location.replace('../light-lens-prototype/'+location.search);</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
@@ -5325,8 +5323,13 @@ updateCmpBadge();
     if(el.textContent!==next)el.innerHTML='<b>'+number+'</b>'+value;
   });
   const workKey=()=>{
-    const value=[document.getElementById('openingWorkCode')?.textContent,document.getElementById('workFilmCode')?.textContent,document.getElementById('tryIdentityText')?.textContent].join(' ');
-    return Object.keys(titles.ja).find(key=>new RegExp('\\b'+key+'\\b').test(value))||'COLOR';
+    const codes={
+      opening:document.getElementById('openingWorkCode')?.textContent,
+      film:document.getElementById('workFilmCode')?.textContent,
+      tryOn:document.getElementById('tryIdentityText')?.textContent
+    };
+    const values=document.body.classList.contains('art-page')?[codes.film,codes.tryOn,codes.opening]:document.body.classList.contains('work-tryon')?[codes.tryOn,codes.film,codes.opening]:[codes.opening,codes.film,codes.tryOn];
+    return values.map(value=>Object.keys(titles.ja).find(key=>new RegExp('\\b'+key+'\\b').test(value||''))).find(Boolean)||'COLOR';
   };
   const stored=()=>{try{return localStorage.getItem('tsuya-language');}catch(_){return null;}};
   let language=stored()==='en'?'en':'ja';
