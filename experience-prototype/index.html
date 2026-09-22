@@ -1971,7 +1971,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile113';
+const BUILD_VERSION = 'mobile114';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -2475,7 +2475,8 @@ function drawNails(dt=1/60){
       rim.addColorStop(0,'rgba(0,0,0,0)');
       rim.addColorStop(1,'rgba(60,30,20,.5)');
       ctx.fillStyle=rim; ctx.fillRect(-w,-h,w*2,h*2);
-      if(gloss>0.05 && !flatLook(nailLooks[fi])){
+      /* 白い丸い反射は、全ネイルで描かない。 */
+      if(false && gloss>0.05 && !flatLook(nailLooks[fi])){
         /* 固定光源（画面の左斜め上・天井から手前へ照射）による動的スペキュラー反射 */
         const rot = ang + Math.PI/2;
         const lx = -0.42, ly = -0.90;
@@ -4358,7 +4359,8 @@ function paintExhibitNail(c,x,y,w,h,angle,index){
   const rim=c.createRadialGradient(0,0,Math.min(w,h)*.32,0,0,Math.max(w,h)*.76);
   rim.addColorStop(0,'rgba(0,0,0,0)'); rim.addColorStop(1,'rgba(45,22,18,.42)');
   c.globalAlpha=.25; c.fillStyle=rim; c.fillRect(-w,-h,w*2,h*2);
-  if(tuneVals.gloss>5&&!flatLook(nailLooks[index])){
+  /* 見本・自由制作の展示にも白い反射は描かない。 */
+  if(false && tuneVals.gloss>5&&!flatLook(nailLooks[index])){
     c.globalAlpha=(tuneVals.gloss/100)*.56; c.fillStyle='#fff'; c.beginPath();
     c.ellipse(-w*.17,-h*.19,w*.13,h*.25,-.28,0,Math.PI*2); c.fill();
   }
@@ -4856,26 +4858,6 @@ updateCmpBadge();
       const lacq=c.createRadialGradient(ox,oy,w*0.1,ox,oy,w*0.75);
       lacq.addColorStop(0,'rgba(255,80,70,0.18)'); lacq.addColorStop(1,'rgba(25,5,8,0.45)');
       c.fillStyle=lacq; c.fillRect(-w/2,-h/2,w,h*1.2);
-      /* 立体的な白球（White Orb）— 多重オパール光 */
-      const orbRad = w * 0.25;
-      const sphere=c.createRadialGradient(ox-orbRad*0.35, oy-orbRad*0.35, orbRad*0.05, ox, oy, orbRad);
-      sphere.addColorStop(0,'#ffffff');
-      sphere.addColorStop(0.35,'#fbf6ed');
-      sphere.addColorStop(0.72,'#e2ddd2');
-      sphere.addColorStop(0.92,'#b8b2a5');
-      sphere.addColorStop(1,'#7a746a');
-      c.shadowColor='rgba(255,245,225,0.72)'; c.shadowBlur=w*0.16;
-      c.fillStyle=sphere; c.beginPath(); c.arc(ox,oy,orbRad,0,Math.PI*2); c.fill();
-      c.shadowBlur=0;
-      /* オパールのオーロラ干渉膜（薄い青・緑・ピンクの微細ヴェール） */
-      const prism=c.createLinearGradient(ox-orbRad, oy-orbRad, ox+orbRad, oy+orbRad);
-      prism.addColorStop(0.2,'rgba(160,230,255,0.35)');
-      prism.addColorStop(0.5,'rgba(255,210,230,0.28)');
-      prism.addColorStop(0.8,'rgba(220,255,210,0.32)');
-      c.fillStyle=prism; c.beginPath(); c.arc(ox,oy,orbRad,0,Math.PI*2); c.fill();
-      /* 白球を抱く金彩リング */
-      c.strokeStyle='rgba(235,200,120,0.72)'; c.lineWidth=Math.max(0.5, w*0.016);
-      c.beginPath(); c.arc(ox,oy,orbRad*1.32,0,Math.PI*2); c.stroke();
       c.restore();
     }};
 
