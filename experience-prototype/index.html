@@ -1971,7 +1971,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile114';
+const BUILD_VERSION = 'mobile115';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -3323,27 +3323,10 @@ function paintPhotographicSpecimen(c, w, h, look, color, seed, gloss=0.96){
   // デザイン属性連動のジェルレイヤー（箔・線・キューティクル段差）
   paintGelTip(c, w, h, seed, gloss, look);
 
-  // 3. トップジェルの立体ドーム（ハイポイントとCカーブの厚み）
-  const dome = c.createRadialGradient(0, -h*0.06, w*0.10, 0, -h*0.06, w*0.54);
-  dome.addColorStop(0, 'rgba(255,255,255,0.07)');
-  dome.addColorStop(0.62, 'rgba(0,0,0,0)');
-  dome.addColorStop(1, 'rgba(18,8,6,0.26)');
-  c.fillStyle = dome;
-  c.fillRect(-w*0.6, -h*0.65, w*1.2, h*1.3);
-
-  // 4. 見本には固定のスタジオ光を重ねない。艶の変化はカメラ試着時だけ描く。
-  if(isFlat){
-    // マット・ベルベットの微粒子質感
-    const matteGlow = c.createRadialGradient(0, -h*0.05, 0, 0, -h*0.05, w*0.5);
-    matteGlow.addColorStop(0, 'rgba(255,255,255,0.07)');
-    matteGlow.addColorStop(0.7, 'rgba(255,255,255,0.02)');
-    matteGlow.addColorStop(1, 'rgba(0,0,0,0.18)');
-    c.fillStyle = matteGlow;
-    c.fillRect(-w*0.6, -h*0.65, w*1.2, h*1.3);
-  }
+  // 見本には、中央が白く丸く見える固定光源・立体ドームを重ねない。
   c.restore();
 
-  // 5. 写真のような「全周クリアジェルのガラス境界線（Rim Edge Reflection）」
+  // 3. チップの輪郭だけを残し、中央の光沢は足さない。
   c.save();
   nailShapeSpecimen(c, w, h);
   c.lineWidth = Math.max(0.75, w * 0.016);
