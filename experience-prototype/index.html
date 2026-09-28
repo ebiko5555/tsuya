@@ -1501,11 +1501,10 @@
   #snapBar .pill.primary{color:#171717!important; -webkit-text-fill-color:#171717; background:#eadfce}
 
   @media (max-width:819px){
-    /* 固定した操作帯が5本の見本を覆っていたため、作品情報の流れの最後へ置く。 */
-    body.art-page .work-copy{padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+    body.art-page .work-copy{padding-bottom:calc(176px + env(safe-area-inset-bottom))}
     body.art-page .work-actions{
-      position:relative; z-index:auto; left:auto; right:auto; bottom:auto; width:100%;
-      grid-template-columns:1fr; gap:8px; margin:38px 0 0; padding:8px; transform:none;
+      left:50%; right:auto; bottom:calc(12px + env(safe-area-inset-bottom)); width:min(270px,calc(100% - 36px));
+      grid-template-columns:1fr; gap:8px; padding:8px; transform:translateX(-50%);
     }
     body.art-page .work-try{display:flex; align-items:center; justify-content:center; width:100%; min-height:54px; border-radius:999px; text-align:center}
     body.art-page .work-custom{
