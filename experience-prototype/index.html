@@ -1373,22 +1373,20 @@
     body.art-page .source-entry{min-height:62px; border-radius:3px; text-align:left}
   }
 
-  /* 試作116：作品の実際の5色が、映像から5本のネイルへ移る。 */
+  /* 試作39：スマホで見失わない大きさの発光アイコンと、目で追える粒子へ強化する。 */
   .create-particle{
     position:fixed; z-index:999; left:var(--particle-x); top:var(--particle-y);
     width:var(--particle-size); height:var(--particle-size); margin:calc(var(--particle-size) / -2) 0 0 calc(var(--particle-size) / -2);
-    border:1px solid rgba(255,255,255,.82); border-radius:50%; pointer-events:none; background:var(--particle-color,#fff);
-    box-shadow:0 0 7px color-mix(in srgb,var(--particle-color,#fff) 80%,white),0 0 19px var(--particle-color,#fff);
-    animation:create-particle-flight .92s cubic-bezier(.12,.68,.22,1) var(--particle-delay) forwards;
+    border:1px solid rgba(255,255,255,.8); border-radius:50%; pointer-events:none; background:rgba(255,255,255,.85);
+    box-shadow:0 0 6px rgba(255,255,255,.5), 0 0 14px rgba(215,179,158,.4);
+    animation:create-particle-flight .78s cubic-bezier(.12,.68,.22,1) var(--particle-delay) forwards;
   }
   @keyframes create-particle-flight{
     0%{opacity:0; transform:translate(0,0) scale(.3)}
     12%{opacity:1; transform:translate(0,0) scale(1)}
     72%{opacity:.85}
-    100%{opacity:0; transform:translate(var(--particle-dx),var(--particle-dy)) scale(.58)}
+    100%{opacity:0; transform:translate(var(--particle-dx),var(--particle-dy)) scale(.5)}
   }
-  .transfer-reading{position:fixed;z-index:998;left:50%;top:50%;translate:-50% -50%;pointer-events:none;opacity:0;color:#fff;font:500 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-shadow:0 1px 12px #000;animation:transfer-reading .82s ease both}
-  @keyframes transfer-reading{0%{opacity:0;transform:translateY(7px)}20%,76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
   @media (max-width:819px){
     body.art-page #workNails{justify-content:center}
     body.art-page .work-custom{
@@ -1973,7 +1971,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile116';
+const BUILD_VERSION = 'mobile115';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -5055,33 +5053,24 @@ updateCmpBadge();
       document.body.classList.add('create-entering');
       const rect=customLink.getBoundingClientRect();
       if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-        const filmRect=workFilm.getBoundingClientRect();
-        const nailRects=[...document.querySelectorAll('#workNails canvas')].map(canvas=>canvas.getBoundingClientRect());
-        const colours=work.preset.colors;
-        const reading=document.createElement('p');
-        reading.className='transfer-reading'; reading.textContent='ARTWORK COLOUR → NAIL SURFACE';
-        document.body.appendChild(reading); setTimeout(()=>reading.remove(),900);
-        for(let i=0;i<20;i++){
-          const target=nailRects[i%5]||rect;
-          const startX=filmRect.left+filmRect.width*(.25+((i*37)%50)/100);
-          const startY=filmRect.top+filmRect.height*(.28+((i*19)%42)/100);
-          const endX=target.left+target.width*(.35+(i%3)*.15);
-          const endY=target.top+target.height*(.35+(i%2)*.22);
+        const centerX=rect.left+rect.width/2, centerY=rect.top+18;
+        for(let i=0;i<16;i++){
+          const angle=-2.65+(1.7*i/15)+((i%3)-1)*.025;
+          const distance=60+(i%5)*12;
           const particle=document.createElement('span');
           particle.className='create-particle';
-          particle.style.setProperty('--particle-x',startX+'px');
-          particle.style.setProperty('--particle-y',startY+'px');
-          particle.style.setProperty('--particle-dx',(endX-startX)+'px');
-          particle.style.setProperty('--particle-dy',(endY-startY)+'px');
-          particle.style.setProperty('--particle-color',colours[i%colours.length]);
-          particle.style.setProperty('--particle-size',(7+(i%4)*2)+'px');
-          particle.style.setProperty('--particle-delay',((i%5)*44)+'ms');
+          particle.style.setProperty('--particle-x',centerX+'px');
+          particle.style.setProperty('--particle-y',centerY+'px');
+          particle.style.setProperty('--particle-dx',Math.cos(angle)*distance+'px');
+          particle.style.setProperty('--particle-dy',Math.sin(angle)*distance+'px');
+          particle.style.setProperty('--particle-size',(6+(i%4)*2)+'px');
+          particle.style.setProperty('--particle-delay',((i%5)*12)+'ms');
           document.body.appendChild(particle);
-          setTimeout(()=>particle.remove(),1100);
+          setTimeout(()=>particle.remove(),900);
         }
       }
-      setTimeout(()=>document.body.classList.add('route-leaving'),880);
-      setTimeout(()=>{location.href=customHref;},1180);
+      setTimeout(()=>document.body.classList.add('route-leaving'),720);
+      setTimeout(()=>{location.href=customHref;},1060);
     };
     index.querySelectorAll('button').forEach(button=>button.classList.toggle('active',button.dataset.workKey===key));
     const activeButton=index.querySelector('button.active');
@@ -5381,7 +5370,7 @@ updateCmpBadge();
       text('#sourcePhoto','CHOOSE A PHOTO'); text('#sourceOriginReset','ARTWORK NAILS'); text('#sourceMotifPick','TAP A MOTIF TO SELECT IT');
       text('.source-exhibit','VIEW AS ARTWORK'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','BACK');
       text('#saveSetLink','SAVE THIS SET'); text('#resetPal','RESET TO STANDARD'); text('.tonelabel','TONE');
-      text('.source-entry-sub','CARRY THIS COLOUR INTO A PHOTO'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
+      text('.source-entry-sub','CREATE FROM A PHOTO'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
       text('#setViewerTry','TRY THIS SET ON'); text('#nailSetBack','BACK TO THE WORK');
       text('.shTxt','This image has not been saved yet. Press and hold it, choose “Save to Photos”, then return here.');
       text('#saveHintDone','CLOSE AND RETURN TO TRY-ON'); text('.cmpTitle','COMPARE'); text('#cmpClose','CLOSE');
@@ -5397,7 +5386,7 @@ updateCmpBadge();
       text('#sourcePhoto','写真を選ぶ'); text('#sourceOriginReset','作品ネイル'); text('#sourceMotifPick','モチーフをタップして指定');
       text('.source-exhibit','作品として見る'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','戻る');
       text('#saveSetLink','この組み合わせを保存'); text('#resetPal','標準にもどす'); text('.tonelabel','濃淡');
-      text('.source-entry-sub','この作品の色を、写真へ持っていく'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
+      text('.source-entry-sub','写真からつくる'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
       text('#setViewerTry','このセットを試着する'); text('#nailSetBack','作品ページへ戻る');
       text('.shTxt','まだ端末には保存されていません画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。');
       text('#saveHintDone','保存画面を閉じて試着へ戻る'); text('.cmpTitle','比べる'); text('#cmpClose','閉じる');
