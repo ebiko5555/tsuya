@@ -7,6 +7,12 @@
 - カメラ、MediaPipe、チップの座標・柄・写真解析・画面遷移のJavaScriptには変更していない。
 - iPhone Safari実機での最終確認は要確認。
 
+#### 公開確認
+
+- コミット `37c6559` を `origin/main` へpushした。
+- GitHub Pagesで `BUILD_VERSION = 'mobile116'` とチップ見切れ修正のCSSが配信されていることを確認した。
+- キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=37c6559-mobile116`
+
 ### 2026-09-23・ローカル修正（未公開）
 
 - 本人の指定により、作品「手」(HAND)と「痕跡」(TRACE)を現行カタログ・入口から除外。「思惟する手」は維持。
