@@ -1636,6 +1636,24 @@
     body.custom-mode.source-planning #sourcePreview,
     body.custom-mode.source-planning .source-meta{display:none}
   }
+
+  /* 試作116：小さい画面高でも、拡大した5本のチップを操作に隠さない。 */
+  .source-confirm{overflow-y:auto; overscroll-behavior:contain}
+  .source-confirm-body{overflow:visible}
+  @media (max-width:819px){
+    .source-confirm{padding-bottom:max(22px,env(safe-area-inset-bottom))}
+    .source-confirm-body{
+      flex:0 0 auto; min-height:100%; justify-content:flex-start;
+      padding:24px 0 12px;
+    }
+    #sourceConfirmCanvas{flex:0 0 auto}
+    .source-confirm-try{margin-bottom:6px}
+    body.custom-mode.source-planning .panel{
+      padding-bottom:max(24px,env(safe-area-inset-bottom));
+      scroll-padding-bottom:max(24px,env(safe-area-inset-bottom));
+    }
+    body.custom-mode.source-planning .source-sets{padding-bottom:max(12px,env(safe-area-inset-bottom))}
+  }
 </style>
 </head>
 <body>
@@ -1702,12 +1720,10 @@
       <button type="button" data-opening-work="SURFACE" aria-label="SURFACE 表面">02</button>
       <button type="button" data-opening-work="SCULPT" aria-label="SCULPT 形">03</button>
       <button type="button" data-opening-work="LIGHT" aria-label="LIGHT 光">04</button>
-      <button type="button" data-opening-work="HAND" aria-label="HAND 手">05</button>
-      <button type="button" data-opening-work="TRACE" aria-label="TRACE 痕跡">06</button>
-      <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">07</button>
-      <button type="button" data-opening-work="THINKING" aria-label="思惟する手">08</button>
-      <button type="button" data-opening-work="ORB" aria-label="White Orb">09</button>
-      <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">10</button>
+      <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">05</button>
+      <button type="button" data-opening-work="THINKING" aria-label="思惟する手">06</button>
+      <button type="button" data-opening-work="ORB" aria-label="White Orb">07</button>
+      <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">08</button>
     </nav>
     <div id="status"></div>
   </div>
@@ -1971,7 +1987,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile115';
+const BUILD_VERSION = 'mobile116';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -4502,7 +4518,11 @@ updateCmpBadge();
       preset:{looks:['artFrame','sheer','frenchmirror','artFrame','aurora'],colors:['#e2b9b2','#ead8cf','#caa75d','#f0cbc6','#d7cabd'],tune:{gloss:82,opacity:90,nailSize:100,sculptLen:148,sculptShape:'coffin'},vars:{sheer:.3,frenchmirror:.16,aurora:.38},trail:{on:true,intensity:50,hue:'#f0d4c8'}}
     }
   };
+  // 2026-09-23: 作者の指定により重複する「手」と「痕跡」は掲載しない。素材は保存。
+  delete works.HAND;
+  delete works.TRACE;
   const order=Object.keys(works);
+  order.forEach((key,i)=>{works[key].no=String(i+1).padStart(2,'0');});
   const tabMap={looks:'COLOR',colors:'COLOR',tune:'SURFACE',sculpt:'SCULPT',hikari:'LIGHT'};
   const overlay=document.getElementById('startOverlay');
   const signal=document.getElementById('artSignal');
@@ -4529,7 +4549,7 @@ updateCmpBadge();
     query.set('try',key); query.set('length',normalizeTryLength(length));
     return '?'+query.toString();
   };
-  const normalizeWorkKey=key=>key==='NAILORB'?'ORB':key;
+  const normalizeWorkKey=key=>key==='NAILORB'?'ORB':key==='HAND'?'THINKING':key==='TRACE'?'':key;
   const artKey=normalizeWorkKey((params.get('work')||'').toUpperCase());
   const tryKey=normalizeWorkKey((params.get('try')||'').toUpperCase());
   const requestedTryLength=normalizeTryLength(params.get('length'));
