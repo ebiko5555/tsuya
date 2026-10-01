@@ -1654,6 +1654,60 @@
     }
     body.custom-mode.source-planning .source-sets{padding-bottom:max(12px,env(safe-area-inset-bottom))}
   }
+
+  /* 試作117：作品の5本を固定操作の下に隠さず、独立した標本として読む。 */
+  @media (max-width:819px){
+    body.art-page .work-copy{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+    body.art-page #workNails{height:128px; gap:12px; margin-top:18px; align-items:center}
+    body.art-page #workNails::before{display:none}
+    body.art-page #workNails canvas{width:48px; height:96px}
+    body.art-page #workNails canvas:nth-child(1),body.art-page #workNails canvas:nth-child(5){height:79px}
+    body.art-page #workNails canvas:nth-child(2),body.art-page #workNails canvas:nth-child(4){height:88px}
+    body.art-page .work-actions{position:static; display:grid; grid-template-columns:1fr; gap:12px; margin:18px 0 0; padding:0; border:0; background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none}
+    body.art-page .work-length-choice{width:100%; margin:0}
+    body.art-page .work-length-choice button{min-height:52px; font-size:12px}
+    body.art-page .source-entry{min-height:72px}
+  }
+
+  /* 試作117：文字を読まなくても、作品と5本を大きく選べる別導線。 */
+  .access-link,.access-hub{display:none}
+  body.hub-mode .access-link{position:absolute; z-index:7; display:flex; align-items:center; justify-content:center; right:18px; top:calc(18px + env(safe-area-inset-top)); min-height:54px; padding:0 18px; border:2px solid #fff; color:#fff; background:rgba(8,9,12,.82); text-decoration:none; font:600 17px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
+  body.access-mode{overflow:auto}
+  body.access-mode header,body.access-mode .global-back,body.access-mode .site-home,body.access-mode .language-switch{display:none}
+  body.access-mode #startOverlay{display:block; overflow-y:auto; min-height:100svh; padding:0; background:#08090c}
+  body.access-mode .opening-films,body.access-mode .opening-mark,body.access-mode .invite,body.access-mode .opening-guide,body.access-mode .opening-actions,body.access-mode .opening-steps,body.access-mode .opening-enter,body.access-mode .opening-work-meta,body.access-mode .opening-index,body.access-mode .access-link{display:none}
+  body.access-mode .access-hub{display:block; padding:calc(28px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom))}
+  .access-hub-head{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:20px}
+  .access-hub-title{margin:0; color:#fff; font:700 clamp(28px,8vw,38px)/1.15 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
+  .access-hub-back{display:flex; align-items:center; justify-content:center; min-height:50px; padding:0 14px; border:2px solid #fff; color:#fff; background:#08090c; text-decoration:none; font:600 16px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+  .access-work-grid{display:grid; grid-template-columns:1fr; gap:16px}
+  .access-work-card{display:grid; grid-template-columns:minmax(136px,.84fr) minmax(0,1.16fr); min-height:150px; overflow:hidden; border:2px solid rgba(255,255,255,.76); color:#fff; background:#111216; text-decoration:none}
+  .access-work-image{width:100%; height:100%; min-height:150px; object-fit:cover; background:#050608}
+  .access-work-body{display:flex; flex-direction:column; justify-content:space-between; min-width:0; padding:15px 12px 12px}
+  .access-work-title{font:700 clamp(20px,6.3vw,29px)/1.15 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.03em}
+  .access-work-nails{display:flex; align-items:center; gap:5px; min-height:72px; margin-top:10px}
+  .access-work-nails canvas{width:30px; height:62px; filter:drop-shadow(0 6px 8px rgba(0,0,0,.42))}
+  .access-work-nails canvas:nth-child(1),.access-work-nails canvas:nth-child(5){height:51px}
+  .access-work-nails canvas:nth-child(2),.access-work-nails canvas:nth-child(4){height:57px}
+  body.art-page.access-mode .work-layer{overflow-y:auto}
+  body.art-page.access-mode .work-film{height:42svh}
+  body.art-page.access-mode .work-film-mark,body.art-page.access-mode .work-index,body.art-page.access-mode .work-code{display:none}
+  body.art-page.access-mode .work-copy{position:relative; top:auto; min-height:0; overflow:visible; padding:22px 18px calc(28px + env(safe-area-inset-bottom))}
+  body.art-page.access-mode .work-title{margin:0; font-size:clamp(36px,11vw,52px)}
+  body.art-page.access-mode .work-title::after{display:none}
+  body.art-page.access-mode #workNails::before,body.art-page.access-mode #workNails::after{display:none}
+  body.art-page.access-mode #workNails{height:142px; gap:13px; margin-top:20px}
+  body.art-page.access-mode #workNails canvas{width:54px; height:108px}
+  body.art-page.access-mode #workNails canvas:nth-child(1),body.art-page.access-mode #workNails canvas:nth-child(5){height:89px}
+  body.art-page.access-mode #workNails canvas:nth-child(2),body.art-page.access-mode #workNails canvas:nth-child(4){height:99px}
+  body.art-page.access-mode .work-actions{position:static; grid-template-columns:1fr; margin-top:18px; padding:0; border:0; background:none; box-shadow:none}
+  body.art-page.access-mode .work-length-choice{width:100%; margin:0}
+  body.art-page.access-mode .work-length-choice button{min-height:58px; font-size:15px}
+  body.art-page.access-mode .source-entry{min-height:76px; justify-content:center; grid-template-columns:1fr; border:2px solid #fff; text-align:center}
+  body.art-page.access-mode .source-entry-icon,body.art-page.access-mode .source-entry-sub,body.art-page.access-mode .source-entry-arrow{display:none}
+  body.art-page.access-mode .source-entry-title{font:700 21px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
+  body.art-page.access-mode .work-close{z-index:34; min-height:50px; border:2px solid #fff; font-size:16px}
+  @media (min-width:820px){body.access-mode .access-hub{max-width:760px; margin:0 auto}.access-work-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -1705,6 +1759,7 @@
       <button class="bigbtn" id="startBtn">作品ネイルを選ぶ</button>
       <a class="make-link" href="?mode=custom">自由にデザインする</a>
     </div>
+    <a class="access-link" id="accessLink" href="?access=large">見やすい表示</a>
     <div class="opening-steps" aria-label="試着までの流れ">
       <span><b>01</b>作品を選ぶ</span><span><b>02</b>ネイルを見る</span><span><b>03</b>カメラで試着</span>
     </div>
@@ -1725,6 +1780,7 @@
       <button type="button" data-opening-work="ORB" aria-label="White Orb">07</button>
       <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">08</button>
     </nav>
+    <section class="access-hub" id="accessHub" aria-label="見やすい作品一覧"></section>
     <div id="status"></div>
   </div>
 
@@ -1987,7 +2043,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile116';
+const BUILD_VERSION = 'mobile117';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -4532,21 +4588,25 @@ updateCmpBadge();
   const index=document.getElementById('workIndex');
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
+  const accessibleMode=params.get('access')==='large';
   document.getElementById('siteHome').href='../';
   const route=(name,value)=>{
     const query=new URLSearchParams();
     if(name&&value) query.set(name,value);
+    if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
   };
   const homeRoute=()=>route(null,null);
   const customRoute=from=>{
     const query=new URLSearchParams(); query.set('mode','custom');
     if(from) query.set('from',from);
+    if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
   };
   const tryRoute=(key,length)=>{
     const query=new URLSearchParams();
     query.set('try',key); query.set('length',normalizeTryLength(length));
+    if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
   };
   const normalizeWorkKey=key=>key==='NAILORB'?'ORB':key==='HAND'?'THINKING':key==='TRACE'?'':key;
@@ -5067,6 +5127,7 @@ updateCmpBadge();
     renderLengthChoice($('workLengthChoice'),artworkTryLength);
     const customLink=document.querySelector('.source-entry');
     const customHref=customRoute(key); customLink.href=customHref;
+    customLink.querySelector('.source-entry-title').textContent=accessibleMode?'写真からつくる':'SOURCE';
     customLink.onclick=event=>{
       event.preventDefault();
       if(document.body.classList.contains('create-entering')||document.body.classList.contains('route-leaving')) return;
@@ -5158,6 +5219,7 @@ updateCmpBadge();
   }
 
   function showArtworkPage(key){
+    if(accessibleMode) document.body.classList.add('access-mode');
     document.body.classList.add('art-page');
     document.querySelector('#workClose span').textContent='BACK';
     openWork(key);
@@ -5263,6 +5325,27 @@ updateCmpBadge();
     }
   }
 
+  function prepareAccessibleHub(){
+    document.body.classList.add('access-mode');
+    const hub=document.getElementById('accessHub');
+    hub.innerHTML='<div class="access-hub-head"><h1 class="access-hub-title">作品を選ぶ</h1><a class="access-hub-back" href="./">通常表示</a></div><div class="access-work-grid" id="accessWorkGrid"></div>';
+    const grid=document.getElementById('accessWorkGrid');
+    order.forEach(key=>{
+      const work=works[key];
+      const card=document.createElement('a');
+      const image=document.createElement('img');
+      const body=document.createElement('span');
+      const title=document.createElement('span');
+      const nails=document.createElement('span');
+      card.className='access-work-card'; card.href=route('work',key); card.setAttribute('aria-label',work.title+'を見る');
+      image.className='access-work-image'; image.src=work.motion; image.alt='';
+      body.className='access-work-body'; title.className='access-work-title'; title.textContent=work.title;
+      nails.className='access-work-nails'; nails.id='accessNails'+key;
+      body.append(title,nails); card.append(image,body); grid.appendChild(card);
+      renderNailPreview(key,nails.id,inferTryLength(work.preset.tune));
+    });
+  }
+
   document.querySelectorAll('[data-opening-work]').forEach(button=>{
     button.addEventListener('click',()=>{ location.href=route('work',button.dataset.openingWork); });
   });
@@ -5312,6 +5395,8 @@ updateCmpBadge();
     prepareFixedTryOn(tryKey);
   }else if(customMode){
     prepareCustomPage();
+  }else if(accessibleMode){
+    prepareAccessibleHub();
   }else{
     prepareHub();
   }
