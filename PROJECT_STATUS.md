@@ -12,6 +12,7 @@
 - コミット `efe2fa7` を `origin/main` へpushした。
 - GitHub Pages run `36885749453` がsuccessで完了し、公開HTMLで`mobile118`と下部UIを固定しないCSSの配信を確認した。
 - キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=efe2fa7-mobile118`
+- 続いて、固定表示由来の`transform: translateX(-50%)`が残り、長さ選択が左端へずれる不具合を修正した。コミット`dd38f93`、GitHub Pages run `36886677290` のsuccessと、公開HTMLへの`transform:none`配信を確認済み。
 
 ### 試作117 / mobile117 — 見やすい表示入口と作品チップの見切れ修正（2026-10-02・公開準備）
 
