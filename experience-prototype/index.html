@@ -1659,9 +1659,9 @@
   @media (max-width:819px){
     /* iPhoneの下部ブラウザUIへ操作を押し込まない。映像から下を一枚の縦長ページにする。 */
     body.art-page .work-layer{overflow-y:auto; overscroll-behavior:contain}
-    body.art-page .work-film{position:relative; inset:auto; height:42svh}
-    body.art-page .work-layer::after{height:42svh}
-    body.art-page .work-film-mark{top:calc(42svh - 82px); bottom:auto}
+    body.art-page .work-film{position:relative; inset:auto; height:56svh}
+    body.art-page .work-layer::after{height:56svh}
+    body.art-page .work-film-mark{top:calc(56svh - 82px); bottom:auto}
     body.art-page .work-index{
       position:relative; left:auto; right:auto; top:auto; width:100%; height:62px;
       padding:17px 16px 5px;
@@ -1685,8 +1685,23 @@
       border:0; background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
     }
     body.art-page .work-length-choice{width:100%; margin:0}
-    body.art-page .work-length-choice button{min-height:52px; font-size:12px}
-    body.art-page .source-entry{min-height:72px}
+    body.art-page .work-length-choice{width:min(100%,206px); gap:5px}
+    body.art-page .work-length-choice button{min-height:38px; gap:6px; font-size:9px}
+    body.art-page .work-length-choice button[data-length="short"]::before{height:14px}
+    body.art-page .work-length-choice button[data-length="long"]::before{height:22px}
+    body.art-page .source-entry{
+      display:inline-flex; grid-template-columns:none; width:auto; min-height:0; padding:8px 0;
+      gap:7px; border:0; background:none; color:rgba(255,255,255,.82);
+    }
+    body.art-page .source-entry-icon,body.art-page .source-entry-title{display:none}
+    body.art-page .source-entry-sub{display:block; margin:0; color:rgba(255,255,255,.82); font-size:11px; letter-spacing:.13em}
+    body.art-page .source-entry-arrow{font-size:17px}
+  }
+
+  /* 入口の言語切替と見やすい表示を重ねない。 */
+  @media (max-width:819px){
+    body.hub-mode .language-switch{right:18px; top:calc(14px + env(safe-area-inset-top))}
+    body.hub-mode .access-link{right:18px; top:calc(70px + env(safe-area-inset-top)); min-height:46px; padding:0 14px; font-size:15px}
   }
 
   /* 試作117：文字を読まなくても、作品と5本を大きく選べる別導線。 */
@@ -2063,7 +2078,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile118';
+const BUILD_VERSION = 'mobile119';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
