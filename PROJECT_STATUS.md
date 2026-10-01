@@ -9,7 +9,9 @@
 
 #### 公開確認
 
-- コミット・GitHub Pagesの完了後に追記する。
+- コミット `efe2fa7` を `origin/main` へpushした。
+- GitHub Pages run `36885749453` がsuccessで完了し、公開HTMLで`mobile118`と下部UIを固定しないCSSの配信を確認した。
+- キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=efe2fa7-mobile118`
 
 ### 試作117 / mobile117 — 見やすい表示入口と作品チップの見切れ修正（2026-10-02・公開準備）
 
