@@ -1655,11 +1655,26 @@
     body.custom-mode.source-planning .source-sets{padding-bottom:max(12px,env(safe-area-inset-bottom))}
   }
 
-  /* 試作117：作品の5本を固定操作の下に隠さず、独立した標本として読む。 */
+  /* 試作118：作品ページ全体を縦に流し、iPhoneの下部ブラウザUIへ操作を押し込まない。 */
   @media (max-width:819px){
-    body.art-page .work-copy{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+    /* iPhoneの下部ブラウザUIへ操作を押し込まない。映像から下を一枚の縦長ページにする。 */
+    body.art-page .work-layer{overflow-y:auto; overscroll-behavior:contain}
+    body.art-page .work-film{position:relative; inset:auto; height:42svh}
+    body.art-page .work-layer::after{height:42svh}
+    body.art-page .work-film-mark{top:calc(42svh - 82px); bottom:auto}
+    body.art-page .work-index{
+      position:relative; left:auto; right:auto; top:auto; width:100%; height:62px;
+      padding:17px 16px 5px;
+    }
+    body.art-page .work-index::before{top:4px}
+    body.art-page .work-copy{
+      position:relative; left:auto; right:auto; top:auto; bottom:auto; min-height:0;
+      overflow:visible; padding:12px 18px calc(34px + env(safe-area-inset-bottom));
+    }
+    body.art-page .work-code,body.art-page .work-title{display:none}
+    body.art-page .work-copy{padding-bottom:calc(34px + env(safe-area-inset-bottom))}
     body.art-page #workNails{height:128px; gap:12px; margin-top:18px; align-items:center}
-    body.art-page #workNails::before{display:none}
+    body.art-page #workNails::before,body.art-page #workNails::after{display:none}
     body.art-page #workNails canvas{width:48px; height:96px}
     body.art-page #workNails canvas:nth-child(1),body.art-page #workNails canvas:nth-child(5){height:79px}
     body.art-page #workNails canvas:nth-child(2),body.art-page #workNails canvas:nth-child(4){height:88px}
@@ -2043,7 +2058,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile117';
+const BUILD_VERSION = 'mobile118';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
