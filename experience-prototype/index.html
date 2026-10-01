@@ -1678,7 +1678,12 @@
     body.art-page #workNails canvas{width:48px; height:96px}
     body.art-page #workNails canvas:nth-child(1),body.art-page #workNails canvas:nth-child(5){height:79px}
     body.art-page #workNails canvas:nth-child(2),body.art-page #workNails canvas:nth-child(4){height:88px}
-    body.art-page .work-actions{position:static; display:grid; grid-template-columns:1fr; gap:12px; margin:18px 0 0; padding:0; border:0; background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none}
+    body.art-page .work-actions{
+      position:static; left:auto; right:auto; bottom:auto; transform:none;
+      box-sizing:border-box; width:100%; max-width:none;
+      display:grid; grid-template-columns:1fr; gap:12px; margin:18px 0 0; padding:0;
+      border:0; background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
+    }
     body.art-page .work-length-choice{width:100%; margin:0}
     body.art-page .work-length-choice button{min-height:52px; font-size:12px}
     body.art-page .source-entry{min-height:72px}
