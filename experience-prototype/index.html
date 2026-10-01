@@ -1698,11 +1698,10 @@
     body.art-page .source-entry-arrow{font-size:17px}
   }
 
-  /* 入口の言語切替と見やすい表示を重ねない。 */
-  @media (max-width:819px){
-    body.hub-mode .language-switch{right:18px; top:calc(14px + env(safe-area-inset-top))}
-    body.hub-mode .access-link{right:18px; top:calc(70px + env(safe-area-inset-top)); min-height:46px; padding:0 14px; font-size:15px}
-  }
+  /* トップではHOMEを出さず、言語切替と見やすい表示を一列に重ねない。 */
+  body.hub-mode .site-home{display:none}
+  body.hub-mode .language-switch{right:18px; top:calc(14px + env(safe-area-inset-top))}
+  body.hub-mode .access-link{right:18px; top:calc(70px + env(safe-area-inset-top)); min-height:46px; padding:0 14px; font-size:15px}
 
   /* 試作117：文字を読まなくても、作品と5本を大きく選べる別導線。 */
   .access-link,.access-hub{display:none}
@@ -2078,7 +2077,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile119';
+const BUILD_VERSION = 'mobile120';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
