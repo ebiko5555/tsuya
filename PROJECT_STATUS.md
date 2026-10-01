@@ -7,7 +7,9 @@
 
 #### 公開確認
 
-- コミット・GitHub Pagesの完了後に追記する。
+- コミット `44edb09` を `origin/main` へpushした。
+- GitHub Pages run `36897602217` がsuccessで完了し、公開HTMLで`mobile120`とトップ用の操作分離CSSの配信を確認した。
+- キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=44edb09-mobile120`
 
 ### 試作119 / mobile119 — 作品ページの操作を小さく整理し、入口の重なりを解消（2026-10-02・公開準備）
 
