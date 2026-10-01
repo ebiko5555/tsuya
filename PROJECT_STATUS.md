@@ -9,7 +9,9 @@
 
 #### 公開確認
 
-- コミット・GitHub Pagesの完了後に追記する。
+- コミット `d5e7a88` を `origin/main` へpushした。
+- GitHub Pages run `36893172444` がsuccessで完了し、公開HTMLで`mobile119`、映像高さ、入口の分離CSSの配信を確認した。
+- キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=d5e7a88-mobile119`
 
 ### 試作118 / mobile118 — 作品ページの下部操作をiPhoneのブラウザUIから完全に外す（2026-10-02・公開準備）
 
