@@ -1693,9 +1693,8 @@
       display:inline-flex; grid-template-columns:none; width:auto; min-height:0; padding:8px 0;
       gap:7px; border:0; background:none; color:rgba(255,255,255,.82);
     }
-    body.art-page .source-entry-icon,body.art-page .source-entry-title{display:none}
+    body.art-page .source-entry-icon,body.art-page .source-entry-title,body.art-page .source-entry-arrow{display:none}
     body.art-page .source-entry-sub{display:block; margin:0; color:rgba(255,255,255,.82); font-size:11px; letter-spacing:.13em}
-    body.art-page .source-entry-arrow{font-size:17px}
   }
 
   /* トップではHOMEを出さず、言語切替と見やすい表示を一列に重ねない。 */
@@ -1750,6 +1749,19 @@
     position:fixed; left:18px; right:auto; top:calc(14px + env(safe-area-inset-top));
     min-height:44px; padding:0 14px; border:1px solid rgba(255,255,255,.55);
     color:#fff; background:rgba(8,9,12,.72); font-size:14px;
+  }
+
+  /* 見やすい表示でも同じく、写真への入口は文字だけにする。 */
+  body.art-page.access-mode .source-entry{
+    display:inline-flex; grid-template-columns:none; width:auto; min-height:0; padding:8px 0;
+    border:0; background:none; color:rgba(255,255,255,.9); text-align:left;
+  }
+  body.art-page.access-mode .source-entry-icon,
+  body.art-page.access-mode .source-entry-title,
+  body.art-page.access-mode .source-entry-arrow{display:none}
+  body.art-page.access-mode .source-entry-sub{
+    display:block; margin:0; color:rgba(255,255,255,.9);
+    font:600 16px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
   }
 </style>
 </head>
@@ -2086,7 +2098,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile123';
+const BUILD_VERSION = 'mobile124';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
