@@ -1742,6 +1742,14 @@
   body.art-page.access-mode .source-entry-title{font:700 21px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
   body.art-page.access-mode .work-close{z-index:34; min-height:50px; border:2px solid #fff; font-size:16px}
   @media (min-width:820px){body.access-mode .access-hub{max-width:760px; margin:0 auto}.access-work-grid{grid-template-columns:1fr 1fr}}
+
+  /* このブロックは古い入口指定より後に置く。トップだけの操作は絶対に重ねない。 */
+  body.hub-mode .site-home{display:none}
+  body.hub-mode .language-switch{right:18px; top:calc(14px + env(safe-area-inset-top))}
+  body.hub-mode .access-link{
+    position:fixed; right:18px; top:calc(70px + env(safe-area-inset-top));
+    min-height:46px; padding:0 14px; font-size:15px;
+  }
 </style>
 </head>
 <body>
@@ -2077,7 +2085,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile120';
+const BUILD_VERSION = 'mobile121';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
