@@ -7,7 +7,9 @@
 
 #### 公開確認
 
-- コミット・GitHub Pagesの完了後に追記する。
+- コミット `4b2e7c5` を `origin/main` へpushした。
+- GitHub Pages run `36957041485` がsuccessで完了し、公開HTMLで`mobile121`とトップ操作の最終配置CSSの配信を確認した。
+- キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=4b2e7c5-mobile121`
 
 ### 試作120 / mobile120 — トップの操作重なりを解消（2026-10-02・公開準備）
 
