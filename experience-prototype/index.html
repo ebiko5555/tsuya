@@ -1694,7 +1694,10 @@
       gap:7px; border:0; background:none; color:rgba(255,255,255,.82);
     }
     body.art-page .source-entry-icon,body.art-page .source-entry-title,body.art-page .source-entry-arrow{display:none}
-    body.art-page .source-entry-sub{display:block; margin:0; color:rgba(255,255,255,.82); font-size:11px; letter-spacing:.13em}
+    body.art-page .source-entry-sub{
+      display:block; margin:0; color:rgba(255,255,255,.88);
+      font:600 15px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.12em;
+    }
   }
 
   /* トップではHOMEを出さず、言語切替と見やすい表示を一列に重ねない。 */
@@ -2098,7 +2101,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const video = document.getElementById('video');
-const BUILD_VERSION = 'mobile124';
+const BUILD_VERSION = 'mobile125';
 let mode = 'idle';            // idle | live | frozen
 let facing = 'environment';
 let stream = null;
@@ -5530,7 +5533,7 @@ updateCmpBadge();
       text('#sourcePhoto','CHOOSE A PHOTO'); text('#sourceOriginReset','ARTWORK NAILS'); text('#sourceMotifPick','TAP A MOTIF TO SELECT IT');
       text('.source-exhibit','VIEW AS ARTWORK'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','BACK');
       text('#saveSetLink','SAVE THIS SET'); text('#resetPal','RESET TO STANDARD'); text('.tonelabel','TONE');
-      text('.source-entry-sub','CREATE FROM A PHOTO'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
+      text('.source-entry-sub','COLLECT A SOURCE'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
       text('#setViewerTry','TRY THIS SET ON'); text('#nailSetBack','BACK TO THE WORK');
       text('.shTxt','This image has not been saved yet. Press and hold it, choose “Save to Photos”, then return here.');
       text('#saveHintDone','CLOSE AND RETURN TO TRY-ON'); text('.cmpTitle','COMPARE'); text('#cmpClose','CLOSE');
@@ -5546,7 +5549,7 @@ updateCmpBadge();
       text('#sourcePhoto','写真を選ぶ'); text('#sourceOriginReset','作品ネイル'); text('#sourceMotifPick','モチーフをタップして指定');
       text('.source-exhibit','作品として見る'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','戻る');
       text('#saveSetLink','この組み合わせを保存'); text('#resetPal','標準にもどす'); text('.tonelabel','濃淡');
-      text('.source-entry-sub','写真からつくる'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
+      text('.source-entry-sub','採集する'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
       text('#setViewerTry','このセットを試着する'); text('#nailSetBack','作品ページへ戻る');
       text('.shTxt','まだ端末には保存されていません画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。');
       text('#saveHintDone','保存画面を閉じて試着へ戻る'); text('.cmpTitle','比べる'); text('#cmpClose','閉じる');
