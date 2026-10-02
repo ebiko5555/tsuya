@@ -7,7 +7,9 @@
 
 #### 公開確認
 
-- コミット・GitHub Pagesの完了後に追記する。
+- コミット `e0ae038` を `origin/main` へpushした。
+- GitHub Pages run `36959865097` がsuccessで完了し、公開HTMLで`mobile123`とトップ左上の見やすい表示の配信を確認した。
+- キャッシュ回避用URL: `https://ebiko5555.github.io/tsuya/?v=e0ae038-mobile123`
 
 ### 試作122 / mobile122 — トップから見やすい表示を外す（2026-10-02・公開準備）
 
