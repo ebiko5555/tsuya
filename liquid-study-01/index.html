@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17251e">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'">
+<title>水のあいだ · Liquid study</title>
+<link rel="stylesheet" href="style.css?v=liquid01">
+</head>
+<body>
+<canvas id="view" aria-label="手の周りの景色が屈折する映像"></canvas>
+<video id="camera" playsinline muted></video>
+<header><span class="mark" aria-hidden="true">◌</span><span>水のあいだ<small>LIQUID STUDY / 01</small></span><span id="mode">待機</span></header>
+<main id="intro">
+<div class="orb" aria-hidden="true"></div>
+<h1>景色に、<br>ふれる。</h1>
+<p>指をひらく。曲げる。<br>手のあとに、水がのこる。</p>
+<button id="start" class="primary">カメラではじめる <span aria-hidden="true">↗</span></button>
+<button id="demo" class="text-button">カメラなしで質感を試す</button>
+<p class="privacy">映像は端末内だけで処理します</p>
+</main>
+<div id="status" role="status" aria-live="polite"></div>
+<nav id="controls" hidden aria-label="体験の操作"><button id="stop">停止</button><button id="switch" hidden aria-label="前後のカメラを切り替え">↻</button><button id="motion" hidden>自動の動き</button></nav>
+<footer id="hint">独立したWeb試作</footer>
+<script src="renderer.js?v=liquid01"></script><script src="app.js?v=liquid01"></script>
+</body></html>
