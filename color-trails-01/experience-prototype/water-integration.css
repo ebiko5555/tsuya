@@ -1,0 +1,7 @@
+#liveBtns{gap:14px}
+#waterToggle{flex-direction:column;gap:1px;font-size:15px;flex-shrink:0;border:1px solid #ffffff70}
+#waterToggle span{font-size:11px;letter-spacing:.08em}
+#waterToggle[aria-pressed=true]{background:#eff7ed;color:#264439;border-color:#fff}
+body.source-camera-capture #waterToggle{display:none}
+.water-message{position:fixed;bottom:calc(105px + env(safe-area-inset-bottom));left:20px;right:20px;border-radius:30px;background:#243d37e8;color:white;text-align:center;padding:9px 16px;font-size:13px;z-index:90;pointer-events:none}
+@media(max-width:350px){#liveBtns{gap:10px}#waterToggle{width:40px;height:40px}}
