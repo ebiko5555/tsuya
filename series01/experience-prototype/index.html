@@ -4711,10 +4711,12 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
+  const artworkRouteVersion='selection-return-20261012';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();
     if(name&&value) query.set(name,value);
+    if(name==='work') query.set('v',artworkRouteVersion);
     if(length) query.set('length',normalizeTryLength(length));
     if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
@@ -4729,6 +4731,7 @@ updateCmpBadge();
   const tryRoute=(key,length)=>{
     const query=new URLSearchParams();
     query.set('try',key); query.set('length',normalizeTryLength(length));
+    query.set('v',artworkRouteVersion);
     if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
   };
