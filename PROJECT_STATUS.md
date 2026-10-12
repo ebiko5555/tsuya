@@ -1,5 +1,12 @@
 # 艶 II — PROJECT STATUS
 
+### 作品ページのSHORT/LONGを中央揃え（2026-10-12・本人画像指示）
+
+- 指定Library画像を正規手順でこのMacの作業フォルダへ取得し、JPEGの読み取りと実ピクセルを確認。対象は作品ページで5本ネイルの下、「試着☞」の上にある#workLengthChoice。
+- 共通CSSへ`body.art-page #workLengthChoice{margin-left:auto;margin-right:auto}`のみ追加。通常版・series01の既存幅/高さ/文字サイズ/機能を保持し、長さボックスの一組を中央へ置く。
+- CSSはlength-center1、内部作品/試着/SOURCEルートはlength-center-20261012へ更新。最近の文言・写真入口・手記号修正を保持。
+- 関連49件とgit diff --check通過。実ブラウザでの中央位置は親側確認へ引き継ぐ。
+
 ### 写真/SOURCE入口を一つの文字ボタンへ整理（2026-10-12・本人追加依頼）
 
 - 通常版・series01の.source-sequence-flow要素を除去。series01-ui.jsによる「写真→色→ネイル→手」の上書きも除去。
