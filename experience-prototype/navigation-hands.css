@@ -21,7 +21,11 @@ body.hub-mode .bigbtn::after,body.hub-mode .make-link::after,
 }
 /* These forward controls already use a light background. */
 #sourceTry::after,#sourceConfirmTry::after,#setViewerTry::after,#seriesWorkTry::after{color:#111}
-.source-entry-arrow{font-size:0!important;color:#fff!important}
+/* Let the visible glyph determine its grid column; never shrink it in flex layouts. */
+@media(min-width:820px){
+  .source-entry{grid-template-columns:42px minmax(0,1fr) max-content}
+}
+.source-entry-arrow{font-size:0!important;color:#fff!important;min-width:35px;flex-shrink:0;white-space:nowrap}
 .source-entry-arrow::after{
   content:"☞"; content:"☞" / "";
   font:35px/1 "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",serif;
