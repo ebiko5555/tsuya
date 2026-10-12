@@ -14,7 +14,12 @@ body.hub-mode:not(.access-mode) .series-hub-photo{display:flex;position:absolute
 body.hub-mode .opening-work-code{font-size:12px}
 body.hub-mode .opening-work-cue{font-size:15px}
 body.art-page .work-layer{padding-bottom:var(--series-bottom);scroll-padding-top:76px;scroll-padding-bottom:var(--series-bottom)}
-body.art-page .work-index button{min-width:84px;min-height:48px}
+/* Desktop buttons must fit the existing 38px grid; mobile keeps its scrollable row. */
+body.art-page .work-index button{min-width:0;min-height:48px}
+@media(max-width:819px){
+  body.art-page .work-index{height:70px}
+  body.art-page .work-index button{min-width:84px}
+}
 body.art-page .work-index .work-nav-no{font-size:12px}
 body.art-page .work-index .work-nav-title{font-size:12px;opacity:.9}
 body.art-page .work-copy{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right));padding-bottom:var(--series-bottom)}
