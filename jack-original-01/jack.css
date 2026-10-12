@@ -62,7 +62,9 @@ body.jack-edition.art-page .source-entry-icon,body.jack-edition.art-page .source
 .jack-edition .set-viewer-nails{width:min(100%,780px);min-height:240px;gap:0;justify-content:center}
 .jack-edition .set-viewer-nails canvas{width:20%;height:auto!important;aspect-ratio:192/320;filter:none}
 .jack-edition .set-viewer-try,.jack-edition .set-viewer-back,.jack-edition .nail-set-close,.jack-edition .source-confirm-back,.jack-edition .source-confirm-try{border-radius:0;background:none;color:var(--jack-ink);border:0;border-bottom:1px solid var(--jack-line);box-shadow:none;font-size:20px;min-height:56px}
-.jack-edition .set-viewer-try{font-size:26px;line-height:1.4}
+.jack-edition .set-viewer-actions{width:min(100%,480px)}
+.jack-edition .set-viewer-try{font-size:clamp(18px,5.5vw,26px);line-height:1.4;letter-spacing:.04em;white-space:nowrap;gap:8px;padding:10px 8px}
+.jack-edition .set-viewer-try::after{flex-shrink:0;margin-left:0}
 /* Before the camera opens: the work above, its five nails below. */
 .jack-edition.work-tryon:not(.camera-started) #startOverlay,.jack-edition.custom-mode:not(.source-planning):not(.camera-started) #startOverlay{padding:0;display:block;background:var(--jack-paper);color:var(--jack-ink);overflow-y:auto}
 .jack-edition.work-tryon #startOverlay::before,.jack-edition.work-tryon #startOverlay::after,.jack-edition.custom-mode #startOverlay::before,.jack-edition.custom-mode #startOverlay::after{display:none}
