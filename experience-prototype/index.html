@@ -1768,7 +1768,7 @@
     font:600 32px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
   }
 </style>
-<link rel="stylesheet" href="navigation-hands.css?v=hands5">
+<link rel="stylesheet" href="navigation-hands.css?v=photo-entry1">
 </head>
 <body>
 <header>
@@ -1811,7 +1811,6 @@
         <img class="source-reference-hand" src="source-assets/source-tsuya-hand.png" alt="">
       </div>
     </div>
-    <p class="source-sequence-flow">作品 → ネイル → 手</p>
     <div class="opening-mark">TRY ON / ART WORK<br>TRACE / SKIN — 2026</div>
     <p class="invite"></p>
     <p class="opening-guide" id="openingGuide"></p>
@@ -4649,7 +4648,7 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
-  const artworkRouteVersion='navigation-entry-double-20261012';
+  const artworkRouteVersion='photo-entry-20261012';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();
@@ -4662,6 +4661,7 @@ updateCmpBadge();
   const homeRoute=()=>route(null,null);
   const customRoute=from=>{
     const query=new URLSearchParams(); query.set('mode','custom');
+    query.set('v',artworkRouteVersion);
     if(from) query.set('from',from);
     if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
@@ -5331,7 +5331,7 @@ updateCmpBadge();
     }
     document.querySelector('#startOverlay .invite').innerHTML='COLOUR ATELIER<span class="invite-sub">CREATE YOUR OWN NAIL</span>';
     document.getElementById('openingGuide').textContent=origin?(origin.title+' / 身のまわりから採集する'):'身のまわりから採集する';
-    document.getElementById('startBtn').textContent='写真を選んでつくる';
+    document.getElementById('startBtn').textContent='イメージを写真から選ぶ';
     document.getElementById('tryIdentityText').textContent=origin?('SOURCE / '+fromKey):'SOURCE';
     const backHref=origin?route('work',fromKey):homeRoute();
     const workBack=document.getElementById('tryWorkBack'); workBack.textContent='BACK'; workBack.href=backHref;
@@ -5532,7 +5532,7 @@ updateCmpBadge();
     if(isEnglish){
       text('.guide-text','Place your hand in the frame');
       text('.sg-tag','SOURCE · COLLECT LIGHT'); text('.sg-title','Gather a colour or a glimmer that catches you'); text('.sg-sub','Hold it up to light or a scene around you');
-      text('.bigbtn',isCustom?'CHOOSE A PHOTO':isTryOn?'START CAMERA':'CHOOSE A WORK');
+      text('.bigbtn',isCustom?'CHOOSE AN IMAGE FROM PHOTOS':isTryOn?'START CAMERA':'CHOOSE A WORK');
       text('.make-link',isCustom?'CREATE FROM A PHOTO':'CREATE FREELY');
       steps(['CHOOSE A WORK','VIEW THE NAILS','TRY ON WITH CAMERA']);
       text('.opening-work-cue span','ENTER THE WORK');
@@ -5548,7 +5548,7 @@ updateCmpBadge();
     }else{
       text('.guide-text','枠に手をかざしてください');
       text('.sg-tag','SOURCE · 光の採集'); text('.sg-title','心惹かれる光や色を、写しとる'); text('.sg-sub','身のまわりの光や景色にかざしてください');
-      text('.bigbtn',isCustom?'写真を選ぶ':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
+      text('.bigbtn',isCustom?'イメージを写真から選ぶ':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
       text('.make-link',isCustom?'写真からつくる':'自由にデザインする');
       steps(['作品を選ぶ','ネイルを見る','カメラで試着']);
       text('.opening-work-cue span','触れて、作品へ');

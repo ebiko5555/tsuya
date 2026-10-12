@@ -61,6 +61,6 @@ test('SOURCE only offers a device photo picker, never an in-app material camera'
  assert.ok(html.includes('id="sourcePhoto"'));
  assert.ok(!html.includes('id="sourceCamera"'));
  assert.ok(!html.includes("$('sourceCamera')"));
- assert.ok(html.includes("document.getElementById('startBtn').textContent='写真を選ぶ'"));
+ assert.ok(html.includes("document.getElementById('startBtn').textContent='イメージを写真から選ぶ'"));
  assert.match(html,/\$\('startBtn'\)\.onclick = \(\)=>\{[\s\S]*?\$\('sourceInput'\)\.click\(\);[\s\S]*?return;/);
 });

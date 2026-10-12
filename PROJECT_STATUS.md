@@ -1,5 +1,15 @@
 # 艶 II — PROJECT STATUS
 
+### 写真/SOURCE入口を一つの文字ボタンへ整理（2026-10-12・本人追加依頼）
+
+- 通常版・series01の.source-sequence-flow要素を除去。series01-ui.jsによる「写真→色→ネイル→手」の上書きも除去。
+- SOURCEの.make-linkは画面幅を問わず非表示とし、唯一の#startBtnを「イメージを写真から選ぶ」（英語CHOOSE AN IMAGE FROM PHOTOS）へ統一。初期処理と言語切替/MutationObserverの両方を更新。
+- SOURCEの#startBtnだけ24px・中央・透明・枠なし・丸背景なし・影なし・backdropなし。52px以上のタップ領域とキーボードfocusを保持。狭幅は文字折返しを許可。
+- 写真選択/解析/生成・AR試着カメラ・ネイル・既存バグ修正は維持。customRouteにも版指定を追加し、旧写真画面のキャッシュへ戻るのを防止。
+- test-photo-entry.cjsの14件で両版の初期/日英/MutationObserver、320/390/819/820/1180pxのCSS、写真pickerとARカメラ分岐を検証。修正前は12件失敗、修正後は14件通過。既存35件と合わせ49件通過。
+- 旧test-source-navigation.cjsの入口文言期待を今回の指定へ更新し11件通過。既知のmobile104固定ハッシュ1件は引き続き失敗（今回の変更対象外）。git diff --check通過。
+- 実ブラウザでの最終表示・クリックとiPhone確認は親側へ引き継ぐ。
+
 ### 中央の試着入口だけ文字と手を2倍（2026-10-12・本人追加依頼）
 
 - 通常版の入口文字はデスクトップ10→20px、スマホ15→30px、拡大表示16→32px。series01は既存上書き15→30px。日英とも同じサイズ指定でフォントは保持。

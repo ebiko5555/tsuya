@@ -7,8 +7,6 @@
     if(trial)trial.textContent=en?'Try this artwork on your hand':'この作品の5本を試す';
     const repick=document.getElementById('sourcePhoto');
     if(repick&&document.body.classList.contains('source-selected'))repick.textContent=en?'Choose another photo':'別の写真を選ぶ';
-    const flow=document.querySelector('.source-sequence-flow');
-    if(flow)flow.textContent=en?'Photo colours → Five nails → Your hand':'写真 → 色 → ネイル → 手';
   }
   new MutationObserver(wording).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   new MutationObserver(wording).observe(document.body,{attributes:true,attributeFilter:['class']});
