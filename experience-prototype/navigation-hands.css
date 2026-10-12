@@ -21,10 +21,15 @@ body.hub-mode .bigbtn::after,body.hub-mode .make-link::after,
 }
 /* These forward controls already use a light background. */
 #sourceTry::after,#sourceConfirmTry::after,#setViewerTry::after,#seriesWorkTry::after{color:#111}
-/* Let the visible glyph determine its grid column; never shrink it in flex layouts. */
-@media(min-width:820px){
-  .source-entry{grid-template-columns:42px minmax(0,1fr) max-content}
+/* Center only this entry's label and hand, including narrow and accessible views. */
+body.art-page .source-entry,body.art-page.access-mode .source-entry{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;max-width:100%;min-height:44px;box-sizing:border-box;text-align:center;
 }
+body.art-page .source-entry .source-entry-icon,
+body.art-page .source-entry .source-entry-title{display:none}
+body.art-page .source-entry .source-entry-sub{display:block;margin:0;text-align:center}
+body.art-page .source-entry .source-entry-arrow{display:block}
 .source-entry-arrow{font-size:0!important;color:#fff!important;min-width:35px;flex-shrink:0;white-space:nowrap}
 .source-entry-arrow::after{
   content:"☞"; content:"☞" / "";

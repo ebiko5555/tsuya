@@ -1768,7 +1768,7 @@
     font:600 16px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
   }
 </style>
-<link rel="stylesheet" href="navigation-hands.css?v=hands3">
+<link rel="stylesheet" href="navigation-hands.css?v=hands4">
 </head>
 <body>
 <header>
@@ -2028,7 +2028,7 @@
       <div class="length-choice work-length-choice" id="workLengthChoice" aria-label="ネイルの長さを選ぶ">
         <button type="button" data-length="short">SHORT</button><button type="button" data-length="long">LONG</button>
       </div>
-      <a class="source-entry" href="?mode=custom" aria-label="写真からネイルを作る"><span class="source-entry-icon" aria-hidden="true"></span><span><span class="source-entry-title">SOURCE</span><span class="source-entry-sub">写真からつくる</span></span><span class="source-entry-arrow" aria-hidden="true">→</span></a>
+      <a class="source-entry" href="?mode=custom" aria-label="試着：写真からネイルを作る"><span class="source-entry-icon" aria-hidden="true"></span><span><span class="source-entry-title">SOURCE</span><span class="source-entry-sub">試着</span></span><span class="source-entry-arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -4649,7 +4649,7 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
-  const artworkRouteVersion='navigation-hands-fit-20261012';
+  const artworkRouteVersion='navigation-entry-20261012';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();
@@ -5540,7 +5540,7 @@ updateCmpBadge();
       text('#sourcePhoto','CHOOSE A PHOTO'); text('#sourceOriginReset','ARTWORK NAILS'); text('#sourceMotifPick','TAP A MOTIF TO SELECT IT');
       text('.source-exhibit','VIEW AS ARTWORK'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','BACK');
       text('#saveSetLink','SAVE THIS SET'); text('#resetPal','RESET TO STANDARD'); text('.tonelabel','TONE');
-      text('.source-entry-sub','COLLECT A SOURCE'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
+      text('.source-entry-sub','TRY ON'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
       text('#setViewerTry','TRY THIS SET ON'); text('#nailSetBack','BACK TO THE WORK');
       text('.shTxt','This image has not been saved yet. Press and hold it, choose “Save to Photos”, then return here.');
       text('#saveHintDone','CLOSE AND RETURN TO TRY-ON'); text('.cmpTitle','COMPARE'); text('#cmpClose','CLOSE');
@@ -5556,13 +5556,14 @@ updateCmpBadge();
       text('#sourcePhoto','写真を選ぶ'); text('#sourceOriginReset','作品ネイル'); text('#sourceMotifPick','モチーフをタップして指定');
       text('.source-exhibit','作品として見る'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','戻る');
       text('#saveSetLink','この組み合わせを保存'); text('#resetPal','標準にもどす'); text('.tonelabel','濃淡');
-      text('.source-entry-sub','採集する'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
+      text('.source-entry-sub','試着'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
       text('#setViewerTry','このセットを試着する'); text('#nailSetBack','作品ページへ戻る');
       text('.shTxt','まだ端末には保存されていません画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。');
       text('#saveHintDone','保存画面を閉じて試着へ戻る'); text('.cmpTitle','比べる'); text('#cmpClose','閉じる');
       attr('.site-home','aria-label','トップページへ戻る'); attr('#globalBack','aria-label','前の画面へ戻る');
     }
     attr('#globalBack','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
+    attr('.source-entry','aria-label',isEnglish?'Try on: create nails from a photo':'試着：写真からネイルを作る');
     attr('#workClose','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
     attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
