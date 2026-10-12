@@ -5,8 +5,6 @@
     const en=english(),photo=document.getElementById('seriesHubPhoto'),trial=document.getElementById('seriesWorkTry');
     if(photo)photo.textContent=en?'Make five nails from a photo':'写真の色から、5本をつくる';
     if(trial)trial.textContent=en?'Try this artwork on your hand':'この作品の5本を試す';
-    const link=document.querySelector('.source-entry-sub');
-    if(link)link.textContent=en?'Collect photo colours for another set':'写真の色で、別の5本をつくる';
     const repick=document.getElementById('sourcePhoto');
     if(repick&&document.body.classList.contains('source-selected'))repick.textContent=en?'Choose another photo':'別の写真を選ぶ';
     const flow=document.querySelector('.source-sequence-flow');
