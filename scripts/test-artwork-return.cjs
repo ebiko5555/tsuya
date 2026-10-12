@@ -23,14 +23,14 @@ for(const path of paths){
  test(path+' inline JavaScript parses',()=>{for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);});
  for(const key of ['COLOR','SURFACE'])for(const length of ['short','long'])for(const access of ['', '&access=large']){
  test(`${path} ${key} ${length} ${access||'normal'} round trip`,()=>{
-  const art=harness(html,`?work=${key}${access}`);art.showArtworkPage(key);
+  const art=harness(html,`?work=${key}${access}&v=old-entry`);art.showArtworkPage(key);
   art.nodes.workLengthChoice.click({target:{closest:()=>({dataset:{length}})}});
-  const forward=art.tryHref();assert.equal(new URLSearchParams(art.url).get('length'),length);
+  const forward=art.tryHref();assert.equal(new URLSearchParams(forward).get('v'),'selection-return-20261012');assert.equal(new URLSearchParams(art.url).get('length'),length);
   const trial=harness(html,forward);trial.prepareFixedTryOn(key);
   assert.equal(trial.applied,key);assert.equal(trial.appliedLength,length);
   for(const back of ['globalBack','tryWorkBack']){
    const href=trial.nodes[back].href,query=new URLSearchParams(href);
-   assert.equal(query.get('work'),key);assert.equal(query.get('length'),length);assert.equal(query.get('access'),access?'large':null);
+   assert.equal(query.get('v'),'selection-return-20261012');assert.equal(query.get('work'),key);assert.equal(query.get('length'),length);assert.equal(query.get('access'),access?'large':null);
    const returned=harness(html,href);returned.showArtworkPage(key);
    assert.equal(returned.length,length);assert.equal(returned.preview.key,key);assert.equal(returned.tryHref(),forward);
    assert.equal(JSON.stringify(returned.works[key].preset),JSON.stringify(art.works[key].preset));
