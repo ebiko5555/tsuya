@@ -1,0 +1,137 @@
+/* Jack Original 01 — an exhibition in two fields: projected work / paper specimen. */
+:root{--jack-paper:#f1f0eb;--jack-ink:#252525;--jack-stage:#101112;--jack-line:#b4b3ae}
+html{scroll-behavior:smooth}
+html,body.jack-edition{background:var(--jack-stage);overscroll-behavior:auto}
+body.jack-edition{margin:0;max-width:none;color:var(--jack-ink)}
+.jack-edition button,.jack-edition a{touch-action:manipulation}
+.jack-edition :focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.jack-edition .tap-mark::after{background:#fff}
+.jack-edition .create-particle{display:none}
+.jack-masthead{position:absolute;top:0;left:0;z-index:115;padding:22px 24px;pointer-events:none}
+.jack-wordmark{display:flex;flex-direction:column;gap:5px;pointer-events:auto;color:#f5f4f0;text-decoration:none;letter-spacing:.2em;font-size:27px;line-height:1.1}
+.jack-wordmark span{font-size:11px;letter-spacing:.09em}
+.jack-edition .language-switch,.jack-edition .site-home,.jack-edition .global-back{border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--jack-stage);color:#f5f4f0;font-size:14px;min-height:48px;top:16px}
+.jack-edition .language-switch{right:16px}
+.jack-edition .site-home{display:none}
+.jack-edition .global-back{left:12px;padding:0 8px}
+.jack-edition:not(.art-page) .jack-masthead{left:50%;transform:translateX(-50%);padding:24px 0;text-align:center}
+.jack-edition:not(.art-page) .jack-wordmark{font-size:21px}
+.jack-edition:not(.art-page) .jack-wordmark span{display:none}
+/* One exhibition, without a separate splash screen. */
+body.jack-edition.art-page{height:auto;min-height:100svh;display:block;overflow:auto}
+body.jack-edition.art-page>header,body.jack-edition.art-page>.stage,body.jack-edition.art-page>#controlPanel{display:none!important}
+body.jack-edition.art-page .work-layer{position:relative;inset:auto;display:grid;grid-template-columns:minmax(0,1fr);height:auto;min-height:100svh;overflow:visible;background:var(--jack-stage);transform:none;opacity:1}
+body.jack-edition.art-page .work-layer::after,body.jack-edition.art-page .work-close{display:none!important}
+.jack-art{position:relative;padding-top:88px;color:#f5f4f0;min-width:0}
+body.jack-edition.art-page .work-film{position:relative;inset:auto;display:block;width:100%;height:57svh;min-height:300px;max-height:720px;object-fit:contain;object-position:center;background:var(--jack-stage);filter:none!important;opacity:1;border:0;cursor:pointer}
+.jack-caption{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 24px 6px;min-height:66px}
+body.jack-edition.art-page .work-film-mark{position:static;inset:auto;text-align:left;max-width:70%;padding:0;margin:0;color:inherit;text-shadow:none}
+body.jack-edition.art-page .work-film-code{font-size:11px;letter-spacing:.12em;color:#bcbcb8;margin-bottom:5px}
+body.jack-edition.art-page .work-film-title{font-size:28px;font-weight:400;line-height:1.25;letter-spacing:.04em;color:inherit}
+.jack-closer{border:0;border-bottom:1px solid #8a8a86;padding:12px 0;min-height:48px;background:none;color:inherit;font-size:19px;white-space:nowrap}
+.jack-pause{position:absolute;right:20px;top:88px;z-index:2;min-width:62px;min-height:44px;border:0;background:var(--jack-stage);color:#d7d7d2;font-size:12px;padding:10px}
+body.jack-edition.art-page .work-index{position:relative;inset:auto;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));width:auto;height:auto;gap:0;margin:14px 16px 16px;padding:0;overflow:visible;border:0;background:transparent}
+body.jack-edition.art-page .work-index::before{display:none}
+body.jack-edition.art-page .work-index button{display:flex;align-items:center;justify-content:center;min-width:0;width:100%;height:48px;padding:0;flex:auto;border:0;border-bottom:1px solid #4f504e;border-radius:0;background:none;color:#bcbcb8;opacity:1}
+body.jack-edition.art-page .work-index button.active{color:#fff;background:none;border-bottom:3px solid #fff}
+body.jack-edition.art-page .work-index .work-nav-no{font-size:15px}
+body.jack-edition.art-page .work-index .work-nav-title{display:none}
+body.jack-edition.art-page .work-copy{position:relative;inset:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:600px;width:100%;padding:54px 20px 42px;background:var(--jack-paper);color:var(--jack-ink);text-align:center;scroll-margin-top:0}
+.jack-nail-heading .jack-section-no{font-size:11px;letter-spacing:.18em;color:#676760}
+.jack-nail-heading h1{font-size:30px;font-weight:400;letter-spacing:.08em;line-height:1.35;margin:14px 0 12px}
+body.jack-edition.art-page #workNails{display:flex;align-items:center;justify-content:center;position:relative;width:100%;max-width:640px;height:auto;min-height:180px;gap:0;margin:12px 0 0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+body.jack-edition.art-page #workNails::before{display:none}
+body.jack-edition.art-page #workNails canvas{width:20%;height:auto!important;aspect-ratio:192/320;filter:none}
+.jack-detail-hint{font-size:13px;letter-spacing:.06em;color:#696963;margin:0 0 30px}
+body.jack-edition.art-page .work-actions{position:static;inset:auto;display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;max-width:540px;padding:0;margin:0;background:none}
+.jack-edition .length-choice,.jack-edition #workLengthChoice{display:flex;align-items:center;justify-content:center;gap:24px;border:0;background:none;margin:0 auto 8px;width:auto;max-width:100%;padding:0}
+.jack-edition .length-choice button{border:0;border-bottom:1px solid #a2a29c;border-radius:0;background:none;color:var(--jack-ink);min-height:48px;min-width:102px;padding:10px;font-size:14px;box-shadow:none}
+.jack-edition .length-choice button.active{border-bottom:3px solid var(--jack-ink);background:none;color:var(--jack-ink)}
+.jack-edition .length-choice button::before{display:none}
+.jack-wear{display:flex;align-items:center;justify-content:center;gap:16px;min-height:72px;width:100%;text-align:center;color:var(--jack-ink);text-decoration:none;font-size:28px;line-height:1.5;border-top:1px solid var(--jack-line);border-bottom:1px solid var(--jack-line)}
+.jack-wear::after{content:'☞';font-family:serif;font-size:40px;line-height:1}
+body.jack-edition.art-page .source-entry{position:static;display:flex;align-items:center;justify-content:center;min-height:64px;width:100%;max-width:100%;margin:10px 0 0;padding:14px 0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;color:var(--jack-ink);text-align:center;transform:none;animation:none}
+body.jack-edition.art-page .source-entry-sub{font-size:19px;line-height:1.7;letter-spacing:.015em;color:inherit;white-space:normal}
+body.jack-edition.art-page .source-entry-icon,body.jack-edition.art-page .source-entry-title,body.jack-edition.art-page .source-entry-arrow{display:none!important}
+/* The close view is paper too. Keep the same exact five canvases. */
+.jack-edition .nail-set-viewer,.jack-edition .source-confirm{background:var(--jack-paper);color:var(--jack-ink);box-shadow:none}
+.jack-edition .nail-set-viewer{z-index:150}
+.jack-edition .nail-set-title{font-weight:400;font-size:32px;color:inherit}
+.jack-edition .nail-set-kicker{font-size:12px;color:#61615c}
+.jack-edition .nail-set-note{display:none}
+.jack-edition .set-viewer-nails{width:min(100%,780px);min-height:240px;gap:0;justify-content:center}
+.jack-edition .set-viewer-nails canvas{width:20%;height:auto!important;aspect-ratio:192/320;filter:none}
+.jack-edition .set-viewer-try,.jack-edition .set-viewer-back,.jack-edition .nail-set-close,.jack-edition .source-confirm-back,.jack-edition .source-confirm-try{border-radius:0;background:none;color:var(--jack-ink);border:0;border-bottom:1px solid var(--jack-line);box-shadow:none;font-size:20px;min-height:56px}
+.jack-edition .set-viewer-try{font-size:26px;line-height:1.4}
+/* Before the camera opens: the work above, its five nails below. */
+.jack-edition.work-tryon:not(.camera-started) #startOverlay,.jack-edition.custom-mode:not(.source-planning):not(.camera-started) #startOverlay{padding:0;display:block;background:var(--jack-paper);color:var(--jack-ink);overflow-y:auto}
+.jack-edition.work-tryon #startOverlay::before,.jack-edition.work-tryon #startOverlay::after,.jack-edition.custom-mode #startOverlay::before,.jack-edition.custom-mode #startOverlay::after{display:none}
+.jack-edition.work-tryon .opening-films,.jack-edition.custom-mode .opening-films{position:absolute;inset:0 0 auto;height:57svh;background:var(--jack-stage);overflow:hidden}
+.jack-edition.work-tryon .opening-film.a,.jack-edition.custom-mode .opening-film.a{position:absolute;left:0;top:80px;width:100%;height:calc(100% - 80px);object-fit:contain;object-position:center;opacity:1;filter:none!important;clip-path:none;transform:none;animation:none}
+.jack-edition .opening-film.b,.jack-edition .opening-film.c,.jack-edition .source-reference-stack{display:none!important}
+.jack-edition.work-tryon #startOverlay .invite,.jack-edition.custom-mode #startOverlay .invite,.jack-edition .opening-mark,.jack-edition .opening-work-meta,.jack-edition .opening-steps,.jack-edition .access-link{display:none!important}
+.jack-edition.work-tryon #openingGuide,.jack-edition.custom-mode #openingGuide{position:absolute;top:calc(57svh + 22px);left:20px;right:20px;max-width:none;width:auto;margin:0;font-size:14px;letter-spacing:.1em;color:#62625b;text-align:center}
+#jackTryNails{position:absolute;top:calc(57svh + 42px);left:20px;right:20px;display:flex;justify-content:center;gap:0;margin:auto;max-width:430px;pointer-events:none}
+#jackTryNails canvas{width:20%;height:auto;aspect-ratio:192/320}
+.jack-edition.work-tryon .opening-actions{position:absolute;top:calc(57svh + 196px);bottom:auto;left:20px;right:20px;width:auto;max-width:540px;margin:0 auto;display:flex;justify-content:center;transform:none;padding:0;background:none}
+.jack-edition.custom-mode .opening-actions{position:absolute;top:calc(57svh + 84px);bottom:auto;left:22px;right:22px;width:auto;max-width:540px;margin:0 auto;display:flex;justify-content:center;transform:none;padding:0;background:none}
+.jack-edition.work-tryon #startBtn,.jack-edition.custom-mode #startBtn{width:100%;min-height:76px;padding:16px 4px!important;white-space:normal;border:0!important;border-radius:0!important;background:none!important;color:var(--jack-ink)!important;box-shadow:none!important;font-size:26px!important;line-height:1.5;letter-spacing:.025em!important;text-align:center;transform:none;animation:none}
+.jack-edition.work-tryon #startBtn{border-top:1px solid var(--jack-line)!important;border-bottom:1px solid var(--jack-line)!important}
+.jack-edition.work-tryon #startBtn::after{content:' ☞';font-family:serif;font-size:36px}
+.jack-edition #status{color:#282828;font-size:14px;background:var(--jack-paper)}
+/* Photo selection and close-up retain the same paper field. Analysis stays on-device. */
+.jack-edition.custom-mode.source-planning .panel{background:var(--jack-paper);color:var(--jack-ink);border:0;border-radius:0;left:0;right:0;bottom:0;top:80px;padding:24px 20px}
+.jack-edition.custom-mode.source-planning .source-mode,.jack-edition.custom-mode.source-planning .source-set{background:transparent;color:var(--jack-ink);border:0;border-bottom:1px solid var(--jack-line);border-radius:0;box-shadow:none;font-size:14px}
+.jack-edition.custom-mode.source-planning .source-mode.active,.jack-edition.custom-mode.source-planning .source-set.active{background:#e2e1da;border-bottom:2px solid #282828;color:#282828}
+.jack-edition.custom-mode.source-planning .source-meta,.jack-edition.custom-mode.source-planning .source-meta strong,.jack-edition.custom-mode.source-planning .source-set-name,.jack-edition.custom-mode.source-planning .source-set-code{color:var(--jack-ink);font-size:13px}
+.jack-edition.custom-mode.source-planning .source-sets{gap:10px;margin-top:24px}
+.jack-edition.custom-mode.source-planning .source-set{padding:16px 4px;min-height:112px}
+.jack-edition.custom-mode.source-planning .source-modes{margin-top:24px}
+.jack-edition.custom-mode.source-planning .source-frame{grid-template-columns:96px minmax(0,1fr)}
+.jack-edition.custom-mode.source-planning #sourcePreview{width:96px;height:96px;object-fit:contain;background:#e2e1da}
+.jack-edition .source-confirm-head{justify-content:flex-start}
+.jack-edition .source-confirm-try{font-size:28px;width:min(100%,440px)}
+.jack-edition .source-tryon-back-pill{border-radius:0;background:var(--jack-paper);color:var(--jack-ink);font-size:16px}
+.jack-edition .source-actions button,.jack-edition .source-preview-actions button{font-size:14px;min-height:44px}
+@media(min-width:900px){
+ body.jack-edition.art-page .work-layer{grid-template-columns:58% 42%;align-items:start}
+ .jack-art{height:100svh;min-height:700px;position:sticky;top:0;padding-top:90px;display:flex;flex-direction:column}
+ body.jack-edition.art-page .work-film{height:auto;flex:1;min-height:0;max-height:none}
+ .jack-caption{margin-left:36px;margin-right:36px}
+ body.jack-edition.art-page .work-index{margin:16px 28px 22px}
+ .jack-edition.art-page .language-switch{background:var(--jack-paper);color:var(--jack-ink)}
+ body.jack-edition.art-page .work-copy{min-height:100svh;padding:100px 36px 54px}
+ .jack-nail-heading h1{font-size:38px}
+ .jack-nail-heading{margin-bottom:24px}
+ body.jack-edition.art-page #workNails{min-height:240px}
+ .jack-detail-hint{margin:8px 0 40px}
+ .jack-closer{font-size:20px}
+ .jack-edition.work-tryon .opening-films,.jack-edition.custom-mode .opening-films{width:58%;height:100svh}
+ .jack-edition.work-tryon .opening-film.a,.jack-edition.custom-mode .opening-film.a{height:calc(100% - 130px)}
+ .jack-edition.work-tryon #openingGuide,.jack-edition.custom-mode #openingGuide{left:58%;right:0;top:24svh}
+ #jackTryNails{left:calc(58% + 30px);right:30px;top:32svh}
+ .jack-edition.work-tryon .opening-actions{left:calc(58% + 30px);right:30px;top:65svh}
+ .jack-edition.custom-mode .opening-actions{left:calc(58% + 30px);right:30px;top:42svh}
+ .jack-edition:not(.art-page) .jack-masthead{left:29%}
+ .jack-edition:not(.camera-started):not(.source-planning) .language-switch{background:var(--jack-paper);color:var(--jack-ink)}
+ .jack-edition.custom-mode.source-planning .panel{left:15%;right:15%;padding:36px;max-width:1000px;margin:auto}
+}
+@media(max-width:359px){.jack-caption{margin-left:16px;margin-right:16px}.jack-closer{font-size:16px}body.jack-edition.art-page .work-film-title{font-size:24px}.jack-wear{font-size:25px}body.jack-edition.art-page .source-entry-sub{font-size:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* Remove legacy decorative layers; preserve the actual artwork's luminance. */
+.jack-edition>header{display:none!important}
+.jack-edition .opening-films::after{display:none!important}
+.jack-edition.custom-mode .opening-film.a{display:block!important}
+.jack-edition #workNails::after{display:none!important}
+.jack-edition .jack-wear::after{color:var(--jack-ink)}
+.jack-edition.custom-mode #openingGuide{display:block!important}
+.jack-edition .jack-closer{display:flex;align-items:center;justify-content:center;gap:4px}
+.jack-edition .jack-closer::after{content:'☞';font:32px/1 'Apple Symbols','Segoe UI Symbol',serif}
+.jack-edition.custom-mode.source-planning .source-actions{display:flex!important;justify-content:center;margin-top:16px}
+.jack-edition.custom-mode.source-planning #sourcePhoto{background:none;color:var(--jack-ink);border:0;border-bottom:1px solid var(--jack-line);border-radius:0;min-height:48px;font-size:17px}
+.jack-edition #status:empty{display:none}
+.jack-edition #status:not(:empty){position:fixed;z-index:140;left:16px;right:16px;bottom:16px;margin:0;padding:14px 18px;text-align:center;border:1px solid var(--jack-line);line-height:1.6}
+.jack-edition.custom-mode.source-planning .source-motif-pick{background:none;color:var(--jack-ink);border:0;border-bottom:1px solid var(--jack-line);font-size:14px;min-height:48px}
+.jack-edition.custom-mode.source-planning .source-motif-pick.active{background:var(--jack-ink);color:var(--jack-paper)}
+.jack-edition.custom-mode:not(.source-planning) #openingGuide{display:none!important}
+.jack-pause{top:22px;right:76px}
