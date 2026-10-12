@@ -1,0 +1,28 @@
+/* Direction marks only: retain existing controls, destinations and visibility. */
+[data-nav-direction="back"]{
+  min-width:44px!important; min-height:44px!important; box-sizing:border-box;
+  font-size:0!important; letter-spacing:0!important; text-align:center;
+  color:#fff!important; background:#111!important;
+}
+[data-nav-direction="back"] > *{display:none!important}
+[data-nav-direction="back"]::before{
+  content:"☜"; content:"☜" / "";
+  display:inline-block; font:32px/1 "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",serif;
+  color:#fff; vertical-align:middle;
+}
+[data-nav-direction="forward"]{min-width:44px;min-height:44px}
+[data-nav-direction="forward"]::after,
+body.hub-mode .bigbtn::after,body.hub-mode .make-link::after,
+.opening-work-cue::after{
+  content:"☞"; content:"☞" / "";
+  display:inline-block; margin-left:8px; vertical-align:middle;
+  font:28px/1 "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",serif;
+  color:#fff;
+}
+/* These forward controls already use a light background. */
+#sourceTry::after,#sourceConfirmTry::after,#setViewerTry::after,#seriesWorkTry::after{color:#111}
+.source-entry-arrow{font-size:0!important;color:#fff!important}
+.source-entry-arrow::after{
+  content:"☞"; content:"☞" / "";
+  font:28px/1 "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",serif;
+}

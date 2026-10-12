@@ -1770,6 +1770,7 @@
 </style>
 <link rel="stylesheet" href="series01.css?v=series01-nav1">
 <script src="series-safety.js?v=series01"></script>
+<link rel="stylesheet" href="../../experience-prototype/navigation-hands.css?v=hands1">
 </head>
 <body>
 <header>
@@ -1777,7 +1778,7 @@
   <div class="rule"></div>
 </header>
 
-<a class="global-back" id="globalBack" href="./" aria-label="前の画面へ戻る">
+<a class="global-back" id="globalBack" href="./" data-nav-direction="back" aria-label="前の画面へ戻る">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
   <span id="globalBackText">BACK</span>
 </a>
@@ -1855,7 +1856,7 @@
   <div class="try-identity" id="tryIdentity">
     <span id="tryIdentityText">01 / COLOR</span>
     <div class="work-nails" id="tryNails" aria-label="装着する5本のネイル"></div>
-    <a href="?work=COLOR" id="tryWorkBack">BACK</a>
+    <a href="?work=COLOR" id="tryWorkBack" data-nav-direction="back" aria-label="作品ページへ戻る">BACK</a>
   </div>
 
   <div class="stagebtns" id="liveBtns" style="display:none">
@@ -1865,7 +1866,7 @@
     <button class="roundbtn" id="flipBtn" title="カメラ切替"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.4 9.2h3.1l1.3-2h6.4l1.3 2h4.1v9.4H3.4Z"/><path d="M14.6 13.4a2.7 2.7 0 1 1-1.1-2.2"/><path d="M13.9 8.8v2.6h-2.6"/></svg></button>
   </div>
 
-  <button type="button" class="source-tryon-back-pill" id="sourceTryonBackPill" aria-label="チップを選び直す">
+  <button type="button" class="source-tryon-back-pill" id="sourceTryonBackPill" data-nav-direction="back" aria-label="チップを選び直す">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
     <span>← チップを選び直す</span>
   </button>
@@ -1884,14 +1885,14 @@
 
 <section class="source-confirm" id="sourceConfirm" aria-hidden="true" aria-label="試着するネイルを確認">
   <div class="source-confirm-head">
-    <button type="button" class="source-confirm-back" id="sourceConfirmBack">戻る</button>
+    <button type="button" class="source-confirm-back" id="sourceConfirmBack" data-nav-direction="back" aria-label="チップ選択へ戻る">戻る</button>
   </div>
   <div class="source-confirm-body">
     <canvas id="sourceConfirmCanvas" width="620" height="300" aria-label="選んだネイルセット"></canvas>
     <div class="length-choice" id="sourceLengthChoice" aria-label="ネイルの長さを選ぶ">
       <button type="button" data-length="short">SHORT</button><button type="button" data-length="long">LONG</button>
     </div>
-    <button type="button" class="source-confirm-try" id="sourceConfirmTry">TRY ON</button>
+    <button type="button" class="source-confirm-try" id="sourceConfirmTry" data-nav-direction="forward">TRY ON</button>
   </div>
 </section>
 
@@ -1932,7 +1933,7 @@
     </div>
     <div class="source-sets" id="sourceSets"></div>
     <button type="button" class="exhibit-open source-exhibit">作品として見る</button>
-    <button type="button" class="source-try" id="sourceTry">TRY ON</button>
+    <button type="button" class="source-try" id="sourceTry" data-nav-direction="forward">TRY ON</button>
   </div>
 
   <div class="tray active" id="tray-looks">
@@ -2022,7 +2023,7 @@
 <section class="work-layer" id="workLayer" aria-hidden="true" aria-label="試着からひらく作品">
   <video class="work-film" id="workFilm" src="../../experience-prototype/art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="0" role="button" aria-label="作品ネイルを試着する"></video>
   <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01 / COLOR</div><div class="work-film-title" id="workFilmTitle">色</div></div>
-  <button type="button" class="work-close" id="workClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg><span>BACK</span></button>
+  <button type="button" class="work-close" id="workClose" data-nav-direction="back" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg><span>BACK</span></button>
   <nav class="work-index" id="workIndex" aria-label="作品を選ぶ"></nav>
   <div class="work-copy">
     <p class="work-text" id="workText"></p>
@@ -2031,30 +2032,30 @@
       <div class="length-choice work-length-choice" id="workLengthChoice" aria-label="ネイルの長さを選ぶ">
         <button type="button" data-length="short">SHORT</button><button type="button" data-length="long">LONG</button>
       </div>
-      <a class="series-work-try" id="seriesWorkTry" href="?try=COLOR">この作品の5本を試す</a>
+      <a class="series-work-try" id="seriesWorkTry" href="?try=COLOR" data-nav-direction="forward">この作品の5本を試す</a>
       <a class="source-entry" href="?mode=custom" aria-label="写真からネイルを作る"><span class="source-entry-icon" aria-hidden="true"></span><span><span class="source-entry-title">SOURCE</span><span class="source-entry-sub">写真からつくる</span></span><span class="source-entry-arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
 <section class="nail-set-viewer" id="nailSetViewer" aria-hidden="true" aria-label="ネイルセットを大きく見る">
-  <button type="button" class="nail-set-close" id="nailSetClose">← BACK</button>
+  <button type="button" class="nail-set-close" id="nailSetClose" data-nav-direction="back" aria-label="作品ページへ戻る">← BACK</button>
   <p class="nail-set-kicker" id="nailSetKicker">01 / COLOR — NAIL SET</p>
   <h2 class="nail-set-title" id="nailSetTitle">色</h2>
   <p class="nail-set-note">この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。</p>
   <div class="set-viewer-nails" id="setViewerNails" aria-label="5本のネイルチップ"></div>
   <div class="set-viewer-actions">
-    <a class="set-viewer-try" id="setViewerTry" href="?try=COLOR&amp;length=short">このセットを試着する</a>
-    <button type="button" class="set-viewer-back" id="nailSetBack">作品ページへ戻る</button>
+    <a class="set-viewer-try" id="setViewerTry" href="?try=COLOR&amp;length=short" data-nav-direction="forward">このセットを試着する</a>
+    <button type="button" class="set-viewer-back" id="nailSetBack" data-nav-direction="back" aria-label="作品ページへ戻る">作品ページへ戻る</button>
   </div>
 </section>
 
 <div id="saveHint" role="dialog" aria-modal="true" aria-label="画像を端末へ保存する">
-  <button class="shBack" id="saveHintClose">← 試着へ戻る</button>
+  <button class="shBack" id="saveHintClose" data-nav-direction="back" aria-label="試着へ戻る">← 試着へ戻る</button>
   <div class="shTitle">SAVE IMAGE</div>
   <img id="saveImg" alt="">
   <div class="shTxt"><strong>まだ端末には保存されていません</strong>画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。</div>
-  <button class="shBtn" id="saveHintDone">保存画面を閉じて試着へ戻る</button>
+  <button class="shBtn" id="saveHintDone" data-nav-direction="back" aria-label="保存画面を閉じて試着へ戻る">保存画面を閉じて試着へ戻る</button>
 </div>
 <div id="compare">
   <div class="cmpHead">
@@ -2094,7 +2095,7 @@
   <div class="exhibit-stage"><canvas id="exhibitCanvas" width="900" height="1200"></canvas></div>
   <div class="exhibit-head">
     <div><div class="exhibit-kicker">HAND &amp; LIGHT / PERSONAL WORK</div><div class="exhibit-title">MY TRACE</div></div>
-    <button type="button" class="exhibit-close" id="exhibitClose">BACK</button>
+    <button type="button" class="exhibit-close" id="exhibitClose" data-nav-direction="back" aria-label="ネイルの制作画面へ戻る">BACK</button>
   </div>
   <div class="exhibit-controls" aria-label="作品展示の操作">
     <div class="exhibit-mode">CHIPS</div>
@@ -4621,7 +4622,7 @@ updateCmpBadge();
     panel.classList.toggle('collapsed',collapsed);
     document.body.classList.toggle('controls-collapsed',collapsed);
     handle.setAttribute('aria-expanded',String(!collapsed));
-    label.textContent=collapsed?'DESIGN':'← TRY ON';
+    label.textContent=collapsed?'DESIGN':'☜ TRY ON';
     if(!collapsed) panel.scrollTop=0;
   };
   window.setControlPanelCollapsed=setCollapsed;
@@ -4711,7 +4712,7 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
-  const artworkRouteVersion='selection-return-20261012';
+  const artworkRouteVersion='navigation-hands-20261012';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();
@@ -5459,7 +5460,7 @@ updateCmpBadge();
   function prepareAccessibleHub(){
     document.body.classList.add('access-mode');
     const hub=document.getElementById('accessHub');
-    hub.innerHTML='<div class="access-hub-head"><h1 class="access-hub-title">作品を選ぶ</h1><a class="access-hub-back" href="./">通常表示</a></div><div class="access-work-grid" id="accessWorkGrid"></div>';
+    hub.innerHTML='<div class="access-hub-head"><h1 class="access-hub-title">作品を選ぶ</h1><a class="access-hub-back" href="./" data-nav-direction="back" aria-label="通常表示へ戻る">通常表示</a></div><div class="access-work-grid" id="accessWorkGrid"></div>';
     const grid=document.getElementById('accessWorkGrid');
     order.forEach(key=>{
       const work=works[key];
@@ -5628,6 +5629,17 @@ updateCmpBadge();
       text('#saveHintDone','保存画面を閉じて試着へ戻る'); text('.cmpTitle','比べる'); text('#cmpClose','閉じる');
       attr('.site-home','aria-label','トップページへ戻る'); attr('#globalBack','aria-label','前の画面へ戻る');
     }
+    attr('#globalBack','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
+    attr('#workClose','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
+    attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
+    attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
+    attr('#sourceConfirmBack','aria-label',isEnglish?'Return to nail selection':'チップ選択へ戻る');
+    attr('#nailSetClose','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
+    attr('#nailSetBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
+    attr('#saveHintClose','aria-label',isEnglish?'Return to try-on':'試着へ戻る');
+    attr('#saveHintDone','aria-label',isEnglish?'Close and return to try-on':'保存画面を閉じて試着へ戻る');
+    attr('#exhibitClose','aria-label',isEnglish?'Return to the nail design':'ネイルの制作画面へ戻る');
+    attr('.access-hub-back','aria-label',isEnglish?'Return to standard view':'通常表示へ戻る');
     text('#openingWorkTitle',name); text('#workFilmTitle',name); text('#nailSetTitle',name); text('#workText',descriptions[language][key]);
     attr('#openingEnter','aria-label',isEnglish?'Open '+name:name+'の作品ページへ入る');
   };
