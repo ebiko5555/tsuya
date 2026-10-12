@@ -23,15 +23,15 @@ body.hub-mode .bigbtn::after,body.hub-mode .make-link::after,
 #sourceTry::after,#sourceConfirmTry::after,#setViewerTry::after,#seriesWorkTry::after{color:#111}
 /* Center only this entry's label and hand, including narrow and accessible views. */
 body.art-page .source-entry,body.art-page.access-mode .source-entry{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;max-width:100%;min-height:44px;box-sizing:border-box;text-align:center;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;
+  width:100%;max-width:100%;min-height:92px;box-sizing:border-box;text-align:center;
 }
 body.art-page .source-entry .source-entry-icon,
 body.art-page .source-entry .source-entry-title{display:none}
 body.art-page .source-entry .source-entry-sub{display:block;margin:0;text-align:center}
 body.art-page .source-entry .source-entry-arrow{display:block}
-.source-entry-arrow{font-size:0!important;color:#fff!important;min-width:35px;flex-shrink:0;white-space:nowrap}
+.source-entry-arrow{font-size:0!important;color:#fff!important;min-width:70px;flex-shrink:0;white-space:nowrap}
 .source-entry-arrow::after{
   content:"☞"; content:"☞" / "";
-  font:35px/1 "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",serif;
+  font:70px/1 "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",serif;
 }

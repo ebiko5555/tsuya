@@ -897,7 +897,7 @@
   .source-entry-icon::before{content:""; position:absolute; inset:7px; border:1px solid rgba(255,255,255,.74); border-radius:1px}
   .source-entry-icon::after{content:"✦"; position:absolute; right:-8px; top:-9px; color:var(--work-accent); font:16px/1 Georgia,serif; text-shadow:0 0 10px rgba(255,255,255,.45)}
   .source-entry-title{display:block; font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
-  .source-entry-sub{display:block; margin-top:5px; color:rgba(255,255,255,.6); font-size:10px; letter-spacing:.08em}
+  .source-entry-sub{display:block; margin-top:5px; color:rgba(255,255,255,.6); font-size:20px; letter-spacing:.08em}
   .source-entry-arrow{font:300 20px/1 Georgia,serif; color:var(--work-accent)}
   .source-entry:focus-visible{outline:2px solid var(--work-accent); outline-offset:3px}
   .opening-actions{position:relative; z-index:2; display:flex; align-items:center; gap:20px}
@@ -1696,7 +1696,7 @@
     body.art-page .source-entry-icon,body.art-page .source-entry-title,body.art-page .source-entry-arrow{display:none}
     body.art-page .source-entry-sub{
       display:block; margin:0; color:rgba(255,255,255,.88);
-      font:600 15px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.12em;
+      font:600 30px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.12em;
     }
   }
 
@@ -1765,10 +1765,10 @@
   body.art-page.access-mode .source-entry-arrow{display:none}
   body.art-page.access-mode .source-entry-sub{
     display:block; margin:0; color:rgba(255,255,255,.9);
-    font:600 16px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
+    font:600 32px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
   }
 </style>
-<link rel="stylesheet" href="navigation-hands.css?v=hands4">
+<link rel="stylesheet" href="navigation-hands.css?v=hands5">
 </head>
 <body>
 <header>
@@ -4649,7 +4649,7 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
-  const artworkRouteVersion='navigation-entry-label-20261012';
+  const artworkRouteVersion='navigation-entry-double-20261012';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();

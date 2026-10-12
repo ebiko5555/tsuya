@@ -28,7 +28,7 @@ body.art-page .work-length-choice{width:100%;margin:0}
 body.art-page .work-length-choice button{flex:1;min-height:44px;font-size:14px}
 .series-work-try{display:flex;align-items:center;justify-content:center;min-height:50px;padding:8px 16px;color:#131415;background:#f2eee6;border:1px solid #f2eee6;text-decoration:none;font-size:16px;letter-spacing:.05em}
 body.art-page .source-entry,body.art-page.access-mode .source-entry{display:flex;align-items:center;justify-content:center;min-height:48px;width:100%;padding:8px 12px;margin:0;border:1px solid #ffffff55;box-sizing:border-box;text-align:center}
-body.art-page .source-entry-sub,body.art-page.access-mode .source-entry-sub{font-size:15px;line-height:1.5}
+body.art-page .source-entry-sub,body.art-page.access-mode .source-entry-sub{font-size:30px;line-height:1.5}
 body.art-page #workNails{max-width:100%;margin-left:auto;margin-right:auto}
 body.art-page .work-film-mark{pointer-events:none}
 body.custom-mode:not(.source-selected) .make-link{display:none}
