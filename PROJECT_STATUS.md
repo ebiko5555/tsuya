@@ -1,5 +1,14 @@
 # 艶 II — PROJECT STATUS
 
+### 本番長さ選択の復帰修正（2026-10-12・mobile126 / series01 の限定修正）
+
+- 最新本番 `327b328` を起点に、`experience-prototype/` と `series01/experience-prototype/` の共通する作品→試着→BACKを修正。
+- BACKのURLに選択した長さを渡し、作品画面で復元する。選択変更も現在URLへ反映し、再読み込み・履歴復帰でも保持する。作品変更時はその作品の既定値を維持。
+- 見た目、作品の5本セット、生成、追跡、カメラ、Salon02は変更なし。既存の版名は保持し、配信確認にはcommitクエリを使う。
+- `node --test scripts/test-artwork-return.cjs`: 20件通過。両パス、COLOR/SURFACE、SHORT/LONG、通常/拡大表示、globalBack/tryWorkBack、再読み込み、既定値・不正値・作品切替、JavaScript構文を検証。修正前は往復16件が失敗することを確認。
+- 既存 `test-source-navigation.cjs` は10件通過、2件失敗。修正前の本番でも同じ2件（mobile104固定ハッシュ、写真入口の古い文言期待）が失敗することを確認し、今回の範囲外として変更していない。
+- `git diff --check` 通過。操作可能なブラウザがこの実行環境にはないため、配信後の実クリックは親タスクへ引き継ぐ。iPhone Safariのカメラ・追跡は要確認。
+
 ### 試作126 / mobile126 — 拡大表示入口を目の線画へ変更（2026-10-02・公開準備）
 
 - トップ左上の拡大表示入口は、文字を使わない白い目の線画アイコンに変更した。読み上げ用のaria-labelのみ、機能説明を保持する。
