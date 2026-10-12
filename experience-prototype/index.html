@@ -4649,9 +4649,10 @@ updateCmpBadge();
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
   document.getElementById('siteHome').href='../';
-  const route=(name,value)=>{
+  const route=(name,value,length)=>{
     const query=new URLSearchParams();
     if(name&&value) query.set(name,value);
+    if(length) query.set('length',normalizeTryLength(length));
     if(accessibleMode) query.set('access','large');
     return '?'+query.toString();
   };
@@ -5172,16 +5173,16 @@ updateCmpBadge();
   }
   document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>setCurrent(tabMap[tab.dataset.t]||current)));
 
-  function openWork(key){
+  function openWork(key,length){
     setCurrent(key); const work=works[key];
+    artworkTryLength=normalizeTryLength(length,inferTryLength(work.preset.tune));
     if(document.body.classList.contains('art-page')){
-      history.replaceState(null,'',route('work',key));
+      history.replaceState(null,'',route('work',key,artworkTryLength));
       document.title='HAND & LIGHT — '+work.title;
     }
     document.getElementById('workFilmCode').textContent=work.no+' / '+key;
     document.getElementById('workFilmTitle').textContent=work.title;
     document.getElementById('workText').textContent=work.text;
-    artworkTryLength=inferTryLength(work.preset.tune);
     renderNailPreview(key,'workNails',artworkTryLength);
     renderLengthChoice($('workLengthChoice'),artworkTryLength);
     const customLink=document.querySelector('.source-entry');
@@ -5239,6 +5240,7 @@ updateCmpBadge();
   $('workLengthChoice').addEventListener('click',event=>{
     const button=event.target.closest('[data-length]'); if(!button) return;
     artworkTryLength=normalizeTryLength(button.dataset.length);
+    if(document.body.classList.contains('art-page')) history.replaceState(null,'',route('work',current,artworkTryLength));
     renderLengthChoice($('workLengthChoice'),artworkTryLength);
     renderNailPreview(current,'workNails',artworkTryLength);
     if(nailSetViewer.classList.contains('open'))openSetViewer();
@@ -5281,7 +5283,7 @@ updateCmpBadge();
     if(accessibleMode) document.body.classList.add('access-mode');
     document.body.classList.add('art-page');
     document.querySelector('#workClose span').textContent='BACK';
-    openWork(key);
+    openWork(key,params.get('length'));
   }
 
   function prepareFixedTryOn(key){
@@ -5295,8 +5297,8 @@ updateCmpBadge();
     document.getElementById('startBtn').textContent='START CAMERA';
     document.getElementById('tryIdentityText').textContent=work.no+' / '+key;
     renderNailPreview(key,'tryNails',requestedTryLength);
-    document.getElementById('tryWorkBack').href=route('work',key);
-    document.getElementById('globalBack').href=route('work',key);
+    document.getElementById('tryWorkBack').href=route('work',key,requestedTryLength);
+    document.getElementById('globalBack').href=route('work',key,requestedTryLength);
     document.getElementById('globalBackText').textContent='BACK';
     const hero=document.querySelector('.opening-film.a');
     hero.src=work.film; hero.load(); playSilently(hero);
