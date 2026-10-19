@@ -26,3 +26,25 @@ id_ed25519
 /output/presentation/
 /output/pdf/
 *.inspect.ndjson
+
+# Private local authoring files: never publish
+AGENTS.md
+PROJECT_STATUS.md
+IMPLEMENTATION_SPEC.md
+/experience-prototype/試作*.md
+/experience-prototype/制作起点記録*.md
+/output/
+/tmp/
+*.inspect.ndjson
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+.aws/
