@@ -5,3 +5,24 @@ _test.png
 **/._*
 tmp/
 node_modules/
+
+# Local secrets (templates may be committed after review)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+.aws/
+
+# Private production notes and generated presentation exports
+/experience-prototype/試作*.md
+/experience-prototype/制作起点記録*.md
+/output/presentation/
+/output/pdf/
+*.inspect.ndjson
