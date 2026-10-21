@@ -1767,6 +1767,16 @@
     display:block; margin:0; color:rgba(255,255,255,.9);
     font:600 32px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
   }
+
+  /* 試着中は手とネイルを優先し、戻る操作は既存の左上に集約する。 */
+  body.camera-started:is(.work-tryon,.source-tryon) #tryIdentity,
+  body.camera-started:is(.work-tryon,.source-tryon) #artSignal,
+  body.camera-started:is(.work-tryon,.source-tryon) #guide,
+  body.camera-started:is(.work-tryon,.source-tryon) #sourceTryonBackPill,
+  body.camera-started:is(.work-tryon,.source-tryon) header{display:none!important}
+  body.work-tryon.camera-started #liveBtns{
+    position:fixed; bottom:calc(20px + env(safe-area-inset-bottom));
+  }
 </style>
 <link rel="stylesheet" href="navigation-hands.css?v=length-center1">
 </head>
