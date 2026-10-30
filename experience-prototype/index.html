@@ -2058,7 +2058,7 @@
   <button class="shBack" id="saveHintClose" data-nav-direction="back" aria-label="試着へ戻る">← 試着へ戻る</button>
   <div class="shTitle">SAVE IMAGE</div>
   <img id="saveImg" alt="">
-  <div class="shTxt"><strong>まだ端末には保存されていません</strong>画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。</div>
+  <div class="shTxt"><strong>まだ端末には保存されていません</strong>画像を長押しして、画像の保存を選んでください。保存先は端末やブラウザによって異なります。</div>
   <button class="shBtn" id="saveHintDone" data-nav-direction="back" aria-label="保存画面を閉じて試着へ戻る">保存画面を閉じて試着へ戻る</button>
 </div>
 <div id="compare">
@@ -2488,6 +2488,7 @@ $('timerBtn').onclick = () => {
 $('cmpBtn').onclick = openCompare;
 $('cmpClose').onclick = closeCompare;
 $('retryBtn').onclick = () => {
+  closeSaveHint();
   mode='live';
   document.body.classList.remove('photo-frozen');
   $('snapBar').style.display='none';
@@ -2495,29 +2496,27 @@ $('retryBtn').onclick = () => {
   $('guide')?.classList.remove('hand-detected');
   setSnapStatus('撮影しました','アプリ内の「比べる」に保存されています','');
 };
-$('saveBtn').onclick = async () => {
-  setSnapStatus('保存メニュー','「画像を保存」を選んでください','');
-  const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
-  if(!blob){ setSnapStatus('保存失敗','端末へ保存できませんでした','warn'); return; }
-  const file = new File([blob], 'tsuya.jpg', {type:'image/jpeg'});
-  if(navigator.canShare && navigator.canShare({files:[file]})){
-    try{
-      await navigator.share({files:[file]});
-      setSnapStatus('保存完了','写真アプリで確認できます','ok');
-      return;
-    }
-    catch(e){
-      if(e && e.name === 'AbortError'){
-        setSnapStatus('保存をキャンセルしました','','');
-        return;
-      }
-    }
+let saveRequest = 0;
+async function saveCanvasImage(source, button, fileName, isCurrent, quality=0.92){
+  if(button.disabled) return;
+  const request = ++saveRequest;
+  button.disabled = true;
+  setSnapStatus('保存用画像を準備中','','');
+  try{
+    const blob = await new Promise(resolve => source.toBlob(resolve, 'image/jpeg', quality));
+    if(request !== saveRequest || !isCurrent()) return;
+    if(!blob) throw new Error('Image encoding failed');
+    fallbackSave(blob,fileName);
+  }catch(e){
+    if(request === saveRequest && isCurrent())
+      setSnapStatus('保存用画像を準備できませんでした','もう一度保存ボタンを押してください。','warn');
+  }finally{
+    button.disabled = false;
   }
-  fallbackSave(blob,'tsuya.jpg');
-};
-/* 共有シートが使えないブラウザ向け。
-   iOS は Safari でも Chrome でも、画像を長押しすれば「"写真"に保存」が出る。
-   パソコンではそのままダウンロードする。 */
+}
+$('saveBtn').onclick = () => saveCanvasImage(canvas,$('saveBtn'),'tsuya.jpg',()=>mode==='frozen');
+/* タッチ端末は画像の長押し保存、パソコンはダウンロード。
+   OS側の保存完了はブラウザから確認できない。 */
 let saveUrl = null;
 function fallbackSave(blob,fileName='tsuya.jpg'){
   if(saveUrl) URL.revokeObjectURL(saveUrl);
@@ -2526,7 +2525,7 @@ function fallbackSave(blob,fileName='tsuya.jpg'){
   if(touch){
     $('saveImg').src = saveUrl;
     $('saveHint').style.display = 'flex';
-    setSnapStatus('保存用画像を表示中','画像を長押しして「写真に保存」を選んでください。','');
+    setSnapStatus('保存用画像を表示中','画像を長押しして、画像の保存を選んでください。','');
   }else{
     const a = document.createElement('a');
     a.download = fileName; a.href = saveUrl; a.click();
@@ -2534,10 +2533,11 @@ function fallbackSave(blob,fileName='tsuya.jpg'){
   }
 }
 function closeSaveHint(){
+  saveRequest++;
   $('saveHint').style.display='none';
   $('saveImg').removeAttribute('src');
   if(saveUrl){ URL.revokeObjectURL(saveUrl); saveUrl=null; }
-  setSnapStatus('保存画面を閉じました','端末に保存できたか写真アプリで確認してください。','');
+  setSnapStatus('保存画面を閉じました','保存した場合は、端末の保存先を確認してください。','');
 }
 $('saveHintClose').onclick=closeSaveHint;
 $('saveHintDone').onclick=closeSaveHint;
@@ -4533,14 +4533,7 @@ function openExhibit(){
 function closeExhibit(){exhibit.classList.remove('open');exhibit.setAttribute('aria-hidden','true');}
 document.querySelectorAll('.exhibit-open').forEach(btn=>btn.onclick=openExhibit);
 $('exhibitClose').onclick=closeExhibit;
-$('exhibitSave').onclick=async()=>{
-  const blob=await new Promise(resolve=>exhibitCanvas.toBlob(resolve,'image/jpeg',.95));if(!blob)return;
-  const file=new File([blob],'tsuya-my-trace.jpg',{type:'image/jpeg'});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){
-    try{await navigator.share({files:[file],title:'MY TRACE'});return;}catch(e){if(e&&e.name==='AbortError')return;}
-  }
-  fallbackSave(blob,'tsuya-my-trace.jpg');
-};
+$('exhibitSave').onclick=()=>saveCanvasImage(exhibitCanvas,$('exhibitSave'),'tsuya-my-trace.jpg',()=>exhibit.classList.contains('open'),0.95);
 $('exhibit').addEventListener('click',event=>{if(event.target===exhibit)closeExhibit();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&exhibit.classList.contains('open'))closeExhibit();});
 
@@ -5552,7 +5545,7 @@ updateCmpBadge();
       text('#saveSetLink','SAVE THIS SET'); text('#resetPal','RESET TO STANDARD'); text('.tonelabel','TONE');
       text('.source-entry-sub','TRY ON'); text('.nail-set-note','A five-piece set for this work. Take time to see the form and detail before trying it on.');
       text('#setViewerTry','TRY THIS SET ON'); text('#nailSetBack','BACK TO THE WORK');
-      text('.shTxt','This image has not been saved yet. Press and hold it, choose “Save to Photos”, then return here.');
+      text('.shTxt','Press and hold the image and choose the image-saving option. The save location depends on your device and browser.');
       text('#saveHintDone','CLOSE AND RETURN TO TRY-ON'); text('.cmpTitle','COMPARE'); text('#cmpClose','CLOSE');
       attr('.site-home','aria-label','Return to home'); attr('#globalBack','aria-label','Return to previous screen');
     }else{
@@ -5568,7 +5561,7 @@ updateCmpBadge();
       text('#saveSetLink','この組み合わせを保存'); text('#resetPal','標準にもどす'); text('.tonelabel','濃淡');
       text('.source-entry-sub','試着'); text('.nail-set-note','この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。');
       text('#setViewerTry','このセットを試着する'); text('#nailSetBack','作品ページへ戻る');
-      text('.shTxt','まだ端末には保存されていません画像を長押しして「写真に保存」を選び、終わったら戻るボタンを押してください。');
+      text('.shTxt','まだ端末には保存されていません画像を長押しして、画像の保存を選んでください。保存先は端末やブラウザによって異なります。');
       text('#saveHintDone','保存画面を閉じて試着へ戻る'); text('.cmpTitle','比べる'); text('#cmpClose','閉じる');
       attr('.site-home','aria-label','トップページへ戻る'); attr('#globalBack','aria-label','前の画面へ戻る');
     }
