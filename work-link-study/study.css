@@ -1,0 +1,50 @@
+/* Isolated exploration. No production styles or artwork assets are changed. */
+body.work-link-study #workLayer{isolation:isolate}
+.study-stage{position:absolute;z-index:3;pointer-events:none;box-sizing:border-box;transition:box-shadow .2s ease}
+.study-stage.has-selection{box-shadow:inset 0 0 42px color-mix(in srgb,var(--selected-color),transparent 78%),inset 0 0 0 1px color-mix(in srgb,var(--selected-color),transparent 40%)}
+.study-trial-mark{position:absolute;top:20px;right:22px;color:#aaa8a6;font:9px/1.5 ui-monospace,monospace;letter-spacing:.16em}
+.study-colors{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;padding:9px 18px;background:rgba(8,9,12,.62);border-radius:3px;max-width:calc(100% - 32px);box-sizing:border-box;pointer-events:auto}
+.study-colors-title{font:9px/1.4 ui-monospace,"Hiragino Sans",sans-serif;letter-spacing:.08em;color:#c3bfbc;white-space:nowrap}
+.study-markers{display:flex;gap:10px}
+.study-marker{display:grid;place-items:center;width:44px;height:44px;min-width:44px;border:1px solid transparent;border-radius:50%;background:transparent;color:#fff;font:10px/1 ui-monospace,monospace;position:relative;cursor:pointer;isolation:isolate}
+.study-marker::before{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--pair-color);opacity:.55;z-index:-1}
+.study-marker.is-selected{border-color:var(--pair-color);box-shadow:0 0 15px color-mix(in srgb,var(--pair-color),transparent 60%)}
+.study-set-caption{color:#bbb6b2;font:12px/1.6 "Hina Mincho",serif;letter-spacing:.08em;margin:14px 0 6px;text-align:center}
+#workLayer #workNails{height:auto;min-height:128px;overflow:visible;display:flex;align-items:center;justify-content:center;gap:8px}
+#workLayer #workNails .study-tip{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 4px 6px;min-width:44px;min-height:132px;border:1px solid transparent;border-radius:4px;background:none;cursor:pointer;transition:border-color .18s,filter .18s}
+#workLayer #workNails .study-tip canvas{width:48px;height:96px;max-width:100%;filter:drop-shadow(0 9px 12px #0006)}
+#workLayer #workNails .study-tip:nth-child(1) canvas,#workLayer #workNails .study-tip:nth-child(5) canvas{height:79px}
+#workLayer #workNails .study-tip:nth-child(2) canvas,#workLayer #workNails .study-tip:nth-child(4) canvas{height:88px}
+.study-number{position:absolute;top:0;left:50%;transform:translateX(-50%);color:#b8b3af;font:10px/1.4 ui-monospace,monospace;letter-spacing:.08em}
+.study-number::before{content:"";display:inline-block;width:4px;height:4px;margin-right:4px;border-radius:50%;background:var(--pair-color);vertical-align:middle}
+#workLayer #workNails .study-tip.is-selected{border-color:var(--pair-color);filter:drop-shadow(0 0 8px color-mix(in srgb,var(--pair-color),transparent 65%))}
+.study-tip:focus-visible,.study-marker:focus-visible,.study-expand:focus-visible,.study-return:focus-visible,.study-try:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.study-expand{display:block;margin:8px auto 0;min-height:44px;padding:6px 14px;border:0;background:none;color:#aaa5a1;font:12px/1.5 "Hina Mincho",serif;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
+#workLayer .study-try{display:flex;align-items:center;justify-content:center;gap:6px;min-height:54px;color:#eeeae5;text-decoration:none;font:600 clamp(20px,5vw,27px)/1.4 "Hina Mincho",serif;text-align:center}
+#workLayer .source-entry{min-height:44px;padding:2px 0;gap:4px}
+#workLayer .source-entry .source-entry-sub{font-size:17px;color:#aaa5a1;line-height:1.4}
+#workLayer .source-entry .source-entry-arrow{min-width:32px}
+#workLayer .source-entry .source-entry-arrow::after{font-size:32px}
+.study-hand{position:absolute;inset:0;background:#090a0d;pointer-events:auto;overflow:hidden}
+.study-hand[hidden]{display:none}
+.study-hand canvas{display:block;width:100%;height:100%;object-fit:contain}
+.study-preview-title{position:absolute;left:0;right:0;top:20px;text-align:center;color:#e0d8d1;font:11px/1.5 "Hiragino Sans",sans-serif;letter-spacing:.06em}
+.study-return{position:absolute;left:50%;bottom:98px;transform:translateX(-50%);min-height:44px;padding:8px 17px;border:1px solid #ffffff45;border-radius:2px;background:#101114bb;color:#eee9e3;white-space:nowrap;cursor:pointer;font:12px/1.5 "Hina Mincho",serif}
+.study-explanation{margin:20px auto 0;max-width:310px;color:#88837e;font:10px/1.7 "Hiragino Sans",sans-serif}
+.study-explanation summary{min-height:30px;cursor:pointer;text-align:center}
+.study-explanation p{margin-top:8px}
+.study-palette-flight{position:fixed;z-index:110;width:7px;height:7px;border-radius:50%;pointer-events:none}
+@media(max-width:819px){
+ #workLayer #workNails{gap:5px;min-height:120px}
+ #workLayer #workNails .study-tip{padding:12px 2px 4px;min-width:44px;min-height:120px;flex:0 1 54px}
+ .study-trial-mark{top:12px;right:12px;font-size:8px}
+ .study-colors{bottom:10px;padding:5px 8px;gap:2px}
+ .study-marker{width:44px;height:44px}
+ .study-markers{gap:6px}
+ .study-return{bottom:85px;min-height:44px}
+ .study-preview-title{top:auto;bottom:146px;font-size:10px}
+ .study-set-caption{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.study-stage,.study-tip{transition:none!important}.study-palette-flight{display:none!important}}
+
+body.work-link-study #workFilm{cursor:default}
