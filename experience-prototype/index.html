@@ -1856,15 +1856,15 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:"Denk One","H
       <div class="opening-progress" id="openingProgress"></div>
     </div>
     <nav class="opening-index" id="openingIndex" aria-label="作品を選ぶ">
-      <button type="button" data-opening-work="COLOR" aria-label="COLOR 色">01</button>
-      <button type="button" data-opening-work="SURFACE" aria-label="SURFACE 表面">02</button>
-      <button type="button" data-opening-work="SCULPT" aria-label="SCULPT 形">03</button>
-      <button type="button" data-opening-work="LIGHT" aria-label="LIGHT 光">04</button>
-      <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">05</button>
-      <button type="button" data-opening-work="THINKING" aria-label="思惟する手">06</button>
-      <button type="button" data-opening-work="ORB" aria-label="White Orb">07</button>
-      <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">08</button>
-      <button type="button" data-opening-work="UNDERWATER" aria-label="水中">09</button>
+      <button type="button" data-opening-work="UNDERWATER" aria-label="水中">01</button>
+      <button type="button" data-opening-work="COLOR" aria-label="COLOR 色">02</button>
+      <button type="button" data-opening-work="SURFACE" aria-label="SURFACE 表面">03</button>
+      <button type="button" data-opening-work="SCULPT" aria-label="SCULPT 形">04</button>
+      <button type="button" data-opening-work="LIGHT" aria-label="LIGHT 光">05</button>
+      <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">06</button>
+      <button type="button" data-opening-work="THINKING" aria-label="思惟する手">07</button>
+      <button type="button" data-opening-work="ORB" aria-label="White Orb">08</button>
+      <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">09</button>
     </nav>
     <section class="access-hub" id="accessHub" aria-label="見やすい作品一覧"></section>
     <div id="status"></div>
@@ -4654,7 +4654,7 @@ updateCmpBadge();
       preset:{looks:['artFrame','sheer','frenchmirror','artFrame','aurora'],colors:['#e2b9b2','#ead8cf','#caa75d','#f0cbc6','#d7cabd'],tune:{gloss:82,opacity:90,nailSize:100,sculptLen:148,sculptShape:'coffin'},vars:{sheer:.3,frenchmirror:.16,aurora:.38},trail:{on:true,intensity:50,hue:'#f0d4c8'}}
     },
     UNDERWATER:{
-      no:'11',title:'水中',tryTitle:'水中',label:'UNDERWATER / 水中',accent:'#8eafb4',film:'art-assets/underwater-clear-gem.mp4',motion:'art-assets/underwater-clear-gem.jpg',
+      no:'11',title:'水中',tryTitle:'水中',label:'UNDERWATER / 水中',accent:'#8eafb4',film:'art-assets/underwater-clear-gem-50s.mp4',motion:'art-assets/underwater-clear-gem.jpg',
       text:'淡い水中の光に包まれた二つの手。プラチナと金の細い線、透明な宝石が、回転とともにきらめき、白い光へ溶けていく。',
       preset:{looks:['aurora','sheer','frenchmirror','stardust','chrome'],colors:['#a8c6cc','#e6e2dc','#c6a66c','#c2d8db','#c8cfd0'],tune:{gloss:100,opacity:65,nailSize:100,sculptLen:138,sculptShape:'almond'},vars:{sheer:.2,aurora:.35,frenchmirror:.12,stardust:.3},trail:{on:true,intensity:48,hue:'#c2e0e2'}}
     }
@@ -4662,7 +4662,7 @@ updateCmpBadge();
   // 2026-09-23: 作者の指定により重複する「手」と「痕跡」は掲載しない。素材は保存。
   delete works.HAND;
   delete works.TRACE;
-  const order=Object.keys(works);
+  const order=['UNDERWATER',...Object.keys(works).filter(key=>key!=='UNDERWATER')];
   order.forEach((key,i)=>{works[key].no=String(i+1).padStart(2,'0');});
   const tabMap={looks:'COLOR',colors:'COLOR',tune:'SURFACE',sculpt:'SCULPT',hikari:'LIGHT'};
   const overlay=document.getElementById('startOverlay');
@@ -4674,7 +4674,7 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
-  const artworkRouteVersion='underwater-20261112';
+  const artworkRouteVersion='underwater-first-50s-20261112';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();
@@ -5481,7 +5481,7 @@ updateCmpBadge();
     setTimeout(()=>mark.remove(),700);
   },{capture:true,passive:true});
 
-  setCurrent('COLOR');
+  setCurrent(order[0]);
   if(works[artKey]){
     showArtworkPage(artKey);
   }else if(works[tryKey]){
@@ -5623,4 +5623,5 @@ updateCmpBadge();
 </script>
 </body>
 </html>
+
 
