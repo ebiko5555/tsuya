@@ -1864,6 +1864,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:"Denk One","H
       <button type="button" data-opening-work="THINKING" aria-label="思惟する手">06</button>
       <button type="button" data-opening-work="ORB" aria-label="White Orb">07</button>
       <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">08</button>
+      <button type="button" data-opening-work="UNDERWATER" aria-label="水中">09</button>
     </nav>
     <section class="access-hub" id="accessHub" aria-label="見やすい作品一覧"></section>
     <div id="status"></div>
@@ -4651,6 +4652,11 @@ updateCmpBadge();
       no:'10',title:'二つの手の輪舞曲',tryTitle:'二つの手の輪舞曲',label:'FRAME / 二つの手の輪舞曲',accent:'#d9b8a8',film:'art-assets/frame-0001-0240.mp4',motion:'art-assets/frame-0001-0240.webp',
       text:'白い手、淡いピンクの面、金色の線。240のフレームのなかで、皮膚と膜と装飾の境界が組み替わる。',
       preset:{looks:['artFrame','sheer','frenchmirror','artFrame','aurora'],colors:['#e2b9b2','#ead8cf','#caa75d','#f0cbc6','#d7cabd'],tune:{gloss:82,opacity:90,nailSize:100,sculptLen:148,sculptShape:'coffin'},vars:{sheer:.3,frenchmirror:.16,aurora:.38},trail:{on:true,intensity:50,hue:'#f0d4c8'}}
+    },
+    UNDERWATER:{
+      no:'11',title:'水中',tryTitle:'水中',label:'UNDERWATER / 水中',accent:'#8eafb4',film:'art-assets/underwater-clear-gem.mp4',motion:'art-assets/underwater-clear-gem.jpg',
+      text:'淡い水中の光に包まれた二つの手。プラチナと金の細い線、透明な宝石が、回転とともにきらめき、白い光へ溶けていく。',
+      preset:{looks:['aurora','sheer','frenchmirror','stardust','chrome'],colors:['#a8c6cc','#e6e2dc','#c6a66c','#c2d8db','#c8cfd0'],tune:{gloss:100,opacity:65,nailSize:100,sculptLen:138,sculptShape:'almond'},vars:{sheer:.2,aurora:.35,frenchmirror:.12,stardust:.3},trail:{on:true,intensity:48,hue:'#c2e0e2'}}
     }
   };
   // 2026-09-23: 作者の指定により重複する「手」と「痕跡」は掲載しない。素材は保存。
@@ -4668,7 +4674,7 @@ updateCmpBadge();
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
   const accessibleMode=params.get('access')==='large';
-  const artworkRouteVersion='length-center-20261012';
+  const artworkRouteVersion='underwater-20261112';
   document.getElementById('siteHome').href='../';
   const route=(name,value,length)=>{
     const query=new URLSearchParams();
@@ -5493,8 +5499,8 @@ updateCmpBadge();
 /* mobile107: 表示言語と書体だけを切り替える。追跡・カメラ・ネイル描画は変更しない。 */
 (()=>{
   const titles={
-    ja:{COLOR:'色',SURFACE:'表面',SCULPT:'FORMWORK',LIGHT:'光',HAND:'手',TRACE:'痕跡',SPACE:'宇宙と手',THINKING:'思惟する手',ORB:'White Orb',FRAME:'二つの手の輪舞曲'},
-    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'Formwork',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux'}
+    ja:{COLOR:'色',SURFACE:'表面',SCULPT:'FORMWORK',LIGHT:'光',HAND:'手',TRACE:'痕跡',SPACE:'宇宙と手',THINKING:'思惟する手',ORB:'White Orb',FRAME:'二つの手の輪舞曲',UNDERWATER:'水中'},
+    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'Formwork',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux',UNDERWATER:'Underwater'}
   };
   const descriptions={
     en:{
@@ -5507,7 +5513,8 @@ updateCmpBadge();
       SPACE:'In the dark, a hand reaches toward spheres like stars or moons — held at the distance just before touch.',
       THINKING:'A turning hand and its soft shadow accumulate time. The hand becomes the outline of thought.',
       ORB:'A red-nailed hand circles a white orb. Small adornment and monumental form exchange their scale.',
-      FRAME:'White hands, pale pink planes, and gold lines change their boundaries across 240 frames.'
+      FRAME:'White hands, pale pink planes, and gold lines change their boundaries across 240 frames.',
+      UNDERWATER:'Two hands turn slowly in pale underwater light. Fine platinum and gold lines and a transparent gem catch the light before dissolving into white.'
     },
     ja:{
       COLOR:'色を選ぶ行為から、身体の表面に模様が増殖する作品へ。爪の小さな面が、手全体の色彩へひらく。',
@@ -5519,7 +5526,8 @@ updateCmpBadge();
       SPACE:'暗い空間で、手が星や月のような球体へ伸びていく。触れる前の距離と、身体を越えて広がる想像を映す。',
       THINKING:'回転する手の線と淡い影が、考える時間をゆっくりと重ねる。手は道具ではなく、思考そのものの輪郭になる。',
       ORB:'白い球体のまわりを、赤いネイルを持つ手が巡る。小さな装飾と大きな形が、互いのスケールを反転させる。',
-      FRAME:'白い手、淡いピンクの面、金色の線。240のフレームのなかで、皮膚と膜と装飾の境界が組み替わる。'
+      FRAME:'白い手、淡いピンクの面、金色の線。240のフレームのなかで、皮膚と膜と装飾の境界が組み替わる。',
+      UNDERWATER:'淡い水中の光に包まれた二つの手。プラチナと金の細い線、透明な宝石が、回転とともにきらめき、白い光へ溶けていく。'
     }
   };
   const text=(selector,value)=>document.querySelectorAll(selector).forEach(el=>{if(el.textContent!==value)el.textContent=value;});
@@ -5615,3 +5623,4 @@ updateCmpBadge();
 </script>
 </body>
 </html>
+
