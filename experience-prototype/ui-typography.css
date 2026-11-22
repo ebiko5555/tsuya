@@ -1,0 +1,7 @@
+/* Official Google Fonts, locally hosted for this site. License: ui-fonts/*-OFL.txt. */
+@font-face{font-family:"TSUYA Hina Japanese";font-style:normal;font-weight:400;font-display:swap;src:url("./ui-fonts/HinaMincho-Regular.woff2") format("woff2");unicode-range:U+3000-30FF,U+31F0-31FF,U+3400-4DBF,U+4E00-9FFF,U+F900-FAFF,U+FE10-FE1F,U+FE30-FE4F,U+FF01-FF60,U+FF61-FF9F,U+20000-323AF}
+@font-face{font-family:"Hina Mincho";font-style:normal;font-weight:400;font-display:swap;src:url("./ui-fonts/HinaMincho-Regular.woff2") format("woff2")}
+@font-face{font-family:"Denk One";font-style:normal;font-weight:400;font-display:swap;src:url("./ui-fonts/DenkOne-Regular.ttf") format("truetype")}
+@font-face{font-family:"TSUYA Local Mincho Japanese";font-style:normal;font-weight:400;src:local("Hiragino Mincho ProN W3"),local("HiraMinProN-W3"),local("YuMincho-Regular");unicode-range:U+3000-30FF,U+31F0-31FF,U+3400-4DBF,U+4E00-9FFF,U+F900-FAFF,U+FE10-FE1F,U+FE30-FE4F,U+FF01-FF60,U+FF61-FF9F,U+20000-323AF}
+:root{--tsuya-text-face:"TSUYA Hina Japanese","TSUYA Local Mincho Japanese"}
+html[data-language="en"]{--tsuya-text-face:"Denk One","TSUYA Hina Japanese","TSUYA Local Mincho Japanese"}

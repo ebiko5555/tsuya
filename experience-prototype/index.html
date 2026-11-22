@@ -6,9 +6,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Denk+One&family=Hina+Mincho&display=swap" rel="stylesheet">
 <title>HAND &amp; LIGHT — 自分の手から、作品へ</title>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js"
         onerror="window.__mpFailed=true"></script>
@@ -46,7 +43,7 @@
     .tap-mark{animation-duration:.28s}
   }
   body{
-    font-family:"Hiragino Sans","Yu Gothic",sans-serif;
+    font-family:var(--tsuya-text-face),"Hiragino Sans","Yu Gothic",sans-serif;
     background:
       radial-gradient(120% 80% at 50% -10%, #fbf8f4 0%, var(--bg) 60%),
       var(--bg);
@@ -64,7 +61,7 @@
     text-transform:uppercase; margin-bottom:6px; text-indent:.55em;
   }
   header h1{
-    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-family:var(--tsuya-text-face),"Hiragino Mincho ProN","Yu Mincho",serif;
     font-size:clamp(58px, 20vw, 76px); font-weight:400; line-height:1;
     letter-spacing:.04em;
     background:linear-gradient(135deg, #8a5a45 0%, #d4a887 45%, #8a5a45 100%);
@@ -88,7 +85,7 @@
     background:radial-gradient(90% 70% at 50% 20%, #f9f4ee 0%, #efe6dc 100%);
   }
   #startOverlay .invite{
-    font-family:"Hiragino Mincho ProN",serif; font-size:15px;
+    font-family:var(--tsuya-text-face),"Hiragino Mincho ProN",serif; font-size:15px;
     letter-spacing:.6em; text-indent:.6em; color:#7a6c60; margin-bottom:34px;
   }
   .bigbtn{
@@ -125,7 +122,7 @@
     margin-top:16px; font-size:12px; letter-spacing:.26em; text-indent:.26em;
     color:rgba(255,255,255,.94);
     text-shadow:0 2px 10px rgba(0,0,0,.8);
-    font-family:"Hiragino Sans","Yu Gothic",sans-serif;
+    font-family:var(--tsuya-text-face),"Hiragino Sans","Yu Gothic",sans-serif;
   }
   @keyframes guidePulse{
     0%, 100% { opacity:.46; transform:scale(0.97); }
@@ -148,11 +145,11 @@
   }
   body.source-camera-capture .source-guide-card{display:flex}
   .sg-tag{
-    font:500 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    font:500 9px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.26em; color:#d7b39e; margin-bottom:7px;
   }
   .sg-title{
-    color:#fffdfa; font:300 15px/1.38 "Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    color:#fffdfa; font:300 15px/1.38 var(--tsuya-text-face),"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
     letter-spacing:.14em; text-indent:.14em; margin-bottom:5px;
     text-shadow:0 2px 10px rgba(0,0,0,.6);
   }
@@ -170,7 +167,7 @@
   }
   #countdown{
     position:absolute; inset:0; display:none; align-items:center; justify-content:center;
-    font-family:"Hiragino Mincho ProN",serif; font-size:96px; font-weight:300; color:#fff;
+    font-family:var(--tsuya-text-face),"Hiragino Mincho ProN",serif; font-size:96px; font-weight:300; color:#fff;
     text-shadow:0 2px 24px rgba(0,0,0,.4); z-index:6; pointer-events:none;
   }
   .stagebtns{
@@ -221,10 +218,10 @@
   .shBack{
     position:fixed; z-index:2; top:calc(14px + env(safe-area-inset-top)); left:14px;
     min-height:42px; padding:0 16px; border:1px solid rgba(255,255,255,.5);
-    color:#fff; background:rgba(8,8,10,.52); font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:#fff; background:rgba(8,8,10,.52); font:500 10px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.1em; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   }
-  .shTitle{color:#fff; font:300 24px/1.2 "Times New Roman","Yu Mincho",serif; letter-spacing:.08em}
+  .shTitle{color:#fff; font:300 24px/1.2 var(--tsuya-text-face),"Times New Roman","Yu Mincho",serif; letter-spacing:.08em}
   .shTxt{max-width:330px; color:#f6efe8; font-size:11.5px; letter-spacing:.08em; text-align:center; line-height:1.9}
   .shTxt strong{display:block; margin-bottom:4px; color:#fff; font-size:13px; letter-spacing:.12em}
   .shBtn{
@@ -240,7 +237,7 @@
   }
   .cmpHead{display:flex; align-items:center; justify-content:space-between; flex:none; margin-bottom:12px}
   .cmpTitle{
-    font-family:"Hiragino Mincho ProN",serif; font-size:14px;
+    font-family:var(--tsuya-text-face),"Hiragino Mincho ProN",serif; font-size:14px;
     letter-spacing:.45em; text-indent:.45em; color:var(--ink);
   }
   .cmpX{
@@ -513,7 +510,7 @@
     box-shadow:var(--shadow);
   }
   .edtitle{
-    font-family:"Hiragino Mincho ProN",serif; text-align:center;
+    font-family:var(--tsuya-text-face),"Hiragino Mincho ProN",serif; text-align:center;
     font-size:13px; letter-spacing:.3em; text-indent:.3em; margin-bottom:12px;
   }
   .edstage{
@@ -734,7 +731,7 @@
   .source-sequence-flow{display:none}
   .opening-mark{
     position:absolute; z-index:2; top:calc(94px + env(safe-area-inset-top)); left:22px;
-    font:500 8px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;
+    font:500 8px/1.7 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.2em; color:rgba(255,255,255,.55);
   }
   #startOverlay .invite{
@@ -769,7 +766,7 @@
   .panel.collapsed .sheet-handle::before{background:rgba(209,165,141,.72)}
   .tabs{border-bottom:1px solid rgba(255,255,255,.11)}
   .tab{color:rgba(255,255,255,.38); font-size:8.5px; letter-spacing:.12em}
-  .tab::before{display:block; margin-bottom:5px; font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace; opacity:.58}
+  .tab::before{display:block; margin-bottom:5px; font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; opacity:.58}
   .tab[data-t="looks"]::before{content:"01"}.tab[data-t="colors"]::before{content:"02"}
   .tab[data-t="tune"]::before{content:"03"}.tab[data-t="sculpt"]::before{content:"04"}
   .tab[data-t="hikari"]::before{content:"05"}
@@ -821,7 +818,7 @@
   body.custom-mode.source-selected .art-signal video{display:none}
   body.custom-mode.source-selected .art-signal img{display:block}
   .art-signal::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 35%,rgba(8,9,12,.9))}
-  .signal-no,.signal-name{position:absolute; z-index:2; left:9px; font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
+  .signal-no,.signal-name{position:absolute; z-index:2; left:9px; font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
   .signal-no{top:9px}.signal-name{bottom:10px}
 
   .work-layer{
@@ -836,8 +833,8 @@
     color:rgba(255,255,255,.72); pointer-events:none; text-align:right;
     text-shadow:0 2px 16px rgba(0,0,0,.72);
   }
-  .work-film-code{font:500 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; color:var(--work-accent)}
-  .work-film-title{margin-top:7px; font:300 clamp(27px,7vw,58px)/.95 "Times New Roman","Yu Mincho",serif; letter-spacing:.05em}
+  .work-film-code{font:500 9px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; color:var(--work-accent)}
+  .work-film-title{margin-top:7px; font:300 clamp(27px,7vw,58px)/.95 var(--tsuya-text-face),"Times New Roman","Yu Mincho",serif; letter-spacing:.05em}
   .work-layer::after{
     content:""; position:absolute; inset:0;
     pointer-events:none; background:linear-gradient(90deg,rgba(8,9,12,.7),transparent 56%),linear-gradient(180deg,rgba(8,9,12,.1),rgba(8,9,12,.88) 82%);
@@ -855,13 +852,13 @@
   .work-index button{
     width:28px; height:28px; border:0; border-left:1px solid rgba(255,255,255,.18);
     color:rgba(255,255,255,.42); background:none;
-    font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   .work-nav-title{display:none}
   .work-index button.active{color:#fff; border-left-color:#d7b39e}
   .work-copy{position:absolute; z-index:3; left:62px; right:20px; bottom:calc(34px + env(safe-area-inset-bottom))}
-  .work-code{font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; opacity:.58}
-  .work-title{margin:10px 0 9px; font:300 clamp(48px,16vw,82px)/.95 "Times New Roman","Yu Mincho",serif; letter-spacing:.04em}
+  .work-code{font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; opacity:.58}
+  .work-title{margin:10px 0 9px; font:300 clamp(48px,16vw,82px)/.95 var(--tsuya-text-face),"Times New Roman","Yu Mincho",serif; letter-spacing:.04em}
   /* 試作32：作品名の下にあった説明文は10作品すべて表示しない */
   .work-text{display:none; max-width:28em; font-size:11px; line-height:1.9; letter-spacing:.05em; opacity:.78}
   .work-layer{--work-accent:#d7b39e}
@@ -885,7 +882,7 @@
     background:rgba(255,255,255,.94); text-align:left; box-shadow:0 12px 34px rgba(0,0,0,.2);
     backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   }
-  .work-try-label{align-self:center; font:600 18px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em; opacity:1}
+  .work-try-label{align-self:center; font:600 18px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em; opacity:1}
   .work-try strong{align-self:end; font-size:11px; font-weight:500; letter-spacing:.08em}
   .work-custom{justify-self:start; border:0; border-bottom:1px solid rgba(255,255,255,.3); padding:8px 2px; color:rgba(255,255,255,.72); font-size:9px; letter-spacing:.1em; text-decoration:none}
   .source-entry{
@@ -896,9 +893,9 @@
   .source-entry-icon{position:relative; width:38px; height:38px; border:1px solid var(--work-accent); background:rgba(0,0,0,.16)}
   .source-entry-icon::before{content:""; position:absolute; inset:7px; border:1px solid rgba(255,255,255,.74); border-radius:1px}
   .source-entry-icon::after{content:"✦"; position:absolute; right:-8px; top:-9px; color:var(--work-accent); font:16px/1 Georgia,serif; text-shadow:0 0 10px rgba(255,255,255,.45)}
-  .source-entry-title{display:block; font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
+  .source-entry-title{display:block; font:600 12px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
   .source-entry-sub{display:block; margin-top:5px; color:rgba(255,255,255,.6); font-size:20px; letter-spacing:.08em}
-  .source-entry-arrow{font:300 20px/1 Georgia,serif; color:var(--work-accent)}
+  .source-entry-arrow{font:300 20px/1 var(--tsuya-text-face),Georgia,serif; color:var(--work-accent)}
   .source-entry:focus-visible{outline:2px solid var(--work-accent); outline-offset:3px}
   .opening-actions{position:relative; z-index:2; display:flex; align-items:center; gap:20px}
   .make-link{padding:10px 2px; border-bottom:1px solid rgba(255,255,255,.32); color:rgba(255,255,255,.72); font-size:9px; letter-spacing:.12em; text-decoration:none}
@@ -909,12 +906,12 @@
   .opening-index button{
     width:25px; height:28px; border:0; border-top:1px solid rgba(255,255,255,.2);
     color:rgba(255,255,255,.44); background:none;
-    font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   .opening-index button:hover,.opening-index button:focus{color:#fff; border-top-color:#d7b39e}
   .try-identity{
     position:absolute; z-index:9; display:none; left:18px; top:calc(92px + env(safe-area-inset-top));
-    color:#fff; font:500 8px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em;
+    color:#fff; font:500 8px/1.8 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em;
   }
   .try-identity .work-nails{height:35px; margin-top:7px; gap:3px}
   .try-identity .work-nails canvas{width:12px; height:25px}
@@ -945,7 +942,7 @@
   body.custom-mode #startOverlay{justify-content:flex-end; padding-bottom:calc(28px + env(safe-area-inset-bottom))}
   body.custom-mode #startOverlay .invite,body.custom-mode .opening-guide,body.custom-mode .make-link{display:none}
   body.custom-mode .opening-actions{width:min(100%,340px); margin:0 auto; position:relative; z-index:3}
-  body.custom-mode .source-sequence-flow{display:block; position:relative; z-index:3; margin:0 auto 14px; color:rgba(255,255,255,.84); font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.13em; text-align:center}
+  body.custom-mode .source-sequence-flow{display:block; position:relative; z-index:3; margin:0 auto 14px; color:rgba(255,255,255,.84); font:500 11px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.13em; text-align:center}
   body.custom-mode .opening-films::after{
     background:linear-gradient(180deg,rgba(8,9,12,.08),rgba(8,9,12,.06) 50%,rgba(8,9,12,.86) 92%);
   }
@@ -984,7 +981,7 @@
     height:42px; padding:0 20px; border-radius:999px;
     border:1px solid rgba(255,255,255,.38);
     background:rgba(12,14,18,.88); color:#fff;
-    font:600 14px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    font:600 14px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.08em; cursor:pointer;
     box-shadow:0 4px 20px rgba(0,0,0,.5);
     backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
@@ -996,25 +993,25 @@
   .source-intro{margin:1px 0 11px; color:rgba(255,255,255,.68); font-size:10px; line-height:1.65; letter-spacing:.05em}
   .source-origin{display:none; grid-template-columns:1fr auto; align-items:end; gap:8px; margin:0 0 11px; padding:9px 10px; border-left:2px solid var(--work-accent,#d1a58d); background:rgba(255,255,255,.055)}
   body.custom-from-work .source-origin{display:grid}
-  .source-origin span{display:block; margin-bottom:4px; color:rgba(255,255,255,.42); font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em}
-  .source-origin strong{display:block; color:#fff; font:500 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
-  .source-origin button{padding:7px 0; border:0; border-bottom:1px solid rgba(255,255,255,.34); color:rgba(255,255,255,.8); background:none; font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.07em}
+  .source-origin span{display:block; margin-bottom:4px; color:rgba(255,255,255,.42); font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em}
+  .source-origin strong{display:block; color:#fff; font:500 10px/1.3 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
+  .source-origin button{padding:7px 0; border:0; border-bottom:1px solid rgba(255,255,255,.34); color:rgba(255,255,255,.8); background:none; font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.07em}
   .source-actions{display:grid; grid-template-columns:1fr 1fr; gap:8px}
   .source-action{
     min-height:42px; padding:0 10px; border:1px solid rgba(255,255,255,.24);
-    color:#fff; background:rgba(255,255,255,.04); font:500 9px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:#fff; background:rgba(255,255,255,.04); font:500 9px/1.25 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.08em;
   }
   .source-frame{display:none; grid-template-columns:70px 1fr; gap:11px; align-items:center; margin-top:10px}
   .source-frame.ready{display:grid}
   #sourcePreview{width:70px; height:70px; object-fit:cover; background:#17181b}
-  .source-meta{min-width:0; color:rgba(255,255,255,.52); font:500 8px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
+  .source-meta{min-width:0; color:rgba(255,255,255,.52); font:500 8px/1.7 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
   .source-meta strong{display:block; overflow:hidden; margin-bottom:2px; color:#fff; font-size:10px; font-weight:500; text-overflow:ellipsis; white-space:nowrap}
-  .source-motif-pick{display:block; grid-column:1 / -1; width:100%; min-height:38px; margin-top:8px; border:1px solid rgba(255,255,255,.38); color:#fff; background:rgba(255,255,255,.06); font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
+  .source-motif-pick{display:block; grid-column:1 / -1; width:100%; min-height:38px; margin-top:8px; border:1px solid rgba(255,255,255,.38); color:#fff; background:rgba(255,255,255,.06); font:500 11px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
   .source-motif-pick.active{border-color:#fff; background:#fff; color:#08090c}
   .source-modes{display:none; gap:5px; margin-top:12px; overflow-x:auto; scrollbar-width:none}
   .source-modes.ready{display:flex}
-  .source-mode{display:flex; flex:1; min-width:64px; min-height:48px; padding:5px 7px 4px; align-items:center; justify-content:center; gap:4px; border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.56); background:none; font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
+  .source-mode{display:flex; flex:1; min-width:64px; min-height:48px; padding:5px 7px 4px; align-items:center; justify-content:center; gap:4px; border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.56); background:none; font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
   .source-mode svg{display:block; width:24px; height:24px; overflow:visible; fill:none; stroke:currentColor; stroke-width:1.45; stroke-linecap:round; stroke-linejoin:round}
   .source-mode[data-source-mode="COLOR"] svg circle{stroke:none}
   .source-mode[data-source-mode="COLOR"] svg circle:nth-child(1){fill:#e96d67}
@@ -1031,7 +1028,7 @@
   .source-set-code{display:none}
   .source-set canvas{width:180px; max-width:100%; height:auto; aspect-ratio:200/76}
   .source-set-name{display:none}
-  .source-try{display:none; align-items:center; justify-content:space-between; width:100%; min-height:46px; margin-top:10px; padding:0 14px; border:0; color:#08090c; background:#fff; font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
+  .source-try{display:none; align-items:center; justify-content:space-between; width:100%; min-height:46px; margin-top:10px; padding:0 14px; border:0; color:#08090c; background:#fff; font:600 11px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
   .source-try.ready{display:flex}
   .source-try::after{content:"→"; font-size:17px; font-weight:300}
   body.custom-mode.source-planning .source-try.ready{
@@ -1074,7 +1071,7 @@
   body.art-page #workNails{position:relative; height:68px; gap:9px; margin-top:24px}
   body.art-page #workNails::before{
     content:"NAIL SET / 01—05"; position:absolute; left:0; top:-14px;
-    color:rgba(255,255,255,.34); font:500 6px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.16em;
+    color:rgba(255,255,255,.34); font:500 6px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.16em;
   }
   body.art-page #workNails canvas{width:28px; height:56px}
   body.art-page #workNails canvas:nth-child(1),body.art-page #workNails canvas:nth-child(5){height:47px}
@@ -1108,7 +1105,7 @@
     position:fixed; z-index:92; display:none; align-items:center; gap:8px;
     left:14px; top:calc(13px + env(safe-area-inset-top)); min-height:44px; padding:0 16px;
     border:1px solid rgba(255,255,255,.28); color:#fff; background:rgba(8,9,12,.68);
-    text-decoration:none; font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    text-decoration:none; font:500 13px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.14em; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   }
   .global-back svg,.work-close svg{width:16px; height:16px; flex:none}
@@ -1117,23 +1114,23 @@
     position:fixed; z-index:112; display:flex; align-items:center; justify-content:center;
     right:14px; top:calc(13px + env(safe-area-inset-top)); min-height:44px; padding:0 16px;
     border:1px solid rgba(255,255,255,.28); color:#fff; background:rgba(8,9,12,.68);
-    text-decoration:none; font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    text-decoration:none; font:500 13px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.14em; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   }
   .language-switch{
     position:fixed; z-index:113; right:82px; top:calc(13px + env(safe-area-inset-top));
     min-width:48px; min-height:44px; padding:0 10px; border:1px solid rgba(255,255,255,.28);
-    color:#fff; background:rgba(8,9,12,.68); font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:#fff; background:rgba(8,9,12,.68); font:500 11px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.08em; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   }
   html[data-language="ja"] body,html[data-language="ja"] button,html[data-language="ja"] a,
   html[data-language="ja"] input,html[data-language="ja"] select,html[data-language="ja"] textarea,
   html[data-language="ja"] .opening-mark,html[data-language="ja"] .invite,html[data-language="ja"] .work-film-mark,
-  html[data-language="ja"] .source-entry,html[data-language="ja"] .nail-set-viewer{font-family:"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif!important;font-synthesis:none}
+  html[data-language="ja"] .source-entry,html[data-language="ja"] .nail-set-viewer{font-family:var(--tsuya-text-face),"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif!important;font-synthesis:none}
   html[data-language="en"] body,html[data-language="en"] button,html[data-language="en"] a,
   html[data-language="en"] input,html[data-language="en"] select,html[data-language="en"] textarea,
   html[data-language="en"] .opening-mark,html[data-language="en"] .invite,html[data-language="en"] .work-film-mark,
-  html[data-language="en"] .source-entry,html[data-language="en"] .nail-set-viewer{font-family:"Denk One","Helvetica Neue",Arial,sans-serif!important;font-synthesis:none}
+  html[data-language="en"] .source-entry,html[data-language="en"] .nail-set-viewer{font-family:var(--tsuya-text-face),"Denk One","Helvetica Neue",Arial,sans-serif!important;font-synthesis:none}
   html[data-language="en"] .invite,html[data-language="en"] .opening-work-title,html[data-language="en"] .work-film-title{letter-spacing:.035em}
   body.custom-mode header .overline,body.work-tryon header .overline{display:none}
   .opening-guide{
@@ -1144,7 +1141,7 @@
     position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr);
     width:min(100%,340px); margin-top:16px; border-top:1px solid rgba(255,255,255,.16);
   }
-  .opening-steps span{padding:10px 4px 0; color:rgba(255,255,255,.48); font:500 7px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
+  .opening-steps span{padding:10px 4px 0; color:rgba(255,255,255,.48); font:500 7px/1.5 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em}
   .opening-steps b{display:block; margin-bottom:4px; color:#d7b39e; font-weight:500}
   body.hub-mode #startOverlay{padding-bottom:calc(38px + env(safe-area-inset-bottom))}
   body.hub-mode .opening-index{display:none}
@@ -1167,7 +1164,7 @@
     display:block; margin-top:7px;
     font-size:11px; font-weight:400; letter-spacing:.22em; text-indent:.22em;
     color:rgba(255,255,255,.68);
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-family:var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   body.custom-mode .opening-guide{text-align:center; margin:0 auto 20px; max-width:340px; font-size:13.5px; line-height:1.7; color:rgba(255,255,255,.8)}
   body.custom-mode .opening-actions{width:min(100%,340px); margin:0 auto; flex-direction:column; align-items:stretch; gap:9px}
@@ -1179,7 +1176,7 @@
   .work-close{
     display:flex; align-items:center; gap:8px; left:14px!important; right:auto!important;
     min-height:44px; padding:0 16px!important; font-size:13px!important;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em;
+    font-family:var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em;
   }
   body.art-page .work-index{grid-template-columns:repeat(5,38px); gap:5px}
   body.art-page .work-index button{width:38px; height:32px; font-size:9px}
@@ -1191,7 +1188,7 @@
     }
     body.art-page .work-index::before{
       content:"WORKS　　SWIPE →"; grid-column:1/-1; margin-bottom:3px;
-      color:rgba(255,255,255,.62); font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      color:rgba(255,255,255,.62); font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
       letter-spacing:.16em;
     }
     body.art-page .work-index button{
@@ -1238,7 +1235,7 @@
     position:absolute; z-index:4; display:block; left:22px; right:22px;
     bottom:calc(38px + env(safe-area-inset-bottom)); pointer-events:none;
   }
-  .opening-work-code{color:rgba(255,255,255,.58); font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em}
+  .opening-work-code{color:rgba(255,255,255,.58); font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em}
   .opening-work-cue{
     display:flex; align-items:center; justify-content:space-between;
     margin-top:16px; padding-top:11px;
@@ -1288,7 +1285,7 @@
     body.art-page .work-index::before{
       content:"WORKS　—　SWIPE →"; position:absolute; left:16px; top:5px;
       margin:0; color:rgba(255,255,255,.54);
-      font:500 6px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em;
+      font:500 6px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em;
       white-space:nowrap;
     }
     body.art-page .work-index button{
@@ -1424,7 +1421,7 @@
   .exhibit-open{
     display:none; align-items:center; justify-content:center; min-height:36px; padding:0 12px;
     border:1px solid rgba(215,179,158,.58); color:#e6c6b2; background:rgba(215,179,158,.06);
-    font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em;
+    font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em;
   }
   body.custom-mode .exhibit-open{display:inline-flex}
   .source-exhibit{width:100%; margin-top:9px}
@@ -1441,11 +1438,11 @@
     display:flex; align-items:flex-start; justify-content:space-between; pointer-events:none;
   }
   .exhibit-head>div{display:none}
-  .exhibit-kicker{font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.24em; color:rgba(255,255,255,.56)}
-  .exhibit-title{margin-top:8px; font:300 clamp(25px,8vw,38px)/1 "Times New Roman","Yu Mincho",serif; letter-spacing:.08em}
+  .exhibit-kicker{font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.24em; color:rgba(255,255,255,.56)}
+  .exhibit-title{margin-top:8px; font:300 clamp(25px,8vw,38px)/1 var(--tsuya-text-face),"Times New Roman","Yu Mincho",serif; letter-spacing:.08em}
   .exhibit-close{
     pointer-events:auto; min-width:60px; min-height:36px; margin-left:auto; border:1px solid rgba(255,255,255,.3);
-    color:#fff; background:rgba(8,8,10,.38); font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:#fff; background:rgba(8,8,10,.38); font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace;
     letter-spacing:.13em; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   }
   .exhibit-controls{
@@ -1456,7 +1453,7 @@
   }
   .exhibit-mode,.exhibit-save{
     min-height:48px; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.68); background:transparent;
-    font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em;
+    font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em;
   }
   .exhibit-mode{display:flex; align-items:center; justify-content:center; color:#101012; border-color:#e7ddd4; background:#e7ddd4}
   .exhibit-save{color:#101012; border-color:#d7b39e; background:#d7b39e}
@@ -1473,16 +1470,16 @@
   }
   .source-confirm.open{display:flex}
   .source-confirm-head{display:flex; align-items:center; justify-content:space-between}
-  .source-confirm-kicker{font:500 8px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.2em; color:rgba(255,255,255,.52)}
+  .source-confirm-kicker{font:500 8px/1.5 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.2em; color:rgba(255,255,255,.52)}
   .source-confirm-back{min-width:74px; min-height:44px; border:1px solid rgba(255,255,255,.32); border-radius:999px; color:#fff; background:transparent; font-size:14px; letter-spacing:.12em}
   .source-confirm-body{display:flex; flex:1; flex-direction:column; align-items:center; justify-content:center; min-height:0; text-align:center}
-  .source-confirm-title{margin:0 0 9px; font:300 clamp(29px,9vw,44px)/1.2 "Times New Roman","Yu Mincho",serif; letter-spacing:.08em}
+  .source-confirm-title{margin:0 0 9px; font:300 clamp(29px,9vw,44px)/1.2 var(--tsuya-text-face),"Times New Roman","Yu Mincho",serif; letter-spacing:.08em}
   .source-confirm-note{margin-bottom:25px; color:rgba(255,255,255,.58); font-size:9px; letter-spacing:.12em}
   #sourceConfirmCanvas{display:block; width:min(100%,460px); height:auto; aspect-ratio:700/360}
-  .source-confirm-name{margin-top:18px; font:500 9px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.17em; color:rgba(255,255,255,.62)}
-  .source-confirm-try{width:min(100%,360px); min-height:64px; margin:22px auto 0; border:0; border-radius:999px; color:#171717; background:#f2eee6; font:600 15px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; box-shadow:0 14px 34px rgba(0,0,0,.34)}
+  .source-confirm-name{margin-top:18px; font:500 9px/1.5 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.17em; color:rgba(255,255,255,.62)}
+  .source-confirm-try{width:min(100%,360px); min-height:64px; margin:22px auto 0; border:0; border-radius:999px; color:#171717; background:#f2eee6; font:600 15px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; box-shadow:0 14px 34px rgba(0,0,0,.34)}
   .length-choice{display:grid; grid-template-columns:1fr 1fr; gap:7px; width:min(100%,360px); margin:13px auto 0}
-  .length-choice button{display:flex; align-items:center; justify-content:center; gap:8px; min-height:46px; border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.68); background:transparent; font:500 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em}
+  .length-choice button{display:flex; align-items:center; justify-content:center; gap:8px; min-height:46px; border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.68); background:transparent; font:500 9px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em}
   .length-choice button::before{content:""; display:block; width:9px; border-radius:8px 8px 5px 5px; background:currentColor}
   .length-choice button[data-length="short"]::before{height:18px}
   .length-choice button[data-length="long"]::before{height:29px}
@@ -1516,19 +1513,19 @@
 
   /* 作品ページの小さな5本を入口にし、造形を読むための拡大鑑賞画面へつなぐ。 */
   #workNails{border:0; padding:0; color:inherit; background:transparent; cursor:pointer}
-  #workNails::after{content:"TAP TO VIEW"; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); white-space:nowrap; color:rgba(255,255,255,.52); font:500 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em}
+  #workNails::after{content:"TAP TO VIEW"; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); white-space:nowrap; color:rgba(255,255,255,.52); font:500 7px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.15em}
   .nail-set-viewer{position:fixed; z-index:260; inset:0; display:none; box-sizing:border-box; overflow:auto; padding:calc(22px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom)); color:#f2f1ed; background:#08090c}
   .nail-set-viewer.open{display:flex; flex-direction:column; align-items:center}
-  .nail-set-close{position:absolute; left:14px; top:calc(12px + env(safe-area-inset-top)); min-height:42px; padding:0 14px; border:1px solid rgba(255,255,255,.35); border-radius:999px; color:#fff; background:rgba(255,255,255,.06); font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em}
-  .nail-set-kicker{margin:48px 0 7px; color:rgba(242,241,237,.5); font:500 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em}
-  .nail-set-title{margin:0; text-align:center; font:300 clamp(32px,10vw,48px)/1.05 "Times New Roman","Yu Mincho",serif; letter-spacing:.04em}
+  .nail-set-close{position:absolute; left:14px; top:calc(12px + env(safe-area-inset-top)); min-height:42px; padding:0 14px; border:1px solid rgba(255,255,255,.35); border-radius:999px; color:#fff; background:rgba(255,255,255,.06); font:500 11px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em}
+  .nail-set-kicker{margin:48px 0 7px; color:rgba(242,241,237,.5); font:500 8px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em}
+  .nail-set-title{margin:0; text-align:center; font:300 clamp(32px,10vw,48px)/1.05 var(--tsuya-text-face),"Times New Roman","Yu Mincho",serif; letter-spacing:.04em}
   .nail-set-note{max-width:290px; margin:12px 0 14px; color:rgba(242,241,237,.64); font-size:11px; line-height:1.7; letter-spacing:.04em; text-align:center}
   .set-viewer-nails{display:flex; flex:1; align-items:center; justify-content:center; gap:5px; width:100%; min-height:260px; margin:0}
   .set-viewer-nails canvas{width:62px; height:130px; filter:drop-shadow(0 13px 17px rgba(0,0,0,.46))}
   .set-viewer-nails canvas:nth-child(1),.set-viewer-nails canvas:nth-child(5){height:108px}
   .set-viewer-nails canvas:nth-child(2),.set-viewer-nails canvas:nth-child(4){height:120px}
   .set-viewer-actions{display:grid; gap:10px; width:min(100%,340px); margin-top:16px}
-  .set-viewer-try,.set-viewer-back{display:flex; align-items:center; justify-content:center; width:100%; min-height:56px; border-radius:999px; text-decoration:none; font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
+  .set-viewer-try,.set-viewer-back{display:flex; align-items:center; justify-content:center; width:100%; min-height:56px; border-radius:999px; text-decoration:none; font:600 13px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
   .set-viewer-try{border:0; color:#171717; background:var(--set-accent,#eadfce)}
   .set-viewer-back{border:1px solid rgba(255,255,255,.35); color:rgba(255,255,255,.9); background:rgba(255,255,255,.05)}
   @media (min-width:820px){.nail-set-viewer{padding-top:9vh}.set-viewer-nails{gap:12px;min-height:330px}.set-viewer-nails canvas{width:82px;height:170px}.set-viewer-nails canvas:nth-child(1),.set-viewer-nails canvas:nth-child(5){height:141px}.set-viewer-nails canvas:nth-child(2),.set-viewer-nails canvas:nth-child(4){height:157px}}
@@ -1696,7 +1693,7 @@
     body.art-page .source-entry-icon,body.art-page .source-entry-title,body.art-page .source-entry-arrow{display:none}
     body.art-page .source-entry-sub{
       display:block; margin:0; color:rgba(255,255,255,.88);
-      font:600 30px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.12em;
+      font:600 30px/1 var(--tsuya-text-face),"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.12em;
     }
   }
 
@@ -1707,20 +1704,20 @@
 
   /* 試作117：文字を読まなくても、作品と5本を大きく選べる別導線。 */
   .access-link,.access-hub{display:none}
-  body.hub-mode .access-link{position:absolute; z-index:7; display:flex; align-items:center; justify-content:center; right:18px; top:calc(18px + env(safe-area-inset-top)); min-height:54px; padding:0 18px; border:2px solid #fff; color:#fff; background:rgba(8,9,12,.82); text-decoration:none; font:600 17px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
+  body.hub-mode .access-link{position:absolute; z-index:7; display:flex; align-items:center; justify-content:center; right:18px; top:calc(18px + env(safe-area-inset-top)); min-height:54px; padding:0 18px; border:2px solid #fff; color:#fff; background:rgba(8,9,12,.82); text-decoration:none; font:600 17px/1 var(--tsuya-text-face),"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
   body.access-mode{overflow:auto}
   body.access-mode header,body.access-mode .global-back,body.access-mode .site-home,body.access-mode .language-switch{display:none}
   body.access-mode #startOverlay{display:block; overflow-y:auto; min-height:100svh; padding:0; background:#08090c}
   body.access-mode .opening-films,body.access-mode .opening-mark,body.access-mode .invite,body.access-mode .opening-guide,body.access-mode .opening-actions,body.access-mode .opening-steps,body.access-mode .opening-enter,body.access-mode .opening-work-meta,body.access-mode .opening-index,body.access-mode .access-link{display:none}
   body.access-mode .access-hub{display:block; padding:calc(28px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom))}
   .access-hub-head{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:20px}
-  .access-hub-title{margin:0; color:#fff; font:700 clamp(28px,8vw,38px)/1.15 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
-  .access-hub-back{display:flex; align-items:center; justify-content:center; min-height:50px; padding:0 14px; border:2px solid #fff; color:#fff; background:#08090c; text-decoration:none; font:600 16px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+  .access-hub-title{margin:0; color:#fff; font:700 clamp(28px,8vw,38px)/1.15 var(--tsuya-text-face),"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
+  .access-hub-back{display:flex; align-items:center; justify-content:center; min-height:50px; padding:0 14px; border:2px solid #fff; color:#fff; background:#08090c; text-decoration:none; font:600 16px/1 var(--tsuya-text-face),"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
   .access-work-grid{display:grid; grid-template-columns:1fr; gap:16px}
   .access-work-card{display:grid; grid-template-columns:minmax(136px,.84fr) minmax(0,1.16fr); min-height:150px; overflow:hidden; border:2px solid rgba(255,255,255,.76); color:#fff; background:#111216; text-decoration:none}
   .access-work-image{width:100%; height:100%; min-height:150px; object-fit:cover; background:#050608}
   .access-work-body{display:flex; flex-direction:column; justify-content:space-between; min-width:0; padding:15px 12px 12px}
-  .access-work-title{font:700 clamp(20px,6.3vw,29px)/1.15 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.03em}
+  .access-work-title{font:700 clamp(20px,6.3vw,29px)/1.15 var(--tsuya-text-face),"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.03em}
   .access-work-nails{display:flex; align-items:center; gap:5px; min-height:72px; margin-top:10px}
   .access-work-nails canvas{width:30px; height:62px; filter:drop-shadow(0 6px 8px rgba(0,0,0,.42))}
   .access-work-nails canvas:nth-child(1),.access-work-nails canvas:nth-child(5){height:51px}
@@ -1741,7 +1738,7 @@
   body.art-page.access-mode .work-length-choice button{min-height:58px; font-size:15px}
   body.art-page.access-mode .source-entry{min-height:76px; justify-content:center; grid-template-columns:1fr; border:2px solid #fff; text-align:center}
   body.art-page.access-mode .source-entry-icon,body.art-page.access-mode .source-entry-sub,body.art-page.access-mode .source-entry-arrow{display:none}
-  body.art-page.access-mode .source-entry-title{font:700 21px/1 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
+  body.art-page.access-mode .source-entry-title{font:700 21px/1 var(--tsuya-text-face),"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; letter-spacing:.04em}
   body.art-page.access-mode .work-close{z-index:34; min-height:50px; border:2px solid #fff; font-size:16px}
   @media (min-width:820px){body.access-mode .access-hub{max-width:760px; margin:0 auto}.access-work-grid{grid-template-columns:1fr 1fr}}
 
@@ -1765,7 +1762,7 @@
   body.art-page.access-mode .source-entry-arrow{display:none}
   body.art-page.access-mode .source-entry-sub{
     display:block; margin:0; color:rgba(255,255,255,.9);
-    font:600 32px/1 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
+    font:600 32px/1 var(--tsuya-text-face),"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.08em;
   }
 
   /* 試着中は手とネイルを優先し、戻る操作は既存の左上に集約する。 */
@@ -1777,7 +1774,27 @@
   body.work-tryon.camera-started #liveBtns{
     position:fixed; bottom:calc(20px + env(safe-area-inset-bottom));
   }
+
+  /* Work captions are below the film, outside the video area. */
+  .work-film-caption{display:none}
+  body.art-page .work-film-caption:not([hidden]){
+    display:block; box-sizing:border-box; margin:0; padding:10px 16px 9px;
+    background:#08090c; color:#dededa;
+    font:400 15px/1.5 var(--tsuya-text-face),"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    letter-spacing:.045em; overflow-wrap:anywhere;
+  }
+  html[data-language="en"] body.art-page .work-film-caption:not([hidden]){letter-spacing:.025em}
+  @media (min-width:820px){
+    body.art-page:not(.access-mode) .work-film,
+    body.art-page:not(.access-mode) .work-layer::after{height:calc(100svh - 66px)}
+    body.art-page:not(.access-mode) .work-film-mark{bottom:96px}
+    body.art-page .work-film-caption:not([hidden]){
+      position:absolute; z-index:2; top:calc(100svh - 66px); left:0; width:64%; min-height:66px;
+    }
+    body.art-page.access-mode .work-film-caption:not([hidden]){top:42svh;min-height:0}
+  }
 </style>
+<link rel="stylesheet" href="ui-typography.css?v=work-captions-2">
 <link rel="stylesheet" href="navigation-hands.css?v=length-center1">
 <style>
 /* Keep artwork try-on explicit; photo-based creation is a separate secondary path. */
@@ -1785,10 +1802,10 @@
   display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;
   width:100%;min-height:60px;box-sizing:border-box;padding:8px 0;
   color:#fff;background:none;border:0;text-decoration:none;text-align:center;
-  font:600 clamp(22px,5.6vw,30px)/1.4 "Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font:600 clamp(22px,5.6vw,30px)/1.4 var(--tsuya-text-face),"Hina Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
   letter-spacing:.06em;
 }
-html[data-language="en"] #workLayer .artwork-try-entry{font-family:"Denk One","Helvetica Neue",Arial,sans-serif;letter-spacing:.02em}
+html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-text-face),"Denk One","Helvetica Neue",Arial,sans-serif;letter-spacing:.02em}
 #workLayer .artwork-try-entry:focus-visible{outline:2px solid #fff;outline-offset:4px}
 #workLayer .source-entry{min-height:44px;padding:4px 0;gap:6px}
 #workLayer .source-entry .source-entry-sub{font-size:18px;line-height:1.4;letter-spacing:.04em;color:rgba(255,255,255,.78)}
@@ -2044,6 +2061,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:"Denk One","H
 
 <section class="work-layer" id="workLayer" aria-hidden="true" aria-label="試着からひらく作品">
   <video class="work-film" id="workFilm" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="0" role="button" aria-label="作品ネイルを試着する"></video>
+  <p class="work-film-caption" id="workFilmCaption" hidden></p>
   <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01 / COLOR</div><div class="work-film-title" id="workFilmTitle">色</div></div>
   <button type="button" class="work-close" id="workClose" data-nav-direction="back" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg><span>BACK</span></button>
   <nav class="work-index" id="workIndex" aria-label="作品を選ぶ"></nav>
@@ -5502,6 +5520,17 @@ updateCmpBadge();
     ja:{COLOR:'色',SURFACE:'表面',SCULPT:'FORMWORK',LIGHT:'光',HAND:'手',TRACE:'痕跡',SPACE:'宇宙と手',THINKING:'思惟する手',ORB:'White Orb',FRAME:'二つの手の輪舞曲',UNDERWATER:'水中'},
     en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'Formwork',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux',UNDERWATER:'Underwater'}
   };
+  const filmCaptions={
+    UNDERWATER:["両手のあいだを、光だけが泳ぐ。","Only light swims between the hands."],
+    COLOR:["色がぶつかるたび、手が別の生き物になる。","Each clash of color turns the hand into another creature."],
+    SURFACE:["集い、きらめき、散る。希望。","Light gathers, gleams, and scatters. Hope."],
+    SCULPT:["美しい形の重さを、つくった手だけが知っている。","Only the hands that built it know the weight of that beauty."],
+    LIGHT:["手は通り過ぎても、光はそこに残る。","The hand moves on. The light stays."],
+    SPACE:["指先のすぐ向こうに、届かない宇宙がある。","A whole universe, just beyond reach."],
+    THINKING:["考えが形になる前に、手の影が動き出す。","The hand’s shadow moves before the thought takes shape."],
+    ORB:["白い球のまわりで、赤い爪が主役を奪う。","A flash of red steals the scene from the white sphere."],
+    FRAME:["触れないまま、相手の動きに返事をする。","Without touching, each hand answers the other."]
+  };
   const descriptions={
     en:{
       COLOR:'Paint, pigment, and crossing gestures spread into a field of colour across the hand.',
@@ -5606,6 +5635,14 @@ updateCmpBadge();
     attr('#exhibitClose','aria-label',isEnglish?'Return to the nail design':'ネイルの制作画面へ戻る');
     attr('.access-hub-back','aria-label',isEnglish?'Return to standard view':'通常表示へ戻る');
     text('#openingWorkTitle',name); text('#workFilmTitle',name); text('#nailSetTitle',name); text('#workText',descriptions[language][key]);
+    const filmCaption=document.getElementById('workFilmCaption');
+    if(filmCaption){
+      const caption=filmCaptions[key]?.[isEnglish?1:0]||'';
+      const show=!!caption&&document.body.classList.contains('art-page');
+      if(filmCaption.textContent!==caption)filmCaption.textContent=caption;
+      filmCaption.hidden=!show;
+      filmCaption.lang=language;
+    }
     attr('#openingEnter','aria-label',isEnglish?'Open '+name:name+'の作品ページへ入る');
   };
   document.getElementById('languageSwitch').addEventListener('click',()=>{
