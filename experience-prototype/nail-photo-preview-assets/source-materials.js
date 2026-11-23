@@ -100,5 +100,35 @@
     c.drawImage(texture(key,color,index),-w/2,-h*.59,w,h*1.16);
     return true;
   }
-  globalThis.TSUYASourceMaterials=Object.freeze({styles,has:key=>keys.has(key),chooseColors,draw});
+  const finished=new WeakMap();
+  function drawFinish(c,base,key,color,index,w,h){
+    if(!keys.has(key)){c.drawImage(base,-w/2,-h*.59,w,h*1.16);return;}
+    let bank=finished.get(base);
+    if(!bank){bank=new Map();finished.set(base,bank);}
+    let out=bank.get(key);
+    if(!out){
+      color=hex(color);
+      const rgb=color.slice(1).match(/../g).map(x=>parseInt(x,16));
+      const art=base.getContext('2d').getImageData(0,0,W,H);
+      const finish=texture(key,color,index).getContext('2d').getImageData(0,0,W,H).data;
+      const sheer=key==='sourceGelClear', magnet=key==='sourceGelMagnet';
+      const d=art.data;
+      for(let i=0;i<d.length;i+=4){
+        const a=d[i+3]/255;
+        if(a===0)continue;
+        const detail=Math.min(1,(Math.abs(d[i]-rgb[0])+Math.abs(d[i+1]-rgb[1])+Math.abs(d[i+2]-rgb[2]))/170);
+        // Let the original pigment and art lines dominate; treat the material as tinted light.
+        const reflect=(finish[i]*.21+finish[i+1]*.72+finish[i+2]*.07)-(rgb[0]*.21+rgb[1]*.72+rgb[2]*.07);
+        const exposure=(magnet?.74:sheer?.33:.60)*(1-detail*.54);
+        for(let q=0;q<3;q++)d[i+q]=d[i+q]+reflect*exposure+(finish[i+q]-rgb[q]-reflect)*exposure*.20;
+        const transmit=sheer?.70+(finish[i+3]/255-.64)*.50+detail*.20:magnet?.96+.04*detail:.92+.08*detail;
+        d[i+3]=Math.round(255*a*clamp(transmit));
+      }
+      out=document.createElement('canvas');out.width=W;out.height=H;
+      out.getContext('2d').putImageData(art,0,0);
+      bank.set(key,out);
+    }
+    c.drawImage(out,-w/2,-h*.59,w,h*1.16);
+  }
+  globalThis.TSUYASourceMaterials=Object.freeze({styles,has:key=>keys.has(key),chooseColors,draw,drawFinish});
 })();
