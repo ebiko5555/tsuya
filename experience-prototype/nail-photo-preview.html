@@ -2103,7 +2103,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 
 <section class="nail-set-viewer" id="nailSetViewer" aria-hidden="true" aria-label="ネイルセットを大きく見る">
   <button type="button" class="nail-set-close" id="nailSetClose" data-nav-direction="back" aria-label="作品ページへ戻る">← BACK</button>
-  <p class="nail-set-kicker" id="nailSetKicker">01 / COLOR — NAIL SET</p>
+  <p class="nail-set-kicker" id="nailSetKicker">01 / ネイルチップ</p>
   <h2 class="nail-set-title" id="nailSetTitle">色</h2>
   <p class="nail-set-note">この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。</p>
   <img id="approvedNailSetPhoto" hidden style="width:min(100%,560px);height:auto;object-fit:contain;border-radius:10px;max-height:40vh" decoding="async"><div class="set-viewer-nails" id="setViewerNails" aria-label="5本のネイルチップ"></div>
@@ -5321,7 +5321,9 @@ updateCmpBadge();
       setPhoto.hidden=true;
       setPhoto.removeAttribute('src');
     }
-    document.getElementById('nailSetKicker').textContent=work.no+' / '+current+' — NAIL SET';
+    const kicker=document.getElementById('nailSetKicker');
+    kicker.dataset.workNumber=work.no;
+    kicker.textContent=work.no+' / '+(document.documentElement.lang==='en'?'NAIL SET':'ネイルチップ');
     document.getElementById('nailSetTitle').textContent=work.title;
     nailSetViewer.style.setProperty('--set-accent',work.accent);
     renderNailPreview(current,'setViewerNails',artworkTryLength);
@@ -5340,7 +5342,7 @@ updateCmpBadge();
     button.setAttribute('aria-label',works[key].no+' '+works[key].title+'へ切り替える');
     number.className='work-nav-no'; number.textContent=works[key].no;
     title.className='work-nav-title';
-    title.textContent={SCULPT:'FORM',THINKING:'THINK',FRAME:'RONDO'}[key]||key;
+    title.textContent=works[key].title;
     button.append(number,title);
     button.addEventListener('click',()=>openWork(key));
     index.appendChild(button);
@@ -5745,6 +5747,13 @@ updateCmpBadge();
       if(label&&title&&label.textContent!==title)label.textContent=title;
       if(title)card.setAttribute('aria-label',isEnglish?'View '+title:title+'を見る');
     });
+    document.querySelectorAll('#workIndex button[data-work-key]').forEach(button=>{
+      const workTitle=titles[language][button.dataset.workKey];
+      const label=button.querySelector('.work-nav-title');
+      const number=button.querySelector('.work-nav-no')?.textContent;
+      if(label&&workTitle&&label.textContent!==workTitle)label.textContent=workTitle;
+      if(workTitle)button.setAttribute('aria-label',isEnglish?'Switch to '+number+' '+workTitle:number+' '+workTitle+'へ切り替える');
+    });
     if(accessMode)text('.access-hub-title',isEnglish?'CHOOSE A WORK':'作品を選ぶ');
     if(isTryOn||isFromWork){
       const identity=document.getElementById('tryIdentityText');
@@ -5814,6 +5823,10 @@ updateCmpBadge();
     attr('#exhibitClose','aria-label',isEnglish?'Return to the nail design':'ネイルの制作画面へ戻る');
     attr('.access-hub-back','aria-label',isEnglish?'Return to standard view':'通常表示へ戻る');
     text('#openingWorkTitle',name); text('#workFilmTitle',name); text('#nailSetTitle',name); text('#workText',descriptions[language][key]);
+    const kicker=document.getElementById('nailSetKicker');
+    if(kicker.dataset.workNumber)text('#nailSetKicker',kicker.dataset.workNumber+' / '+(isEnglish?'NAIL SET':'ネイルチップ'));
+    const setPhoto=document.getElementById('approvedNailSetPhoto');
+    if(setPhoto?.getAttribute('src'))setPhoto.alt=isEnglish?'Five nail tips for '+name:name+'のネイルチップ5本の写真';
     const filmCaption=document.getElementById('workFilmCaption');
     if(filmCaption){
       const caption=filmCaptions[key]?.[isEnglish?1:0]||'';
