@@ -1880,17 +1880,17 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     </div>
     <a class="opening-enter" id="openingEnter" href="?work=COLOR" aria-label="現在表示中の作品へ入る"></a>
     <div class="opening-work-meta" aria-live="polite">
-      <div class="opening-work-code" id="openingWorkCode">01 / COLOR</div>
+      <div class="opening-work-code" id="openingWorkCode">01</div>
       <div class="opening-work-title" id="openingWorkTitle">色</div>
       <div class="opening-work-cue"><span>触れて、作品へ</span></div>
       <div class="opening-progress" id="openingProgress"></div>
     </div>
     <nav class="opening-index" id="openingIndex" aria-label="作品を選ぶ">
       <button type="button" data-opening-work="UNDERWATER" aria-label="水中">01</button>
-      <button type="button" data-opening-work="COLOR" aria-label="COLOR 色">02</button>
-      <button type="button" data-opening-work="SURFACE" aria-label="SURFACE 表面">03</button>
-      <button type="button" data-opening-work="SCULPT" aria-label="SCULPT 形">04</button>
-      <button type="button" data-opening-work="LIGHT" aria-label="LIGHT 光">05</button>
+      <button type="button" data-opening-work="COLOR" aria-label="色">02</button>
+      <button type="button" data-opening-work="SURFACE" aria-label="表面">03</button>
+      <button type="button" data-opening-work="SCULPT" aria-label="FORMWORK">04</button>
+      <button type="button" data-opening-work="LIGHT" aria-label="光">05</button>
       <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">06</button>
       <button type="button" data-opening-work="THINKING" aria-label="思惟する手">07</button>
       <button type="button" data-opening-work="ORB" aria-label="White Orb">08</button>
@@ -1904,10 +1904,10 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <video id="signalFilm" muted loop playsinline preload="metadata"></video>
     <img id="sourceSignalImage" alt="選択した画像のプレビュー">
     <span class="signal-no" id="signalNo">01</span>
-    <span class="signal-name" id="signalName">COLOR / 色</span>
+    <span class="signal-name" id="signalName">色</span>
   </button>
   <div class="try-identity" id="tryIdentity">
-    <span id="tryIdentityText">01 / COLOR</span>
+    <span id="tryIdentityText">01 / 色</span>
     <div class="work-nails" id="tryNails" aria-label="装着する5本のネイル"></div>
     <a href="?work=COLOR" id="tryWorkBack" data-nav-direction="back" aria-label="作品ページへ戻る">BACK</a>
   </div>
@@ -1974,7 +1974,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 
   <div class="tray source-only" id="tray-source">
     <div class="source-origin" id="sourceOrigin">
-      <div><span>FROM ARTWORK</span><strong id="sourceOriginTitle">01 / COLOR / 色</strong></div>
+      <div><span>FROM ARTWORK</span><strong id="sourceOriginTitle">01 / 色</strong></div>
       <button type="button" id="sourceOriginReset">作品ネイル</button>
     </div>
     <p class="source-intro">写真から柄を選ぶ。次に、仕上げを選ぶ。</p>
@@ -2085,7 +2085,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 <section class="work-layer" id="workLayer" aria-hidden="true" aria-label="試着からひらく作品">
   <video class="work-film" id="workFilm" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="0" role="button" aria-label="作品ネイルを試着する"></video>
   <p class="work-film-caption" id="workFilmCaption" hidden></p>
-  <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01 / COLOR</div><div class="work-film-title" id="workFilmTitle">色</div></div>
+  <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01</div><div class="work-film-title" id="workFilmTitle">色</div></div>
   <button type="button" class="work-close" id="workClose" data-nav-direction="back" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg><span>BACK</span></button>
   <nav class="work-index" id="workIndex" aria-label="作品を選ぶ"></nav>
   <div class="work-copy">
@@ -4731,7 +4731,7 @@ updateCmpBadge();
 (()=>{
   const works={
     COLOR:{
-      no:'01',title:'色',tryTitle:'色彩',label:'COLOR / 色',accent:'#d14f78',film:'art-assets/color-pattern.mp4',motion:'art-assets/color-pattern.webp',
+      no:'01',title:'色',tryTitle:'色',label:'COLOR / 色',accent:'#d14f78',film:'art-assets/color-pattern.mp4',motion:'art-assets/color-pattern.webp',
       text:'色を選ぶ行為から、身体の表面に模様が増殖する作品へ。爪の小さな面が、手全体の色彩へひらく。',
       preset:{looks:['artColor','sheer','nuance','artColor','flash'],colors:['#d14f78','#477d6c','#e0b936','#795a9f','#c55d3d'],tune:{gloss:76,opacity:98,nailSize:98,sculptLen:138,sculptShape:'natural'},vars:{sheer:.38,flash:.44},trail:{on:true,intensity:48,hue:null}}
     },
@@ -5369,7 +5369,7 @@ updateCmpBadge();
       history.replaceState(null,'',route('work',key,artworkTryLength));
       document.title='HAND & LIGHT — '+work.title;
     }
-    document.getElementById('workFilmCode').textContent=work.no+' / '+key;
+    document.getElementById('workFilmCode').textContent=work.no;
     document.getElementById('workFilmTitle').textContent=work.title;
     document.getElementById('workText').textContent=work.text;
     renderNailPreview(key,'workNails',artworkTryLength);
@@ -5569,7 +5569,8 @@ updateCmpBadge();
         video.addEventListener('canplay',onReady,{once:true});
         video.addEventListener('loadeddata',onReady,{once:true});
       }
-      code.textContent=work.no+' / '+key;
+      code.dataset.workKey=key;
+      code.textContent=work.no;
       title.textContent=work.title;
       enter.href=route('work',key);
       enter.setAttribute('aria-label',work.title+'の作品ページへ入る');
@@ -5597,7 +5598,7 @@ updateCmpBadge();
       const body=document.createElement('span');
       const title=document.createElement('span');
       const nails=document.createElement('span');
-      card.className='access-work-card'; card.href=route('work',key); card.setAttribute('aria-label',work.title+'を見る');
+      card.className='access-work-card'; card.dataset.workKey=key; card.href=route('work',key); card.setAttribute('aria-label',work.title+'を見る');
       image.className='access-work-image'; image.src=work.motion; image.alt='';
       body.className='access-work-body'; title.className='access-work-title'; title.textContent=work.title;
       nails.className='access-work-nails'; nails.id='accessNails'+key;
@@ -5667,7 +5668,7 @@ updateCmpBadge();
 (()=>{
   const titles={
     ja:{COLOR:'色',SURFACE:'表面',SCULPT:'FORMWORK',LIGHT:'光',HAND:'手',TRACE:'痕跡',SPACE:'宇宙と手',THINKING:'思惟する手',ORB:'White Orb',FRAME:'二つの手の輪舞曲',UNDERWATER:'水中'},
-    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'Formwork',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux',UNDERWATER:'Underwater'}
+    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'FORMWORK',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux',UNDERWATER:'Underwater'}
   };
   const filmCaptions={
     UNDERWATER:["両手のあいだを、光だけが泳ぐ。","Only light swims between the hands."],
@@ -5716,15 +5717,9 @@ updateCmpBadge();
     const next=number+value;
     if(el.textContent!==next)el.innerHTML='<b>'+number+'</b>'+value;
   });
-  const workKey=()=>{
-    const codes={
-      opening:document.getElementById('openingWorkCode')?.textContent,
-      film:document.getElementById('workFilmCode')?.textContent,
-      tryOn:document.getElementById('tryIdentityText')?.textContent
-    };
-    const values=document.body.classList.contains('art-page')?[codes.film,codes.tryOn,codes.opening]:document.body.classList.contains('work-tryon')?[codes.tryOn,codes.film,codes.opening]:[codes.opening,codes.film,codes.tryOn];
-    return values.map(value=>Object.keys(titles.ja).find(key=>new RegExp('\\b'+key+'\\b').test(value||''))).find(Boolean)||'COLOR';
-  };
+  const workKey=()=>document.body.classList.contains('hub-mode')
+    ? document.getElementById('openingWorkCode')?.dataset.workKey||'UNDERWATER'
+    : document.body.dataset.workKey||'COLOR';
   const stored=()=>{try{return localStorage.getItem('tsuya-language');}catch(_){return null;}};
   let language=stored()==='en'?'en':'ja';
   const apply=()=>{
@@ -5736,7 +5731,39 @@ updateCmpBadge();
     const toggle=document.getElementById('languageSwitch');
     toggle.textContent=isEnglish?'日本語':'EN';
     toggle.setAttribute('aria-label',isEnglish?'表示言語を日本語へ切り替える':'Switch display language to English');
-    document.title=isEnglish?'HAND & LIGHT — Artwork, Worn Daily':'HAND & LIGHT — 自分の手から、作品へ';
+    const isFilm=document.body.classList.contains('art-page');
+    const isFromWork=isCustom&&document.body.classList.contains('custom-from-work');
+    const accessMode=document.body.classList.contains('access-mode');
+    document.title=isFilm||isTryOn?'HAND & LIGHT — '+name:isEnglish?'HAND & LIGHT — Artwork, Worn Daily':'HAND & LIGHT — 自分の手から、作品へ';
+    document.querySelectorAll('[data-opening-work]').forEach(button=>{
+      const title=titles[language][button.dataset.openingWork];
+      if(title)button.setAttribute('aria-label',title);
+    });
+    document.querySelectorAll('.access-work-card[data-work-key]').forEach(card=>{
+      const title=titles[language][card.dataset.workKey];
+      const label=card.querySelector('.access-work-title');
+      if(label&&title&&label.textContent!==title)label.textContent=title;
+      if(title)card.setAttribute('aria-label',isEnglish?'View '+title:title+'を見る');
+    });
+    if(accessMode)text('.access-hub-title',isEnglish?'CHOOSE A WORK':'作品を選ぶ');
+    if(isTryOn||isFromWork){
+      const identity=document.getElementById('tryIdentityText');
+      if(!identity.dataset.workNumber)identity.dataset.workNumber=identity.textContent.match(/^[0-9]+/)?.[0]||'';
+      const chipSourceTitle=document.getElementById('sourceOriginTitle');
+      if(isFromWork&&!chipSourceTitle.dataset.workNumber)chipSourceTitle.dataset.workNumber=chipSourceTitle.textContent.match(/^[0-9]+/)?.[0]||'';
+      const number=isFromWork?chipSourceTitle.dataset.workNumber:identity.dataset.workNumber;
+      const display=number?number+' / '+name:name;
+      text('#tryIdentityText',isFromWork?'SOURCE / '+name:display);
+      text('#openingGuide',isFromWork?name+(isEnglish?' / Gather inspiration':' / 身のまわりから採集する'):name);
+      if(isFromWork)text('#sourceOriginTitle',display);
+      const mark=document.querySelector('.opening-mark');
+      const markPrimary=isFromWork?'FROM '+display:display;
+      const markSecondary=isFromWork?'ARTWORK → SOURCE → HAND':'ARTWORK TRY ON';
+      if(mark.textContent!==markPrimary+markSecondary){
+        mark.replaceChildren(document.createTextNode(markPrimary),document.createElement('br'),document.createTextNode(markSecondary));
+      }
+    }
+    if(!isCustom||isFromWork&&!document.body.classList.contains('source-selected'))text('#signalName',name);
     if(isEnglish){
       text('.guide-text','Place your hand in the frame');
       text('.sg-tag','SOURCE · COLLECT LIGHT'); text('.sg-title','Gather a colour or a glimmer that catches you'); text('.sg-sub','Hold it up to light or a scene around you');

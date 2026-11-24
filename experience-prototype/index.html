@@ -1028,6 +1028,13 @@
   .source-set-code{display:none}
   .source-set canvas{width:180px; max-width:100%; height:auto; aspect-ratio:200/76}
   .source-set-name{display:none}
+  .source-material-heading{display:none;margin:15px 0 6px;color:rgba(255,255,255,.87);font-size:12px;text-align:center}
+  .source-material-heading.ready{display:block}
+  #sourceSets .source-material-name{display:block;order:-1;white-space:nowrap;font:600 clamp(11px,3.5vw,15px)/1.35 system-ui,sans-serif;color:#fff;letter-spacing:0}
+  #sourceSets .source-material-detail{display:block;font:400 clamp(9px,2.6vw,12px)/1.3 system-ui,sans-serif;color:rgba(255,255,255,.74);letter-spacing:0}
+  #sourceSets .source-set[data-material]{min-height:64px}
+  #sourceSets .source-set[data-material]:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
   .source-try{display:none; align-items:center; justify-content:space-between; width:100%; min-height:46px; margin-top:10px; padding:0 14px; border:0; color:#08090c; background:#fff; font:600 11px/1 var(--tsuya-text-face),ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em}
   .source-try.ready{display:flex}
   .source-try::after{content:"→"; font-size:17px; font-weight:300}
@@ -1793,6 +1800,12 @@
     }
     body.art-page.access-mode .work-film-caption:not([hidden]){top:42svh;min-height:0}
   }
+.source-finish-area{width:min(100%,430px);color:#eee;margin:0 auto 8px}
+.source-finish-area p{font-size:.75rem;margin:0 0 6px;text-align:center;letter-spacing:.08em}
+#sourceFinishChoice{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+#sourceFinishChoice button{border:1px solid #77727a;background:#201d23;color:#f6f3f4;min-height:44px;border-radius:9px;padding:3px 2px;line-height:1.14;font:inherit;font-size:clamp(10px,3.3vw,13px)}
+#sourceFinishChoice button[aria-pressed="true"]{background:#f8efe9;color:#281c22;border-color:#f8efe9}
+#sourceFinishChoice button:focus-visible{outline:2px solid #fdb5da;outline-offset:2px}
 </style>
 <link rel="stylesheet" href="ui-typography.css?v=work-captions-2">
 <link rel="stylesheet" href="navigation-hands.css?v=length-center1">
@@ -1813,7 +1826,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 #workLayer .source-entry .source-entry-arrow::after{font-size:36px}
 </style>
 </head>
-<body>
+<body><div id="photoTrialLabel" style="position:fixed;z-index:250;bottom:3px;left:8px;pointer-events:none;background:#121619dd;color:white;font:10px system-ui;padding:2px 6px;border-radius:4px">試着プレビュー</div>
 <header>
   <div class="overline">Hand &amp; Light Atelier</div>
   <div class="rule"></div>
@@ -1867,17 +1880,17 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     </div>
     <a class="opening-enter" id="openingEnter" href="?work=COLOR" aria-label="現在表示中の作品へ入る"></a>
     <div class="opening-work-meta" aria-live="polite">
-      <div class="opening-work-code" id="openingWorkCode">01 / COLOR</div>
+      <div class="opening-work-code" id="openingWorkCode">01</div>
       <div class="opening-work-title" id="openingWorkTitle">色</div>
       <div class="opening-work-cue"><span>触れて、作品へ</span></div>
       <div class="opening-progress" id="openingProgress"></div>
     </div>
     <nav class="opening-index" id="openingIndex" aria-label="作品を選ぶ">
       <button type="button" data-opening-work="UNDERWATER" aria-label="水中">01</button>
-      <button type="button" data-opening-work="COLOR" aria-label="COLOR 色">02</button>
-      <button type="button" data-opening-work="SURFACE" aria-label="SURFACE 表面">03</button>
-      <button type="button" data-opening-work="SCULPT" aria-label="SCULPT 形">04</button>
-      <button type="button" data-opening-work="LIGHT" aria-label="LIGHT 光">05</button>
+      <button type="button" data-opening-work="COLOR" aria-label="色">02</button>
+      <button type="button" data-opening-work="SURFACE" aria-label="表面">03</button>
+      <button type="button" data-opening-work="SCULPT" aria-label="FORMWORK">04</button>
+      <button type="button" data-opening-work="LIGHT" aria-label="光">05</button>
       <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">06</button>
       <button type="button" data-opening-work="THINKING" aria-label="思惟する手">07</button>
       <button type="button" data-opening-work="ORB" aria-label="White Orb">08</button>
@@ -1891,10 +1904,10 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <video id="signalFilm" muted loop playsinline preload="metadata"></video>
     <img id="sourceSignalImage" alt="選択した画像のプレビュー">
     <span class="signal-no" id="signalNo">01</span>
-    <span class="signal-name" id="signalName">COLOR / 色</span>
+    <span class="signal-name" id="signalName">色</span>
   </button>
   <div class="try-identity" id="tryIdentity">
-    <span id="tryIdentityText">01 / COLOR</span>
+    <span id="tryIdentityText">01 / 色</span>
     <div class="work-nails" id="tryNails" aria-label="装着する5本のネイル"></div>
     <a href="?work=COLOR" id="tryWorkBack" data-nav-direction="back" aria-label="作品ページへ戻る">BACK</a>
   </div>
@@ -1928,7 +1941,17 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <button type="button" class="source-confirm-back" id="sourceConfirmBack" data-nav-direction="back" aria-label="チップ選択へ戻る">戻る</button>
   </div>
   <div class="source-confirm-body">
+    <p id="sourceConfirmName" class="source-confirm-name"></p>
     <canvas id="sourceConfirmCanvas" width="620" height="300" aria-label="選んだネイルセット"></canvas>
+    <div class="source-finish-area">
+      <p id="sourceFinishTitle">2　仕上げ</p>
+      <div id="sourceFinishChoice" role="group" aria-labelledby="sourceFinishTitle">
+        <button type="button" data-finish="original" data-ja="元のまま" data-en="Original">元のまま</button>
+        <button type="button" data-finish="sourceGelClear" data-ja="透けるジェル" data-en="Sheer gel">透けるジェル</button>
+        <button type="button" data-finish="sourceGelMagnet" data-ja="マグネット" data-en="Magnetic">マグネット</button>
+        <button type="button" data-finish="sourceGelGlitter" data-ja="ラメ" data-en="Glitter">ラメ</button>
+      </div>
+    </div>
     <div class="length-choice" id="sourceLengthChoice" aria-label="ネイルの長さを選ぶ">
       <button type="button" data-length="short">SHORT</button><button type="button" data-length="long">LONG</button>
     </div>
@@ -1951,17 +1974,17 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 
   <div class="tray source-only" id="tray-source">
     <div class="source-origin" id="sourceOrigin">
-      <div><span>FROM ARTWORK</span><strong id="sourceOriginTitle">01 / COLOR / 色</strong></div>
+      <div><span>FROM ARTWORK</span><strong id="sourceOriginTitle">01 / 色</strong></div>
       <button type="button" id="sourceOriginReset">作品ネイル</button>
     </div>
-    <p class="source-intro">身のまわりの色・線・光を採集して、5本のネイルへ組み替える。</p>
+    <p class="source-intro">写真から柄を選ぶ。次に、仕上げを選ぶ。</p>
     <div class="source-actions">
       <button type="button" class="source-action" id="sourcePhoto">写真を選ぶ</button>
     </div>
     <div class="source-frame" id="sourceFrame">
       <img class="source-large-image" id="sourceLargeImage" alt="選択した写真">
       <canvas id="sourcePreview" width="160" height="160"></canvas>
-      <div class="source-meta"><strong id="sourceName">SOURCE</strong><span id="sourceReading">色・線・光を読み取ります</span></div>
+      <div class="source-meta"><strong id="sourceName">SOURCE</strong><span id="sourceReading">写真の色を読み取ります</span></div>
       <button type="button" class="source-motif-pick" id="sourceMotifPick">モチーフをタップして指定</button>
     </div>
     <div class="source-modes" id="sourceModes">
@@ -2062,7 +2085,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 <section class="work-layer" id="workLayer" aria-hidden="true" aria-label="試着からひらく作品">
   <video class="work-film" id="workFilm" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="0" role="button" aria-label="作品ネイルを試着する"></video>
   <p class="work-film-caption" id="workFilmCaption" hidden></p>
-  <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01 / COLOR</div><div class="work-film-title" id="workFilmTitle">色</div></div>
+  <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01</div><div class="work-film-title" id="workFilmTitle">色</div></div>
   <button type="button" class="work-close" id="workClose" data-nav-direction="back" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg><span>BACK</span></button>
   <nav class="work-index" id="workIndex" aria-label="作品を選ぶ"></nav>
   <div class="work-copy">
@@ -2083,7 +2106,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
   <p class="nail-set-kicker" id="nailSetKicker">01 / COLOR — NAIL SET</p>
   <h2 class="nail-set-title" id="nailSetTitle">色</h2>
   <p class="nail-set-note">この作品の5本セットです。試着する前に、形と柄をゆっくり見られます。</p>
-  <div class="set-viewer-nails" id="setViewerNails" aria-label="5本のネイルチップ"></div>
+  <img id="approvedNailSetPhoto" hidden style="width:min(100%,560px);height:auto;object-fit:contain;border-radius:10px;max-height:40vh" decoding="async"><div class="set-viewer-nails" id="setViewerNails" aria-label="5本のネイルチップ"></div>
   <div class="set-viewer-actions">
     <a class="set-viewer-try" id="setViewerTry" href="?try=COLOR&amp;length=short" data-nav-direction="forward">このセットを試着する</a>
     <button type="button" class="set-viewer-back" id="nailSetBack" data-nav-direction="back" aria-label="作品ページへ戻る">作品ページへ戻る</button>
@@ -2143,6 +2166,8 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
   </div>
 </section>
 
+<script src="nail-photo-preview-assets/render.js"></script>
+<script src="nail-photo-preview-assets/source-materials.js?v=2"></script>
 <script>
 /* ================= 状態 ================= */
 const canvas = document.getElementById('canvas');
@@ -2584,13 +2609,20 @@ async function loadImage(file){
   let bmp;
   try{ bmp = await createImageBitmap(file, {imageOrientation:'from-image'}); }
   catch(e){
-    bmp = await new Promise(r=>{ const img=new Image(); img.onload=()=>r(img); img.src=URL.createObjectURL(file); });
+    const url=URL.createObjectURL(file);
+    try{
+      bmp=await new Promise((resolve,reject)=>{
+        const img=new Image(); img.onload=()=>resolve(img);
+        img.onerror=()=>reject(new Error('Photo decode failed.')); img.src=url;
+      });
+    }finally{URL.revokeObjectURL(url);}
   }
   const MAX = 1400;
   const sc = Math.min(1, MAX/Math.max(bmp.width, bmp.height));
   const c = document.createElement('canvas');
   c.width = Math.round(bmp.width*sc); c.height = Math.round(bmp.height*sc);
   c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+  bmp.close?.();
   return c;
 }
 
@@ -2609,6 +2641,7 @@ function lmXY(p){
   if(mirrored()) x = canvas.width - x;
   return [x,y];
 }
+let activeArtworkPhotoNails = null;
 function drawNails(dt=1/60){
   sparkT = performance.now()/1000;
   const alpha = tuneVals.opacity/100;
@@ -2645,6 +2678,19 @@ function drawNails(dt=1/60){
       nailPath(w,h,shape);
       ctx.clip();
       ctx.globalAlpha = alpha;
+      if(activeArtworkPhotoNails){
+        // The same per-finger samples displayed in the work/play previews.
+        // Never paint a legacy design while the approved design is loading.
+        ctx.globalAlpha=1; // Transmission lives on this chip, not on the whole set.
+        TSUYAPhotoNails.draw(ctx,activeArtworkPhotoNails,fi,-w/2,-h*.59,w,h*1.16);
+        ctx.restore();
+        return;
+      }
+      if(activeSourceSet && document.body.classList.contains('source-tryon')){
+        drawSourceMaterial(ctx,activeSourceSet,fi,w,h);
+        ctx.restore();
+        return;
+      }
       paintByKey(ctx,nailLooks[fi],w,h,nailColors[fi],hi*5+fi);
       paintGelTip(ctx,w,h,hi*5+fi,gloss,nailLooks[fi]);
       ctx.globalAlpha = alpha*0.3;
@@ -3395,6 +3441,7 @@ const varOf = key => (key in lookVar) ? lookVar[key] : 0.5;
 
 function paintLook(c,w,h,col,seed){ paintByKey(c,currentLook,w,h,col,seed); }
 function paintByKey(c,key,w,h,col,seed){
+  if(globalThis.TSUYASourceMaterials?.draw(c,key,col,seed,w,h))return;
   if(!key || (!LOOKS[key] && !key.startsWith('custom:'))) key='onecolor';
   if(key.startsWith('custom:')){
     const cl = customLooks[+key.slice(7)];
@@ -3474,7 +3521,7 @@ function nailShapeSpecimen(c,w,h){
 }
 
 /* 写真のような10倍の緻密さを持つスタジオ標本レンダラー */
-function paintPhotographicSpecimen(c, w, h, look, color, seed, gloss=0.96){
+function paintPhotographicSpecimen(c, w, h, look, color, seed, gloss=0.96, sourceSet=null){
   const isFlat = flatLook(look);
   c.save();
 
@@ -3495,10 +3542,11 @@ function paintPhotographicSpecimen(c, w, h, look, color, seed, gloss=0.96){
   c.clip();
 
   // ベース・アート描画
-  paintByKey(c, look, w, h, color, seed);
+  if(sourceSet) drawSourceMaterial(c,sourceSet,seed,w,h);
+  else paintByKey(c, look, w, h, color, seed);
 
   // デザイン属性連動のジェルレイヤー（箔・線・キューティクル段差）
-  paintGelTip(c, w, h, seed, gloss, look);
+  if(!sourceSet) paintGelTip(c, w, h, seed, gloss, look);
 
   // 見本には、中央が白く丸く見える固定光源・立体ドームを重ねない。
   c.restore();
@@ -3818,7 +3866,7 @@ function extractPalette(img,n){
    画像生成AIは使わない。入力画像を小さなCanvasに写し、色・輪郭・明暗を数値化して
    筆者が決めた「主役／背景／抜け／光／ポイント」の規則へ割り当てる。 */
 /* 写真を選んだ直後は、5本の役割が最も読み取りやすいCOLORを最初に表示する。 */
-let sourceMode='COLOR';
+let sourceMode='COLOR'; // retained for compatibility with the older source tab routing
 let sourceSets=[];
 let selectedSourceSet=null;
 let sourceTryLength='short';
@@ -4012,8 +4060,10 @@ function analyzeSource(source){
   const sourceSeed=sourceSeedFromPixels(data);
   const designSeed=(sourceSeed^sourceRandomSalt)>>>0;
   const paletteTunings=sourcePaletteTunings(designSeed);
-  const paletteVariants=paletteTunings.map(tuning=>{
+  let materialPalette;
+  const paletteVariants=paletteTunings.map((tuning,i)=>{
     const colors=extractSourcePalette(source,8,tuning);
+    if(i===0) materialPalette=colors.slice();
     const fbList=tuning.isExtra
       ? ['#ff2a6d','#05d9e8','#ffb703','#7928ca','#00f5d4','#111111']
       : fallback;
@@ -4022,12 +4072,13 @@ function analyzeSource(source){
   });
   const palette=paletteVariants[0].slice();
   return {
-    palette:palette.slice(0,8), paletteVariants, paletteTunings, sourceSeed, designSeed, points:points.slice(0,42),
+    palette:palette.slice(0,8), materialPalette, paletteVariants, paletteTunings, sourceSeed, designSeed, points:points.slice(0,42),
     angle:.5*Math.atan2(ey,ex), density:Math.max(.08,Math.min(1,(edge/Math.max(1,count))/62)),
     contrast:Math.max(.05,Math.min(1,Math.sqrt(variance)/70)),
     light:Math.max(.04,Math.min(1,bright/used*3.4)), saturation:Math.max(.04,Math.min(1,satSum/used*1.45))
   };
 }
+const sourceSetBanks=new Map();
 function sourceRecipes(mode, profile){
   const density = profile ? profile.density : 0.5;
   const light = profile ? profile.light : 0.5;
@@ -4137,6 +4188,37 @@ function makeSourceSets(mode){
     };
   });
 }
+const sourceFinishes=new WeakMap(), sourceBases=new WeakMap();
+let activeSourceSet=null;
+function sourceFinish(set){return sourceFinishes.get(set)||'original';}
+function drawSourceMaterial(c,set,i,w,h){
+  let chips=sourceBases.get(set); if(!chips){chips=[];sourceBases.set(set,chips);}
+  if(!chips[i]){
+    const cv=document.createElement('canvas');cv.width=112;cv.height=180;
+    const t=cv.getContext('2d');
+    t.translate(56,180*.59/1.16);
+    const palette=sourceProfile?.palette;
+    if(sourceProfile)sourceProfile.palette=set.sourcePalette;
+    try{
+      withVars(set.vars,()=>{
+        paintByKey(t,set.looks[i],112,180/1.16,set.colors[i],i+11);
+        paintGelTip(t,112,180/1.16,i+11,(set.tune.gloss||96)/100,set.looks[i]);
+      });
+    }finally{if(sourceProfile)sourceProfile.palette=palette;}
+    chips[i]=cv;
+  }
+  TSUYASourceMaterials.drawFinish(c,chips[i],sourceFinish(set),set.colors[i],i,w,h);
+}
+function refreshSourceFinish(){
+  if(!selectedSourceSet)return;
+  const en=document.documentElement.dataset.language==='en';
+  document.querySelectorAll('#sourceFinishChoice [data-finish]').forEach(btn=>{
+    const on=btn.dataset.finish===sourceFinish(selectedSourceSet);
+    btn.setAttribute('aria-pressed',String(on));
+    const label=en?btn.dataset.en:btn.dataset.ja;
+    if(btn.textContent!==label)btn.textContent=label;
+  });
+}
 function drawSourceSetPreview(canvas,set){
   const c=canvas.getContext('2d'); c.clearRect(0,0,canvas.width,canvas.height);
   const keepPalette=sourceProfile&&sourceProfile.palette;
@@ -4146,7 +4228,7 @@ function drawSourceSetPreview(canvas,set){
     const w=24,h=heights[i];
     c.save();
     c.translate(x,canvas.height/2+3);
-    paintPhotographicSpecimen(c,w,h,look,set.colors[i],i+11,.94);
+    paintPhotographicSpecimen(c,w,h,look,set.colors[i],i,.94,set);
     c.restore();
   }));
   if(sourceProfile&&keepPalette) sourceProfile.palette=keepPalette;
@@ -4162,7 +4244,7 @@ function drawLargeSourceSetPreview(canvas,set,length){
     const w=widths[i],h=heights[i],x=60+i*125,y=150;
     c.save();
     c.translate(x,y);
-    paintPhotographicSpecimen(c,w,h,look,set.colors[i],i+21,.94);
+    paintPhotographicSpecimen(c,w,h,look,set.colors[i],i,.94,set);
     c.restore();
   }));
   if(sourceProfile&&keepPalette) sourceProfile.palette=keepPalette;
@@ -4174,6 +4256,8 @@ function openSourceConfirm(set){
   applyTryLength(sourceTryLength);
   renderLengthChoice($('sourceLengthChoice'),sourceTryLength);
   drawLargeSourceSetPreview($('sourceConfirmCanvas'),set,sourceTryLength);
+  $('sourceConfirmName').textContent=set.name.split(' / ').slice(0,2).join(' / ');
+  refreshSourceFinish();
   $('sourceConfirm').classList.add('open');
   $('sourceConfirm').setAttribute('aria-hidden','false');
 }
@@ -4184,13 +4268,17 @@ function closeSourceConfirm(){
 function renderSourceSets({regenerate=true,resetSelection=false}={}){
   const index=resetSelection?0:Math.max(0,sourceSets.indexOf(selectedSourceSet));
   const box=$('sourceSets'); box.innerHTML='';
-  if(regenerate) sourceSets=makeSourceSets(sourceMode);
+  if(regenerate){
+    if(!sourceSetBanks.has(sourceMode))sourceSetBanks.set(sourceMode,makeSourceSets(sourceMode));
+    sourceSets=sourceSetBanks.get(sourceMode);
+  }
   selectedSourceSet=sourceSets[Math.min(index,sourceSets.length-1)]||null;
   sourceSets.forEach((set,idx)=>{
     const btn=document.createElement('button'); btn.type='button';
     const isActive = set === selectedSourceSet;
     btn.className='source-set'+(isActive?' active':'')+(set.isExtra?' is-extra':'');
-    btn.setAttribute('aria-label',`案${idx+1}${set.isExtra?'・派手なデザイン':''}`);
+    btn.setAttribute('aria-label',set.name);
+    btn.dataset.sourceDesign=String(idx);
     btn.setAttribute('aria-pressed',String(isActive));
     if(set.paletteTuning){
       btn.dataset.paletteBase=set.paletteTuning.base.toFixed(6);
@@ -4210,6 +4298,7 @@ function renderSourceSets({regenerate=true,resetSelection=false}={}){
   sourceInputRef=input; sourceInputLabel=label||'FOUND MATERIAL';
   sourceRandomSalt=(Math.floor(Math.random()*0xffffffff)>>>0);
   const sampled=sourceCanvasFrom(input,focus); sourceProfile=analyzeSource(sampled);
+  sourceSetBanks.clear();
   const ow=input.videoWidth||input.naturalWidth||input.width||sampled.width;
   const oh=input.videoHeight||input.naturalHeight||input.height||sampled.height;
   const preview=$('sourcePreview'), pc=preview.getContext('2d');
@@ -4236,8 +4325,7 @@ function renderSourceSets({regenerate=true,resetSelection=false}={}){
   $('sourceName').textContent=label||'FOUND MATERIAL';
   $('sourceFrame').dataset.sourceSeed=String(sourceProfile.sourceSeed);
   $('sourceFrame').dataset.designSeed=String(sourceProfile.designSeed);
-  const deg=Math.round(sourceProfile.angle*180/Math.PI);
-  $('sourceReading').textContent=`${sourceProfile.palette.length} COLORS / LINE ${Math.round(sourceProfile.density*100)} / LIGHT ${Math.round(sourceProfile.light*100)} / ${deg}°`;
+  $('sourceReading').textContent=`${sourceProfile.materialPalette?.length||sourceProfile.palette.length} COLORS`;
   $('sourceFrame').classList.add('ready'); $('sourceModes').classList.add('ready'); $('sourceTry').classList.add('ready');
   if(document.body.classList.contains('custom-mode')&&mode==='idle'){
     document.body.classList.add('source-planning'); activateSourceTab();
@@ -4278,9 +4366,17 @@ function activateSourceTab(){
   tab.classList.add('active'); $('tray-source').classList.add('active');
 }
 $('sourcePhoto').onclick=()=>$('sourceInput').click();
+let sourceFileGeneration=0;
 $('sourceInput').addEventListener('change',async e=>{
   const file=e.target.files[0]; if(!file) return;
-  const img=await loadImage(file); ingestSource(img,file.name.replace(/\.[^.]+$/,'').slice(0,24)); e.target.value='';
+  const generation=++sourceFileGeneration;
+  e.target.value='';
+  try{
+    const img=await loadImage(file);
+    if(generation===sourceFileGeneration) ingestSource(img,file.name.replace(/\.[^.]+$/,'').slice(0,24));
+  }catch(err){
+    if(generation===sourceFileGeneration) setStatus('画像を開けませんでした。別の写真を選んでください。');
+  }
 });
 $('sourceMotifPick').onclick=()=>{
   if(!sourceInputRef) return;
@@ -4298,6 +4394,18 @@ $('sourceLengthChoice').addEventListener('click',event=>{
   applySet(selectedSourceSet); applyTryLength(sourceTryLength);
   renderLengthChoice($('sourceLengthChoice'),sourceTryLength);
   drawLargeSourceSetPreview($('sourceConfirmCanvas'),selectedSourceSet,sourceTryLength);
+});
+$('sourceFinishChoice').addEventListener('click',event=>{
+  const btn=event.target.closest('button[data-finish]');
+  if(!btn||!selectedSourceSet)return;
+  const finish=btn.dataset.finish;
+  if(finish!=='original'&&!TSUYASourceMaterials.has(finish))return;
+  sourceFinishes.set(selectedSourceSet,finish);
+  refreshSourceFinish();
+  drawLargeSourceSetPreview($('sourceConfirmCanvas'),selectedSourceSet,sourceTryLength);
+  const i=sourceSets.indexOf(selectedSourceSet);
+  const cv=$('sourceSets').querySelectorAll('canvas')[i];
+  if(cv)drawSourceSetPreview(cv,selectedSourceSet);
 });
 let sourceTryRequest=0;
 function returnToSourcePlanning(){
@@ -4344,7 +4452,7 @@ $('sourceConfirmTry').onclick=()=>{
 document.querySelectorAll('[data-source-mode]').forEach(btn=>btn.onclick=()=>{
   sourceMode=btn.dataset.sourceMode;
   document.querySelectorAll('[data-source-mode]').forEach(x=>x.classList.toggle('active',x===btn));
-  renderSourceSets();
+  renderSourceSets({resetSelection:true});
 });
 /* ================= ユーティリティ ================= */
 function rgb2hex(r,g,b){return '#'+[r,g,b].map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('')}
@@ -4430,12 +4538,13 @@ function withVars(vars, fn){
   }
 }
 function applySet(st){
+  activeSourceSet=sourceSets.includes(st)?st:null;
   if(sourceProfile&&st.sourcePalette){
     sourceProfile.palette=st.sourcePalette.slice();
     renderChips(sourceProfile.palette);
   }
   st.looks.forEach((k,i)=>{
-    nailLooks[i] = (k && (LOOKS[k] || k.indexOf('custom:')===0)) ? k : 'onecolor';
+    nailLooks[i] = (k && (LOOKS[k] || globalThis.TSUYASourceMaterials?.has(k) || k.indexOf('custom:')===0)) ? k : 'onecolor';
   });
   if(st.colors) st.colors.forEach((c,i)=>{ if(c) nailColors[i]=c; });
   else if(st.color) nailColors.fill(st.color);
@@ -4622,7 +4731,7 @@ updateCmpBadge();
 (()=>{
   const works={
     COLOR:{
-      no:'01',title:'色',tryTitle:'色彩',label:'COLOR / 色',accent:'#d14f78',film:'art-assets/color-pattern.mp4',motion:'art-assets/color-pattern.webp',
+      no:'01',title:'色',tryTitle:'色',label:'COLOR / 色',accent:'#d14f78',film:'art-assets/color-pattern.mp4',motion:'art-assets/color-pattern.webp',
       text:'色を選ぶ行為から、身体の表面に模様が増殖する作品へ。爪の小さな面が、手全体の色彩へひらく。',
       preset:{looks:['artColor','sheer','nuance','artColor','flash'],colors:['#d14f78','#477d6c','#e0b936','#795a9f','#c55d3d'],tune:{gloss:76,opacity:98,nailSize:98,sculptLen:138,sculptShape:'natural'},vars:{sheer:.38,flash:.44},trail:{on:true,intensity:48,hue:null}}
     },
@@ -5164,6 +5273,28 @@ updateCmpBadge();
     const box=document.getElementById(targetId); if(!box) return; box.innerHTML='';
     const p=works[key].preset;
     const lengthScale=normalizeTryLength(length,inferTryLength(p.tune))==='long'?1.16:.68;
+    if(globalThis.TSUYAPhotoNails?.has(key)){
+      const cvs=TSUYAPhotoNails.names(key).map((name,i)=>{
+        const cv=document.createElement('canvas'); cv.width=192; cv.height=320;
+        cv.dataset.photoNail=key+':'+i;
+        cv.setAttribute('aria-label',(i+1)+'本目 '+name); cv.title=name;
+        box.appendChild(cv); return cv;
+      });
+      TSUYAPhotoNails.load(key).then(()=>{
+        // A rapid work/length change can supersede the pending result.
+        if(box.firstChild!==cvs[0]) return;
+        cvs.forEach((cv,i)=>{
+          const width=128, height=2*122*lengthScale;
+          TSUYAPhotoNails.paintPreview(cv.getContext('2d'),key,i,(192-width)/2,(320-height)/2,width,height);
+        });
+      }).catch(err=>{
+        if(box.firstChild!==cvs[0]) return;
+        box.dataset.nailError='true';
+        box.title='ネイル画像を読み込めませんでした。ページを再読み込みしてください。';
+        console.warn(err);
+      });
+      return;
+    }
     withVars(p.vars,()=>p.looks.forEach((look,i)=>{
       const cv=document.createElement('canvas');
       /* 写真のような10倍の緻密さ：Retina対応の倍密度（192×320） */
@@ -5180,6 +5311,16 @@ updateCmpBadge();
   }
   function openSetViewer(){
     const work=works[current];
+    const specimen = globalThis.TSUYAPhotoNails?.setFile(current);
+    const setPhoto = document.getElementById('approvedNailSetPhoto');
+    if (specimen) {
+      setPhoto.src=specimen;
+      setPhoto.alt=work.title+'のネイルチップ5本の写真';
+      setPhoto.hidden=false;
+    } else {
+      setPhoto.hidden=true;
+      setPhoto.removeAttribute('src');
+    }
     document.getElementById('nailSetKicker').textContent=work.no+' / '+current+' — NAIL SET';
     document.getElementById('nailSetTitle').textContent=work.title;
     nailSetViewer.style.setProperty('--set-accent',work.accent);
@@ -5228,7 +5369,7 @@ updateCmpBadge();
       history.replaceState(null,'',route('work',key,artworkTryLength));
       document.title='HAND & LIGHT — '+work.title;
     }
-    document.getElementById('workFilmCode').textContent=work.no+' / '+key;
+    document.getElementById('workFilmCode').textContent=work.no;
     document.getElementById('workFilmTitle').textContent=work.title;
     document.getElementById('workText').textContent=work.text;
     renderNailPreview(key,'workNails',artworkTryLength);
@@ -5341,6 +5482,14 @@ updateCmpBadge();
     document.body.classList.add('work-tryon');
     document.title='HAND & LIGHT — '+work.tryTitle+'のネイルを試す';
     setCurrent(key); applyArtworkPreset(key); applyTryLength(requestedTryLength);
+    if(globalThis.TSUYAPhotoNails?.has(key)){
+      activeArtworkPhotoNails=key;
+      tuneVals.sculptShape='round2'; // 3 approved photo sets use rounded tips
+      TSUYAPhotoNails.load(key).catch(err=>{
+        setStatus('ネイル画像を読み込めませんでした。ページを再読み込みしてください。');
+        console.warn(err);
+      });
+    }
     document.querySelector('.opening-mark').innerHTML=work.no+' / '+key+'<br>ARTWORK TRY ON';
     document.querySelector('#startOverlay .invite').textContent='TRY ON';
     document.getElementById('openingGuide').textContent=key;
@@ -5420,7 +5569,8 @@ updateCmpBadge();
         video.addEventListener('canplay',onReady,{once:true});
         video.addEventListener('loadeddata',onReady,{once:true});
       }
-      code.textContent=work.no+' / '+key;
+      code.dataset.workKey=key;
+      code.textContent=work.no;
       title.textContent=work.title;
       enter.href=route('work',key);
       enter.setAttribute('aria-label',work.title+'の作品ページへ入る');
@@ -5448,7 +5598,7 @@ updateCmpBadge();
       const body=document.createElement('span');
       const title=document.createElement('span');
       const nails=document.createElement('span');
-      card.className='access-work-card'; card.href=route('work',key); card.setAttribute('aria-label',work.title+'を見る');
+      card.className='access-work-card'; card.dataset.workKey=key; card.href=route('work',key); card.setAttribute('aria-label',work.title+'を見る');
       image.className='access-work-image'; image.src=work.motion; image.alt='';
       body.className='access-work-body'; title.className='access-work-title'; title.textContent=work.title;
       nails.className='access-work-nails'; nails.id='accessNails'+key;
@@ -5518,7 +5668,7 @@ updateCmpBadge();
 (()=>{
   const titles={
     ja:{COLOR:'色',SURFACE:'表面',SCULPT:'FORMWORK',LIGHT:'光',HAND:'手',TRACE:'痕跡',SPACE:'宇宙と手',THINKING:'思惟する手',ORB:'White Orb',FRAME:'二つの手の輪舞曲',UNDERWATER:'水中'},
-    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'Formwork',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux',UNDERWATER:'Underwater'}
+    en:{COLOR:'Chromatic Field',SURFACE:'Skin of Gold',SCULPT:'FORMWORK',LIGHT:'Afterlight',HAND:'Palm Memory',TRACE:'Afterimage',SPACE:'A Hand in Orbit',THINKING:'Thinking Hand',ORB:'White Orb',FRAME:'Pas de Deux',UNDERWATER:'Underwater'}
   };
   const filmCaptions={
     UNDERWATER:["両手のあいだを、光だけが泳ぐ。","Only light swims between the hands."],
@@ -5567,15 +5717,9 @@ updateCmpBadge();
     const next=number+value;
     if(el.textContent!==next)el.innerHTML='<b>'+number+'</b>'+value;
   });
-  const workKey=()=>{
-    const codes={
-      opening:document.getElementById('openingWorkCode')?.textContent,
-      film:document.getElementById('workFilmCode')?.textContent,
-      tryOn:document.getElementById('tryIdentityText')?.textContent
-    };
-    const values=document.body.classList.contains('art-page')?[codes.film,codes.tryOn,codes.opening]:document.body.classList.contains('work-tryon')?[codes.tryOn,codes.film,codes.opening]:[codes.opening,codes.film,codes.tryOn];
-    return values.map(value=>Object.keys(titles.ja).find(key=>new RegExp('\\b'+key+'\\b').test(value||''))).find(Boolean)||'COLOR';
-  };
+  const workKey=()=>document.body.classList.contains('hub-mode')
+    ? document.getElementById('openingWorkCode')?.dataset.workKey||'UNDERWATER'
+    : document.body.dataset.workKey||'COLOR';
   const stored=()=>{try{return localStorage.getItem('tsuya-language');}catch(_){return null;}};
   let language=stored()==='en'?'en':'ja';
   const apply=()=>{
@@ -5587,7 +5731,39 @@ updateCmpBadge();
     const toggle=document.getElementById('languageSwitch');
     toggle.textContent=isEnglish?'日本語':'EN';
     toggle.setAttribute('aria-label',isEnglish?'表示言語を日本語へ切り替える':'Switch display language to English');
-    document.title=isEnglish?'HAND & LIGHT — Artwork, Worn Daily':'HAND & LIGHT — 自分の手から、作品へ';
+    const isFilm=document.body.classList.contains('art-page');
+    const isFromWork=isCustom&&document.body.classList.contains('custom-from-work');
+    const accessMode=document.body.classList.contains('access-mode');
+    document.title=isFilm||isTryOn?'HAND & LIGHT — '+name:isEnglish?'HAND & LIGHT — Artwork, Worn Daily':'HAND & LIGHT — 自分の手から、作品へ';
+    document.querySelectorAll('[data-opening-work]').forEach(button=>{
+      const title=titles[language][button.dataset.openingWork];
+      if(title)button.setAttribute('aria-label',title);
+    });
+    document.querySelectorAll('.access-work-card[data-work-key]').forEach(card=>{
+      const title=titles[language][card.dataset.workKey];
+      const label=card.querySelector('.access-work-title');
+      if(label&&title&&label.textContent!==title)label.textContent=title;
+      if(title)card.setAttribute('aria-label',isEnglish?'View '+title:title+'を見る');
+    });
+    if(accessMode)text('.access-hub-title',isEnglish?'CHOOSE A WORK':'作品を選ぶ');
+    if(isTryOn||isFromWork){
+      const identity=document.getElementById('tryIdentityText');
+      if(!identity.dataset.workNumber)identity.dataset.workNumber=identity.textContent.match(/^[0-9]+/)?.[0]||'';
+      const chipSourceTitle=document.getElementById('sourceOriginTitle');
+      if(isFromWork&&!chipSourceTitle.dataset.workNumber)chipSourceTitle.dataset.workNumber=chipSourceTitle.textContent.match(/^[0-9]+/)?.[0]||'';
+      const number=isFromWork?chipSourceTitle.dataset.workNumber:identity.dataset.workNumber;
+      const display=number?number+' / '+name:name;
+      text('#tryIdentityText',isFromWork?'SOURCE / '+name:display);
+      text('#openingGuide',isFromWork?name+(isEnglish?' / Gather inspiration':' / 身のまわりから採集する'):name);
+      if(isFromWork)text('#sourceOriginTitle',display);
+      const mark=document.querySelector('.opening-mark');
+      const markPrimary=isFromWork?'FROM '+display:display;
+      const markSecondary=isFromWork?'ARTWORK → SOURCE → HAND':'ARTWORK TRY ON';
+      if(mark.textContent!==markPrimary+markSecondary){
+        mark.replaceChildren(document.createTextNode(markPrimary),document.createElement('br'),document.createTextNode(markSecondary));
+      }
+    }
+    if(!isCustom||isFromWork&&!document.body.classList.contains('source-selected'))text('#signalName',name);
     if(isEnglish){
       text('.guide-text','Place your hand in the frame');
       text('.sg-tag','SOURCE · COLLECT LIGHT'); text('.sg-title','Gather a colour or a glimmer that catches you'); text('.sg-sub','Hold it up to light or a scene around you');
@@ -5595,7 +5771,8 @@ updateCmpBadge();
       text('.make-link',isCustom?'CREATE FROM A PHOTO':'CREATE FREELY');
       steps(['CHOOSE A WORK','VIEW THE NAILS','TRY ON WITH CAMERA']);
       text('.opening-work-cue span','ENTER THE WORK');
-      text('.source-intro','Gather colour, line, and light from around you, then compose them into five nails.');
+      text('.source-intro','Pick a design from your photo, then choose a finish.');
+      text('#sourceFinishTitle','2　FINISH');
       text('#sourcePhoto','CHOOSE A PHOTO'); text('#sourceOriginReset','ARTWORK NAILS'); text('#sourceMotifPick','TAP A MOTIF TO SELECT IT');
       text('.source-exhibit','VIEW AS ARTWORK'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','BACK');
       text('#saveSetLink','SAVE THIS SET'); text('#resetPal','RESET TO STANDARD'); text('.tonelabel','TONE');
@@ -5611,7 +5788,8 @@ updateCmpBadge();
       text('.make-link',isCustom?'写真からつくる':'自由にデザインする');
       steps(['作品を選ぶ','ネイルを見る','カメラで試着']);
       text('.opening-work-cue span','触れて、作品へ');
-      text('.source-intro','身のまわりの色・線・光を採集して、5本のネイルへ組み替える。');
+      text('.source-intro','写真から柄を選ぶ。次に、仕上げを選ぶ。');
+      text('#sourceFinishTitle','2　仕上げ');
       text('#sourcePhoto','写真を選ぶ'); text('#sourceOriginReset','作品ネイル'); text('#sourceMotifPick','モチーフをタップして指定');
       text('.source-exhibit','作品として見る'); text('#sourceTry','TRY ON'); text('#sourceConfirmBack','戻る');
       text('#saveSetLink','この組み合わせを保存'); text('#resetPal','標準にもどす'); text('.tonelabel','濃淡');
@@ -5627,6 +5805,7 @@ updateCmpBadge();
     attr('#workClose','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
     attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
+    if(typeof refreshSourceFinish==='function'&&document.getElementById('sourceConfirm').classList.contains('open'))refreshSourceFinish();
     attr('#sourceConfirmBack','aria-label',isEnglish?'Return to nail selection':'チップ選択へ戻る');
     attr('#nailSetClose','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#nailSetBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
@@ -5660,5 +5839,3 @@ updateCmpBadge();
 </script>
 </body>
 </html>
-
-
