@@ -1913,7 +1913,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 
   <div id="startOverlay">
     <div class="opening-films" aria-hidden="true">
-      <video class="opening-film a" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
+      <video class="opening-film a" src="art-assets/thinking-hand.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <video class="opening-film b" src="art-assets/surface-gold.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <video class="opening-film c" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <div class="source-reference-stack">
@@ -1933,21 +1933,21 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <div class="opening-steps" aria-label="試着までの流れ">
       <span><b>01</b>作品を選ぶ</span><span><b>02</b>ネイルを見る</span><span><b>03</b>カメラで試着</span>
     </div>
-    <a class="opening-enter" id="openingEnter" href="?work=COLOR" aria-label="現在表示中の作品へ入る"></a>
+    <a class="opening-enter" id="openingEnter" href="?work=THINKING" aria-label="現在表示中の作品へ入る"></a>
     <div class="opening-work-meta" aria-live="polite">
       <div class="opening-work-code" id="openingWorkCode">01</div>
-      <div class="opening-work-title" id="openingWorkTitle">色</div>
+      <div class="opening-work-title" id="openingWorkTitle">思惟する手</div>
       <div class="opening-work-cue"><span>触れて、作品へ</span></div>
       <div class="opening-progress" id="openingProgress"></div>
     </div>
     <nav class="opening-index" id="openingIndex" aria-label="作品を選ぶ">
-      <button type="button" data-opening-work="UNDERWATER" aria-label="水中">01</button>
-      <button type="button" data-opening-work="COLOR" aria-label="色">02</button>
-      <button type="button" data-opening-work="SURFACE" aria-label="表面">03</button>
-      <button type="button" data-opening-work="SCULPT" aria-label="FORMWORK">04</button>
-      <button type="button" data-opening-work="LIGHT" aria-label="光">05</button>
-      <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">06</button>
-      <button type="button" data-opening-work="THINKING" aria-label="思惟する手">07</button>
+      <button type="button" data-opening-work="THINKING" aria-label="思惟する手">01</button>
+      <button type="button" data-opening-work="UNDERWATER" aria-label="水中">02</button>
+      <button type="button" data-opening-work="COLOR" aria-label="色">03</button>
+      <button type="button" data-opening-work="SURFACE" aria-label="表面">04</button>
+      <button type="button" data-opening-work="SCULPT" aria-label="FORMWORK">05</button>
+      <button type="button" data-opening-work="LIGHT" aria-label="光">06</button>
+      <button type="button" data-opening-work="SPACE" aria-label="宇宙と手">07</button>
       <button type="button" data-opening-work="ORB" aria-label="White Orb">08</button>
       <button type="button" data-opening-work="FRAME" aria-label="二つの手の輪舞曲">09</button>
     </nav>
@@ -4854,7 +4854,8 @@ updateCmpBadge();
   // 2026-09-23: 作者の指定により重複する「手」と「痕跡」は掲載しない。素材は保存。
   delete works.HAND;
   delete works.TRACE;
-  const order=['UNDERWATER',...Object.keys(works).filter(key=>key!=='UNDERWATER')];
+  const featuredWork='THINKING';
+  const order=[featuredWork,'UNDERWATER',...Object.keys(works).filter(key=>key!==featuredWork&&key!=='UNDERWATER')];
   order.forEach((key,i)=>{works[key].no=String(i+1).padStart(2,'0');});
   const tabMap={looks:'COLOR',colors:'COLOR',tune:'SURFACE',sculpt:'SCULPT',hikari:'LIGHT'};
   const overlay=document.getElementById('startOverlay');
@@ -5827,7 +5828,7 @@ updateCmpBadge();
     if(el.textContent!==next)el.innerHTML='<b>'+number+'</b>'+value;
   });
   const workKey=()=>document.body.classList.contains('hub-mode')
-    ? document.getElementById('openingWorkCode')?.dataset.workKey||'UNDERWATER'
+    ? document.getElementById('openingWorkCode')?.dataset.workKey||'THINKING'
     : document.body.dataset.workKey||'COLOR';
   const stored=()=>{try{return localStorage.getItem('tsuya-language');}catch(_){return null;}};
   let language=stored()==='en'?'en':'ja';
