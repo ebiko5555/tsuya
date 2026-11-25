@@ -1806,6 +1806,61 @@
 #sourceFinishChoice button{border:1px solid #77727a;background:#201d23;color:#f6f3f4;min-height:44px;border-radius:9px;padding:3px 2px;line-height:1.14;font:inherit;font-size:clamp(10px,3.3vw,13px)}
 #sourceFinishChoice button[aria-pressed="true"]{background:#f8efe9;color:#281c22;border-color:#f8efe9}
 #sourceFinishChoice button:focus-visible{outline:2px solid #fdb5da;outline-offset:2px}
+
+/* Mobile gallery: the first screen is for the work; interpretation and try-on follow. */
+.work-gallery-stage,.work-gallery-bar,.work-gallery-details{display:contents}
+#workGalleryBack,#workGalleryMore,#workGalleryLanguage,.work-gallery-playback{display:none}
+@media (max-width:819px){
+  body.art-page #workLayer{overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain}
+  body.art-page #workLayer::after,
+  body.art-page #siteHome,body.art-page #globalBack,body.art-page #languageSwitch,
+  body.art-page #photoTrialLabel{display:none}
+  body.art-page #workLayer .work-gallery-stage{
+    display:flex; flex-direction:column; height:100vh; height:100svh; background:#08090c;
+    box-sizing:border-box; padding-top:env(safe-area-inset-top);
+    padding-inline:env(safe-area-inset-left) env(safe-area-inset-right);
+  }
+  body.art-page #workLayer .work-gallery-bar{
+    display:grid; grid-template-columns:44px minmax(0,1fr) 44px 44px;
+    align-items:center; gap:6px; flex:none; min-height:48px; padding:0 10px; color:#f2f1ed;
+  }
+  body.art-page #workLayer .work-gallery-bar button,
+  body.art-page #workLayer .work-gallery-playback{
+    display:inline-grid; place-items:center; min-height:44px; min-width:44px;
+    padding:0; border:0; background:none; color:#f2f1ed; cursor:pointer;
+  }
+  body.art-page #workLayer .work-gallery-bar button:focus-visible,
+  body.art-page #workLayer .work-gallery-playback:focus-visible{
+    outline:2px solid currentColor; outline-offset:-3px;
+  }
+  body.art-page #workLayer #workGalleryLanguage{font-size:11px; letter-spacing:.1em}
+  body.art-page #workLayer .work-gallery-bar button svg{
+    width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5;
+  }
+  body.art-page #workLayer .work-film-mark{
+    position:static; max-width:none; display:flex; align-items:baseline; justify-content:center;
+    gap:9px; color:inherit; text-align:left; text-shadow:none;
+  }
+  body.art-page #workLayer .work-film-title{
+    margin:0; font-size:clamp(16px,4.6vw,23px); line-height:1.2; overflow-wrap:anywhere;
+  }
+  body.art-page #workLayer #workFilm{
+    flex:1 1 0; min-height:0; position:relative; inset:auto; height:auto; width:100%;
+    object-fit:contain; object-position:center; opacity:1; background:#08090c;
+    cursor:default; touch-action:pan-y;
+  }
+  body.art-page #workLayer #workClose{display:none}
+  body.art-page #workLayer .work-gallery-details{
+    display:grid; grid-template-columns:minmax(0,1fr) 44px; align-items:start;
+    padding:7px 15px 5px; border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  body.art-page #workLayer .work-gallery-details .work-film-caption:not([hidden]){
+    grid-column:1; position:static; width:auto; padding:11px 6px 11px 2px;
+  }
+  body.art-page #workLayer .work-gallery-playback{
+    grid-column:2; grid-row:1; font:500 17px/1 system-ui,sans-serif;
+  }
+}
 </style>
 <link rel="stylesheet" href="ui-typography.css?v=work-captions-2">
 <link rel="stylesheet" href="navigation-hands.css?v=length-center1">
@@ -2083,9 +2138,19 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 </div>
 
 <section class="work-layer" id="workLayer" aria-hidden="true" aria-label="試着からひらく作品">
-  <video class="work-film" id="workFilm" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="0" role="button" aria-label="作品ネイルを試着する"></video>
-  <p class="work-film-caption" id="workFilmCaption" hidden></p>
-  <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01</div><div class="work-film-title" id="workFilmTitle">色</div></div>
+  <div class="work-gallery-stage">
+    <div class="work-gallery-bar">
+      <button type="button" id="workGalleryBack" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="work-film-mark" aria-live="polite"><div class="work-film-code" id="workFilmCode">01</div><div class="work-film-title" id="workFilmTitle">色</div></div>
+      <button type="button" id="workGalleryLanguage" aria-label="表示言語を英語へ切り替える">EN</button>
+      <button type="button" id="workGalleryMore" aria-label="作品の詳細と試着へ" aria-controls="workGalleryDetails"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button>
+    </div>
+    <video class="work-film" id="workFilm" src="art-assets/color-pattern.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="0" role="button" aria-label="作品ネイルを試着する"></video>
+  </div>
+  <div class="work-gallery-details" id="workGalleryDetails" tabindex="-1">
+    <p class="work-film-caption" id="workFilmCaption" hidden></p>
+    <button type="button" class="work-gallery-playback" id="workGalleryPlayback" aria-label="作品映像を一時停止">Ⅱ</button>
+  </div>
   <button type="button" class="work-close" id="workClose" data-nav-direction="back" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg><span>BACK</span></button>
   <nav class="work-index" id="workIndex" aria-label="作品を選ぶ"></nav>
   <div class="work-copy">
@@ -4797,6 +4862,43 @@ updateCmpBadge();
   const signalFilm=document.getElementById('signalFilm');
   const layer=document.getElementById('workLayer');
   const workFilm=document.getElementById('workFilm');
+  const galleryViewport=matchMedia('(max-width:819px)');
+  const galleryButton=document.getElementById('workGalleryPlayback');
+  let galleryPaused=false;
+  const mobileGallery=()=>galleryViewport.matches&&document.body.classList.contains('art-page');
+  function syncGalleryPlayback(){
+    const english=document.documentElement.dataset.language==='en';
+    const paused=workFilm.paused;
+    galleryButton.textContent=paused?'▶':'Ⅱ';
+    galleryButton.setAttribute('aria-label',english?(paused?'Play artwork film':'Pause artwork film'):(paused?'作品映像を再生':'作品映像を一時停止'));
+  }
+  function syncGalleryFilm(){
+    if(mobileGallery()){
+      workFilm.removeAttribute('role');
+      workFilm.removeAttribute('tabindex');
+      workFilm.removeAttribute('aria-label');
+    }else{
+      workFilm.setAttribute('role','button');
+      workFilm.tabIndex=0;
+      workFilm.setAttribute('aria-label',document.documentElement.dataset.language==='en'?'Try on this artwork’s nails':'作品ネイルを試着する');
+      if(galleryPaused){ galleryPaused=false; playWorkFilmWhenReady(); }
+    }
+  }
+  galleryViewport.addEventListener('change',syncGalleryFilm);
+  workFilm.addEventListener('play',syncGalleryPlayback);
+  workFilm.addEventListener('pause',syncGalleryPlayback);
+  new MutationObserver(()=>{syncGalleryPlayback(); syncGalleryFilm();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-language']});
+  galleryButton.addEventListener('click',()=>{
+    if(workFilm.paused){ galleryPaused=false; playWorkFilmWhenReady(); }
+    else{ galleryPaused=true; workFilm.pause(); }
+    syncGalleryPlayback();
+  });
+  document.getElementById('workGalleryLanguage').addEventListener('click',()=>document.getElementById('languageSwitch').click());
+  document.getElementById('workGalleryMore').addEventListener('click',()=>{
+    const details=document.getElementById('workGalleryDetails');
+    details.focus({preventScroll:true});
+    details.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  });
   const index=document.getElementById('workIndex');
   const nailSetViewer=document.getElementById('nailSetViewer');
   const params=new URLSearchParams(location.search);
@@ -4853,11 +4955,11 @@ updateCmpBadge();
   /* iPhone Safariでは、ページ遷移直後に最初のフレームだけ描かれる場合がある。
      読み込み完了後にも再生を指示して、作品映像の静止を防ぐ。 */
   function playWorkFilmWhenReady(){
-    if(!layer.classList.contains('open')) return;
+    if(!layer.classList.contains('open') || galleryPaused) return;
     workFilm.controls=false;
     workFilm.removeAttribute('controls');
     playSilently(workFilm);
-    const play=()=>{ if(layer.classList.contains('open')) playSilently(workFilm); };
+    const play=()=>{ if(layer.classList.contains('open') && !galleryPaused) playSilently(workFilm); };
     /* iPhoneではloadeddataを待つだけだと、先頭フレームで停止することがある。
        srcを差し替えた直後のplay()が「読み込み後に再生する予約」になるため、
        まず必ずここで指示し、イベント側は再試行として残す。 */
@@ -5365,7 +5467,10 @@ updateCmpBadge();
   document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>setCurrent(tabMap[tab.dataset.t]||current)));
 
   function openWork(key,length){
+    const changed=current!==key;
     setCurrent(key); const work=works[key];
+    syncGalleryFilm();
+    if(changed) galleryPaused=false;
     artworkTryLength=normalizeTryLength(length,inferTryLength(work.preset.tune));
     if(document.body.classList.contains('art-page')){
       history.replaceState(null,'',route('work',key,artworkTryLength));
@@ -5409,6 +5514,7 @@ updateCmpBadge();
     const activeButton=index.querySelector('button.active');
     if(workFilm.getAttribute('src')!==work.film){workFilm.src=work.film; workFilm.load();}
     signalFilm.pause(); layer.classList.add('open'); layer.setAttribute('aria-hidden','false');
+    if(changed && mobileGallery()) layer.scrollTop=0;
     if(activeButton&&matchMedia('(max-width:819px)').matches){
       requestAnimationFrame(()=>index.scrollTo({left:Math.max(0,activeButton.offsetLeft-(index.clientWidth-activeButton.offsetWidth)/2),behavior:'smooth'}));
     }
@@ -5429,6 +5535,7 @@ updateCmpBadge();
     openWork(current);
   });
   document.getElementById('workClose').addEventListener('click',closeWork);
+  document.getElementById('workGalleryBack').addEventListener('click',closeWork);
   $('workLengthChoice').addEventListener('click',event=>{
     const button=event.target.closest('[data-length]'); if(!button) return;
     artworkTryLength=normalizeTryLength(button.dataset.length);
@@ -5448,7 +5555,7 @@ updateCmpBadge();
   });
   window.addEventListener('pageshow',playWorkFilmWhenReady);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden) playWorkFilmWhenReady();});
-  layer.addEventListener('pointerdown',playWorkFilmWhenReady,{passive:true});
+  layer.addEventListener('pointerdown',event=>{ if(!event.target.closest('#workGalleryPlayback')) playWorkFilmWhenReady(); },{passive:true});
 
   const started=new MutationObserver(()=>{
     if(overlay.style.display==='none' && mode==='live'){
@@ -5613,9 +5720,9 @@ updateCmpBadge();
     button.addEventListener('click',()=>{ location.href=route('work',button.dataset.openingWork); });
   });
   const startArtworkTryOn=()=>{ location.href=tryRoute(current,artworkTryLength); };
-  workFilm.addEventListener('click',startArtworkTryOn);
+  workFilm.addEventListener('click',()=>{if(!mobileGallery()) startArtworkTryOn();});
   workFilm.addEventListener('keydown',event=>{
-    if(event.key==='Enter'||event.key===' '){ event.preventDefault(); startArtworkTryOn(); }
+    if(!mobileGallery()&&(event.key==='Enter'||event.key===' ')){ event.preventDefault(); startArtworkTryOn(); }
   });
 
   const globalBack=document.getElementById('globalBack');
@@ -5634,7 +5741,7 @@ updateCmpBadge();
   function unlockMediaPlayback(){
     const hubVideos=[...document.querySelectorAll('.opening-film')].slice(0,2);
     hubVideos.forEach(v=>{ if(v&&v.paused) playSilently(v); });
-    if(layer.classList.contains('open') && workFilm.paused) playSilently(workFilm);
+    if(layer.classList.contains('open') && workFilm.paused && !galleryPaused && !mobileGallery()) playSilently(workFilm);
   }
   document.addEventListener('pointerdown',unlockMediaPlayback,{passive:true,capture:true});
   document.addEventListener('touchstart',unlockMediaPlayback,{passive:true,capture:true});
@@ -5812,6 +5919,10 @@ updateCmpBadge();
     attr('#workArtworkTry','aria-label',isEnglish?'TRY THIS WORK ON':'この作品を試着');
     attr('.source-entry','aria-label',isEnglish?'CREATE FROM A PHOTO':'写真からつくる');
     attr('#workClose','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
+    attr('#workGalleryBack','aria-label',isEnglish?'Return to previous screen':'前の画面へ戻る');
+    attr('#workGalleryMore','aria-label',isEnglish?'Artwork details and try-on':'作品の詳細と試着へ');
+    text('#workGalleryLanguage',isEnglish?'JP':'EN');
+    attr('#workGalleryLanguage','aria-label',isEnglish?'Switch language to Japanese':'表示言語を英語へ切り替える');
     attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
     if(typeof refreshSourceFinish==='function'&&document.getElementById('sourceConfirm').classList.contains('open'))refreshSourceFinish();
