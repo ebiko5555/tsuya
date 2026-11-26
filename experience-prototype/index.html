@@ -1944,7 +1944,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <p class="opening-guide" id="openingGuide"></p>
     <div class="opening-actions">
       <button class="bigbtn" id="startBtn">作品ネイルを選ぶ</button>
-      <button type="button" id="sourceCatSample" class="source-cat-sample">猫の写真で試す</button>
+      <button type="button" id="sourceCatSample" class="source-cat-sample">見本で試す</button>
       <a class="make-link" href="?mode=custom">自由にデザインする</a>
     </div>
     <a class="access-link" id="accessLink" href="?access=large" aria-label="大きく見やすい表示で作品を見る"><svg viewBox="0 0 32 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 11s5-8 14-8 14 8 14 8-5 8-14 8S2 11 2 11Z"/><circle cx="16" cy="11" r="3.6"/></svg></a>
@@ -3969,7 +3969,7 @@ let selectedSourceSet=null;
 let sourceTryLength='short';
 let sourceInputRef=null;
 let catSampleImage=null;
-const catSampleAssets={photo:'source-assets/cat-reference-v1.jpg',tips:'source-assets/cat-nail-set-v3.jpg',hand:'source-assets/cat-nail-hand-v3.jpg'};
+const catSampleAssets={photo:'source-assets/cat-reference-v1.jpg',tips:'source-assets/cat-nail-set-v3.jpg',hand:'source-assets/cat-nail-hand-v4.jpg'};
 function catReferenceSet(){
   const colors=['#536047','#B5A48B','#806B56','#EDE5D7','#B88B8E'];
   return {name:'COLOR / 猫の写真',catReference:true,looks:['onecolor','onecolor','catTabby','onecolor','onecolor'],colors,sourcePalette:colors,
@@ -5714,7 +5714,7 @@ updateCmpBadge();
     }
     document.querySelector('#startOverlay .invite').innerHTML='COLOUR ATELIER<span class="invite-sub">CREATE YOUR OWN NAIL</span>';
     document.getElementById('openingGuide').textContent=origin?(origin.title+' / 身のまわりから採集する'):'身のまわりから採集する';
-    document.getElementById('startBtn').textContent='イメージを写真から選ぶ';
+    document.getElementById('startBtn').textContent='好きなものの写真で試す';
     document.getElementById('tryIdentityText').textContent=origin?('SOURCE / '+fromKey):'SOURCE';
     const backHref=origin?route('work',fromKey):homeRoute();
     const workBack=document.getElementById('tryWorkBack'); workBack.textContent='BACK'; workBack.href=backHref;
@@ -5962,7 +5962,7 @@ updateCmpBadge();
     if(isEnglish){
       text('.guide-text','Place your hand in the frame');
       text('.sg-tag','SOURCE · COLLECT LIGHT'); text('.sg-title','Gather a colour or a glimmer that catches you'); text('.sg-sub','Hold it up to light or a scene around you');
-      text('.bigbtn',isCustom?'CHOOSE AN IMAGE FROM PHOTOS':isTryOn?'START CAMERA':'CHOOSE A WORK');
+      text('.bigbtn',isCustom?'TRY WITH YOUR OWN PHOTO':isTryOn?'START CAMERA':'CHOOSE A WORK');
       text('.make-link',isCustom?'CREATE FROM A PHOTO':'CREATE FREELY');
       steps(['CHOOSE A WORK','VIEW THE NAILS','TRY ON WITH CAMERA']);
       text('.opening-work-cue span','ENTER THE WORK');
@@ -5979,7 +5979,7 @@ updateCmpBadge();
     }else{
       text('.guide-text','枠に手をかざしてください');
       text('.sg-tag','SOURCE · 光の採集'); text('.sg-title','心惹かれる光や色を、写しとる'); text('.sg-sub','身のまわりの光や景色にかざしてください');
-      text('.bigbtn',isCustom?'イメージを写真から選ぶ':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
+      text('.bigbtn',isCustom?'好きなものの写真で試す':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
       text('.make-link',isCustom?'写真からつくる':'自由にデザインする');
       steps(['作品を選ぶ','ネイルを見る','カメラで試着']);
       text('.opening-work-cue span','触れて、作品へ');
@@ -6006,7 +6006,7 @@ updateCmpBadge();
     attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
     if(typeof refreshSourceFinish==='function'&&document.getElementById('sourceConfirm').classList.contains('open'))refreshSourceFinish();
-    text('#sourceCatSample',isEnglish?'TRY WITH A CAT PHOTO':'猫の写真で試す');
+    text('#sourceCatSample',isEnglish?'TRY THE EXAMPLE':'見本で試す');
     if(!$('sourceCatConfirmPhoto').hidden)updateCatReferenceImage();
     attr('#sourceConfirmBack','aria-label',isEnglish?'Return to nail selection':'チップ選択へ戻る');
     attr('#nailSetClose','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
