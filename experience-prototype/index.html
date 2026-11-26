@@ -937,16 +937,19 @@
   body.custom-mode .source-reference-stack .source-reference-art{animation-delay:0s}
   body.custom-mode .source-reference-stack .source-reference-tips{animation-delay:4s}
   body.custom-mode .source-reference-stack .source-reference-hand{animation-delay:8s}
-  @keyframes sourceReferenceCycle{0%,44%,100%{opacity:1}50%,94%{opacity:0}}
+  @keyframes sourceReferenceCycle{0%,29%,100%{opacity:1}34%,95%{opacity:0}}
   body.custom-mode .source-reference-stack{background:#111114}
-  body.custom-mode .source-reference-stack img{height:100%;animation-duration:10s;box-shadow:none}
+  body.custom-mode .source-reference-stack img{height:100%;animation-duration:15s;box-shadow:none}
   body.custom-mode .source-reference-stack .source-reference-art{object-position:center 40%}
   body.custom-mode .source-reference-stack .source-reference-tips{object-fit:contain;object-position:center 32%;animation-delay:5s;background:#ece8e1}
+  body.custom-mode .source-reference-stack .source-reference-hand{object-fit:contain;object-position:center 30%;animation-delay:10s;background:#d6c8bb}
+  #sourceCatViewToggle{margin:0 0 4px;min-height:44px;padding:0 12px;border:0;background:none;color:#e5d9d0;text-decoration:underline;cursor:pointer}
+  #sourceCatViewToggle[hidden]{display:none}
   #sourceCatSample{display:none}
   body.custom-mode #sourceCatSample{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:6px 14px;color:#fff;background:#17171be8;border:1px solid #ffffff80;border-radius:999px;font:inherit;cursor:pointer}
   #sourceCatConfirmPhoto{display:block;width:min(100%,520px);height:auto;aspect-ratio:620/300;object-fit:contain;border-radius:8px}
   #sourceCatConfirmPhoto[hidden],#sourceConfirmCanvas[hidden]{display:none}
-  @media (prefers-reduced-motion:reduce){body.custom-mode .source-reference-stack img{animation:none;opacity:1}body.custom-mode .source-reference-stack .source-reference-tips{display:none}}
+  @media (prefers-reduced-motion:reduce){body.custom-mode .source-reference-stack img{animation:none;opacity:1}body.custom-mode .source-reference-stack :is(.source-reference-tips,.source-reference-hand){display:none}}
   body.custom-mode .opening-mark{display:none}
   body.custom-mode #startOverlay{justify-content:flex-end; padding-bottom:calc(28px + env(safe-area-inset-bottom))}
   body.custom-mode #startOverlay .invite,body.custom-mode .opening-guide,body.custom-mode .make-link{display:none}
@@ -1933,6 +1936,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
       <div class="source-reference-stack">
         <img class="source-reference-art" data-cat-reference="photo" alt="">
         <img class="source-reference-tips" data-cat-reference="tips" alt="">
+        <img class="source-reference-hand" data-cat-reference="hand" alt="">
       </div>
     </div>
     <div class="opening-mark">TRY ON / ART WORK<br>TRACE / SKIN — 2026</div>
@@ -2013,6 +2017,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <p id="sourceConfirmName" class="source-confirm-name"></p>
     <canvas id="sourceConfirmCanvas" width="620" height="300" aria-label="選んだネイルセット"></canvas>
     <img id="sourceCatConfirmPhoto" hidden alt="猫の写真をもとにデザインした5本のチップのイメージ">
+    <button type="button" id="sourceCatViewToggle" hidden>装着イメージを見る</button>
     <div class="source-finish-area">
       <p id="sourceFinishTitle">2　仕上げ</p>
       <div id="sourceFinishChoice" role="group" aria-labelledby="sourceFinishTitle">
@@ -3964,7 +3969,7 @@ let selectedSourceSet=null;
 let sourceTryLength='short';
 let sourceInputRef=null;
 let catSampleImage=null;
-const catSampleAssets={photo:'source-assets/cat-reference-v1.jpg',tips:'source-assets/cat-nail-set-v1.jpg'};
+const catSampleAssets={photo:'source-assets/cat-reference-v1.jpg',tips:'source-assets/cat-nail-set-v2.jpg',hand:'source-assets/cat-nail-hand-v2.jpg'};
 function catReferenceSet(){
   const colors=['#536047','#B5A48B','#806B56','#EDE5D7','#B88B8E'];
   return {name:'COLOR / 猫の写真',catReference:true,looks:['onecolor','onecolor','catTabby','onecolor','onecolor'],colors,sourcePalette:colors,
@@ -4335,10 +4340,12 @@ function drawSourceSetPreview(canvas,set){
 function drawLargeSourceSetPreview(canvas,set,length){
   const samplePhoto=$('sourceCatConfirmPhoto');
   const useReference=Boolean(set.catReference&&sourceFinish(set)==='original'&&normalizeTryLength(length)==='short');
+  const sampleToggle=$('sourceCatViewToggle');
   samplePhoto.hidden=!useReference;
+  sampleToggle.hidden=!useReference;
   canvas.hidden=useReference;
   if(useReference){
-    if(!samplePhoto.hasAttribute('src'))samplePhoto.src=catSampleAssets.tips;
+    updateCatReferenceImage();
     return;
   }
   const c=canvas.getContext('2d');
@@ -4356,9 +4363,19 @@ function drawLargeSourceSetPreview(canvas,set,length){
   }));
   if(sourceProfile&&keepPalette) sourceProfile.palette=keepPalette;
 }
+let catShowHand=false;
+function updateCatReferenceImage(){
+  const photo=$('sourceCatConfirmPhoto'), toggle=$('sourceCatViewToggle');
+  const en=document.documentElement.dataset.language==='en';
+  const next=catShowHand?catSampleAssets.hand:catSampleAssets.tips;
+  if(photo.getAttribute('src')!==next)photo.src=next;
+  photo.alt=en?(catShowHand?'AI-generated worn example for the five cat-inspired nails':'AI-generated preview of the five cat-inspired tips'):(catShowHand?'猫の写真をもとにしたネイルの装着イメージ（AI生成）':'猫の写真をもとにした5本のチップのイメージ（AI生成）');
+  toggle.textContent=catShowHand?(en?'View the tips':'チップを見る'):(en?'View the worn example':'装着イメージを見る');
+}
+$('sourceCatViewToggle').onclick=()=>{catShowHand=!catShowHand;updateCatReferenceImage();};
 function openSourceConfirm(set){
   if(!set) return;
-  selectedSourceSet=set; applySet(set);
+  selectedSourceSet=set; catShowHand=false; applySet(set);
   /* SHORT/LONG is the user's choice; opening the same set again must not reset it. */
   applyTryLength(sourceTryLength);
   renderLengthChoice($('sourceLengthChoice'),sourceTryLength);
@@ -5990,7 +6007,7 @@ updateCmpBadge();
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
     if(typeof refreshSourceFinish==='function'&&document.getElementById('sourceConfirm').classList.contains('open'))refreshSourceFinish();
     text('#sourceCatSample',isEnglish?'TRY WITH A CAT PHOTO':'猫の写真で試す');
-    attr('#sourceCatConfirmPhoto','alt',isEnglish?'Rendered example of five nail tips based on the cat photo':'猫の写真をもとにデザインした5本のチップのイメージ');
+    if(!$('sourceCatConfirmPhoto').hidden)updateCatReferenceImage();
     attr('#sourceConfirmBack','aria-label',isEnglish?'Return to nail selection':'チップ選択へ戻る');
     attr('#nailSetClose','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#nailSetBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
