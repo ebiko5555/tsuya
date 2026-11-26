@@ -945,8 +945,6 @@
   body.custom-mode .source-reference-stack .source-reference-hand{object-fit:contain;object-position:center 30%;animation-delay:10s;background:#d6c8bb}
   #sourceCatViewToggle{margin:0 0 4px;min-height:44px;padding:0 12px;border:0;background:none;color:#e5d9d0;text-decoration:underline;cursor:pointer}
   #sourceCatViewToggle[hidden]{display:none}
-  #sourceCatSample{display:none}
-  body.custom-mode #sourceCatSample{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:6px 14px;color:#fff;background:#17171be8;border:1px solid #ffffff80;border-radius:999px;font:inherit;cursor:pointer}
   #sourceCatConfirmPhoto{display:block;width:min(100%,520px);height:auto;aspect-ratio:620/300;object-fit:contain;border-radius:8px}
   #sourceCatConfirmPhoto[hidden],#sourceConfirmCanvas[hidden]{display:none}
   @media (prefers-reduced-motion:reduce){body.custom-mode .source-reference-stack img{animation:none;opacity:1}body.custom-mode .source-reference-stack :is(.source-reference-tips,.source-reference-hand){display:none}}
@@ -1814,7 +1812,7 @@
   }
 .source-finish-area{width:min(100%,430px);color:#eee;margin:0 auto 8px}
 .source-finish-area p{font-size:.75rem;margin:0 0 6px;text-align:center;letter-spacing:.08em}
-#sourceFinishChoice{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+#sourceFinishChoice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
 #sourceFinishChoice button{border:1px solid #77727a;background:#201d23;color:#f6f3f4;min-height:44px;border-radius:9px;padding:3px 2px;line-height:1.14;font:inherit;font-size:clamp(10px,3.3vw,13px)}
 #sourceFinishChoice button[aria-pressed="true"]{background:#f8efe9;color:#281c22;border-color:#f8efe9}
 #sourceFinishChoice button:focus-visible{outline:2px solid #fdb5da;outline-offset:2px}
@@ -1944,7 +1942,6 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <p class="opening-guide" id="openingGuide"></p>
     <div class="opening-actions">
       <button class="bigbtn" id="startBtn">作品ネイルを選ぶ</button>
-      <button type="button" id="sourceCatSample" class="source-cat-sample">見本で試す</button>
       <a class="make-link" href="?mode=custom">自由にデザインする</a>
     </div>
     <a class="access-link" id="accessLink" href="?access=large" aria-label="大きく見やすい表示で作品を見る"><svg viewBox="0 0 32 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 11s5-8 14-8 14 8 14 8-5 8-14 8S2 11 2 11Z"/><circle cx="16" cy="11" r="3.6"/></svg></a>
@@ -2021,7 +2018,6 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <div class="source-finish-area">
       <p id="sourceFinishTitle">2　仕上げ</p>
       <div id="sourceFinishChoice" role="group" aria-labelledby="sourceFinishTitle">
-        <button type="button" data-finish="original" data-ja="元のまま" data-en="Original">元のまま</button>
         <button type="button" data-finish="sourceGelClear" data-ja="透けるジェル" data-en="Sheer gel">透けるジェル</button>
         <button type="button" data-finish="sourceGelMagnet" data-ja="マグネット" data-en="Magnetic">マグネット</button>
         <button type="button" data-finish="sourceGelGlitter" data-ja="ラメ" data-en="Glitter">ラメ</button>
@@ -4496,20 +4492,6 @@ function activateSourceTab(){
 }
 $('sourcePhoto').onclick=()=>$('sourceInput').click();
 let sourceFileGeneration=0;
-$('sourceCatSample').onclick=async()=>{
-  const generation=++sourceFileGeneration;
-  const button=$('sourceCatSample'); button.disabled=true;
-  try{
-    const image=new Image(); image.src=catSampleAssets.photo;
-    await image.decode();
-    if(generation!==sourceFileGeneration)return;
-    catSampleImage=image;
-    sourceMode='COLOR'; sourceTryLength='short';
-    ingestSource(image,document.documentElement.dataset.language==='en'?'Cat photo':'猫の写真');
-  }catch(error){
-    if(generation===sourceFileGeneration) setStatus('見本の写真を開けませんでした。もう一度お試しください。');
-  }finally{button.disabled=false;}
-};
 $('sourceInput').addEventListener('change',async e=>{
   const file=e.target.files[0]; if(!file) return;
   const generation=++sourceFileGeneration;
@@ -5714,7 +5696,7 @@ updateCmpBadge();
     }
     document.querySelector('#startOverlay .invite').innerHTML='COLOUR ATELIER<span class="invite-sub">CREATE YOUR OWN NAIL</span>';
     document.getElementById('openingGuide').textContent=origin?(origin.title+' / 身のまわりから採集する'):'身のまわりから採集する';
-    document.getElementById('startBtn').textContent='好きなものの写真で試す';
+    document.getElementById('startBtn').textContent='試す';
     document.getElementById('tryIdentityText').textContent=origin?('SOURCE / '+fromKey):'SOURCE';
     const backHref=origin?route('work',fromKey):homeRoute();
     const workBack=document.getElementById('tryWorkBack'); workBack.textContent='BACK'; workBack.href=backHref;
@@ -5962,7 +5944,7 @@ updateCmpBadge();
     if(isEnglish){
       text('.guide-text','Place your hand in the frame');
       text('.sg-tag','SOURCE · COLLECT LIGHT'); text('.sg-title','Gather a colour or a glimmer that catches you'); text('.sg-sub','Hold it up to light or a scene around you');
-      text('.bigbtn',isCustom?'TRY WITH YOUR OWN PHOTO':isTryOn?'START CAMERA':'CHOOSE A WORK');
+      text('.bigbtn',isCustom?'Try':isTryOn?'START CAMERA':'CHOOSE A WORK');
       text('.make-link',isCustom?'CREATE FROM A PHOTO':'CREATE FREELY');
       steps(['CHOOSE A WORK','VIEW THE NAILS','TRY ON WITH CAMERA']);
       text('.opening-work-cue span','ENTER THE WORK');
@@ -5979,7 +5961,7 @@ updateCmpBadge();
     }else{
       text('.guide-text','枠に手をかざしてください');
       text('.sg-tag','SOURCE · 光の採集'); text('.sg-title','心惹かれる光や色を、写しとる'); text('.sg-sub','身のまわりの光や景色にかざしてください');
-      text('.bigbtn',isCustom?'好きなものの写真で試す':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
+      text('.bigbtn',isCustom?'試す':isTryOn?'START CAMERA':'作品ネイルを選ぶ');
       text('.make-link',isCustom?'写真からつくる':'自由にデザインする');
       steps(['作品を選ぶ','ネイルを見る','カメラで試着']);
       text('.opening-work-cue span','触れて、作品へ');
@@ -6006,7 +5988,6 @@ updateCmpBadge();
     attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
     if(typeof refreshSourceFinish==='function'&&document.getElementById('sourceConfirm').classList.contains('open'))refreshSourceFinish();
-    text('#sourceCatSample',isEnglish?'TRY THE EXAMPLE':'見本で試す');
     if(!$('sourceCatConfirmPhoto').hidden)updateCatReferenceImage();
     attr('#sourceConfirmBack','aria-label',isEnglish?'Return to nail selection':'チップ選択へ戻る');
     attr('#nailSetClose','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
