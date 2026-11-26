@@ -937,7 +937,16 @@
   body.custom-mode .source-reference-stack .source-reference-art{animation-delay:0s}
   body.custom-mode .source-reference-stack .source-reference-tips{animation-delay:4s}
   body.custom-mode .source-reference-stack .source-reference-hand{animation-delay:8s}
-  @keyframes sourceReferenceCycle{0%,28%{opacity:1;transform:scale(1)}33%,95%{opacity:0;transform:scale(1.025)}100%{opacity:1;transform:scale(1)}}
+  @keyframes sourceReferenceCycle{0%,44%,100%{opacity:1}50%,94%{opacity:0}}
+  body.custom-mode .source-reference-stack{background:#111114}
+  body.custom-mode .source-reference-stack img{height:100%;animation-duration:10s;box-shadow:none}
+  body.custom-mode .source-reference-stack .source-reference-art{object-position:center 40%}
+  body.custom-mode .source-reference-stack .source-reference-tips{object-fit:contain;object-position:center 32%;animation-delay:5s;background:#ece8e1}
+  #sourceCatSample{display:none}
+  body.custom-mode #sourceCatSample{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:6px 14px;color:#fff;background:#17171be8;border:1px solid #ffffff80;border-radius:999px;font:inherit;cursor:pointer}
+  #sourceCatConfirmPhoto{display:block;width:min(100%,520px);height:auto;aspect-ratio:620/300;object-fit:contain;border-radius:8px}
+  #sourceCatConfirmPhoto[hidden],#sourceConfirmCanvas[hidden]{display:none}
+  @media (prefers-reduced-motion:reduce){body.custom-mode .source-reference-stack img{animation:none;opacity:1}body.custom-mode .source-reference-stack .source-reference-tips{display:none}}
   body.custom-mode .opening-mark{display:none}
   body.custom-mode #startOverlay{justify-content:flex-end; padding-bottom:calc(28px + env(safe-area-inset-bottom))}
   body.custom-mode #startOverlay .invite,body.custom-mode .opening-guide,body.custom-mode .make-link{display:none}
@@ -1922,9 +1931,8 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
       <video class="opening-film b" src="art-assets/surface-gold.mp4" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <video class="opening-film c" muted loop autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
       <div class="source-reference-stack">
-        <img class="source-reference-art" src="source-assets/source-glass-reference.png" alt="">
-        <img class="source-reference-tips" src="source-assets/source-tsuya-nail-set.png" alt="">
-        <img class="source-reference-hand" src="source-assets/source-tsuya-hand.png" alt="">
+        <img class="source-reference-art" data-cat-reference="photo" alt="">
+        <img class="source-reference-tips" data-cat-reference="tips" alt="">
       </div>
     </div>
     <div class="opening-mark">TRY ON / ART WORK<br>TRACE / SKIN — 2026</div>
@@ -1932,6 +1940,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
     <p class="opening-guide" id="openingGuide"></p>
     <div class="opening-actions">
       <button class="bigbtn" id="startBtn">作品ネイルを選ぶ</button>
+      <button type="button" id="sourceCatSample" class="source-cat-sample">猫の写真で試す</button>
       <a class="make-link" href="?mode=custom">自由にデザインする</a>
     </div>
     <a class="access-link" id="accessLink" href="?access=large" aria-label="大きく見やすい表示で作品を見る"><svg viewBox="0 0 32 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 11s5-8 14-8 14 8 14 8-5 8-14 8S2 11 2 11Z"/><circle cx="16" cy="11" r="3.6"/></svg></a>
@@ -2003,6 +2012,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
   <div class="source-confirm-body">
     <p id="sourceConfirmName" class="source-confirm-name"></p>
     <canvas id="sourceConfirmCanvas" width="620" height="300" aria-label="選んだネイルセット"></canvas>
+    <img id="sourceCatConfirmPhoto" hidden alt="猫の写真をもとにデザインした5本のチップのイメージ">
     <div class="source-finish-area">
       <p id="sourceFinishTitle">2　仕上げ</p>
       <div id="sourceFinishChoice" role="group" aria-labelledby="sourceFinishTitle">
@@ -3023,6 +3033,16 @@ function getComplementaryColor(hex){
 }
 const LOOKS = {
   onecolor:{name:'ワンカラー', paint(c,w,h,col){ base(c,w,h,shade(col,18),shade(col,-14)); }},
+  catTabby:{name:'猫の縞',paint(c,w,h,col){
+    base(c,w,h,shade(col,15),shade(col,-13));
+    c.save();c.strokeStyle='#30271f'; c.lineCap='round';
+    for(let i=0;i<4;i++){
+      const y=(-.46+i*.235)*h; c.lineWidth=(i===1?.20:.14)*w;
+      c.beginPath();c.moveTo(-w*.60,y-h*.04);
+      c.bezierCurveTo(-w*.18,y-h*.19,w*.11,y+h*.14,w*.60,y+h*.01);c.stroke();
+    }
+    c.restore();
+  }},
   churun:{name:'ちゅるん', paint(c,w,h,col){
     nudeBase(c,w,h,.5);
     const keep=c.globalAlpha; c.globalAlpha=keep*.72;
@@ -3943,6 +3963,13 @@ let sourceSets=[];
 let selectedSourceSet=null;
 let sourceTryLength='short';
 let sourceInputRef=null;
+let catSampleImage=null;
+const catSampleAssets={photo:'source-assets/cat-reference-v1.jpg',tips:'source-assets/cat-nail-set-v1.jpg'};
+function catReferenceSet(){
+  const colors=['#536047','#B5A48B','#806B56','#EDE5D7','#B88B8E'];
+  return {name:'COLOR / 猫の写真',catReference:true,looks:['onecolor','onecolor','catTabby','onecolor','onecolor'],colors,sourcePalette:colors,
+    tune:{gloss:93,opacity:96,nailSize:95,sculptLen:118,sculptShape:'natural'},vars:{}};
+}
 let sourceInputLabel='FOUND MATERIAL';
 let sourceRandomSalt=0;
 let sourcePickMode=false;
@@ -4306,6 +4333,14 @@ function drawSourceSetPreview(canvas,set){
   if(sourceProfile&&keepPalette) sourceProfile.palette=keepPalette;
 }
 function drawLargeSourceSetPreview(canvas,set,length){
+  const samplePhoto=$('sourceCatConfirmPhoto');
+  const useReference=Boolean(set.catReference&&sourceFinish(set)==='original'&&normalizeTryLength(length)==='short');
+  samplePhoto.hidden=!useReference;
+  canvas.hidden=useReference;
+  if(useReference){
+    if(!samplePhoto.hasAttribute('src'))samplePhoto.src=catSampleAssets.tips;
+    return;
+  }
   const c=canvas.getContext('2d');
   c.clearRect(0,0,canvas.width,canvas.height);
   const keepPalette=sourceProfile&&sourceProfile.palette;
@@ -4341,7 +4376,11 @@ function renderSourceSets({regenerate=true,resetSelection=false}={}){
   const index=resetSelection?0:Math.max(0,sourceSets.indexOf(selectedSourceSet));
   const box=$('sourceSets'); box.innerHTML='';
   if(regenerate){
-    if(!sourceSetBanks.has(sourceMode))sourceSetBanks.set(sourceMode,makeSourceSets(sourceMode));
+    if(!sourceSetBanks.has(sourceMode)){
+      const sets=makeSourceSets(sourceMode);
+      if(sourceInputRef===catSampleImage&&!sourceProfile.catCustomMotif&&sourceMode==='COLOR')sets.unshift(catReferenceSet());
+      sourceSetBanks.set(sourceMode,sets);
+    }
     sourceSets=sourceSetBanks.get(sourceMode);
   }
   selectedSourceSet=sourceSets[Math.min(index,sourceSets.length-1)]||null;
@@ -4370,6 +4409,7 @@ function renderSourceSets({regenerate=true,resetSelection=false}={}){
   sourceInputRef=input; sourceInputLabel=label||'FOUND MATERIAL';
   sourceRandomSalt=(Math.floor(Math.random()*0xffffffff)>>>0);
   const sampled=sourceCanvasFrom(input,focus); sourceProfile=analyzeSource(sampled);
+  sourceProfile.catCustomMotif=Boolean(focus);
   sourceSetBanks.clear();
   const ow=input.videoWidth||input.naturalWidth||input.width||sampled.width;
   const oh=input.videoHeight||input.naturalHeight||input.height||sampled.height;
@@ -4439,6 +4479,20 @@ function activateSourceTab(){
 }
 $('sourcePhoto').onclick=()=>$('sourceInput').click();
 let sourceFileGeneration=0;
+$('sourceCatSample').onclick=async()=>{
+  const generation=++sourceFileGeneration;
+  const button=$('sourceCatSample'); button.disabled=true;
+  try{
+    const image=new Image(); image.src=catSampleAssets.photo;
+    await image.decode();
+    if(generation!==sourceFileGeneration)return;
+    catSampleImage=image;
+    sourceMode='COLOR'; sourceTryLength='short';
+    ingestSource(image,document.documentElement.dataset.language==='en'?'Cat photo':'猫の写真');
+  }catch(error){
+    if(generation===sourceFileGeneration) setStatus('見本の写真を開けませんでした。もう一度お試しください。');
+  }finally{button.disabled=false;}
+};
 $('sourceInput').addEventListener('change',async e=>{
   const file=e.target.files[0]; if(!file) return;
   const generation=++sourceFileGeneration;
@@ -5624,8 +5678,8 @@ updateCmpBadge();
     document.body.classList.add('custom-mode');
     document.title='HAND & LIGHT — COLOUR ATELIER';
     const sourceHero=document.querySelector('.opening-film.a');
-    sourceHero.src='source-assets/source-process-loop-v1.mp4';
-    sourceHero.load(); playSilently(sourceHero);
+    sourceHero.removeAttribute('src');
+    document.querySelectorAll('[data-cat-reference]').forEach(img=>{img.src=catSampleAssets[img.dataset.catReference];});
     Object.assign(tuneVals,{nailSize:95,sculptLen:130,sculptShape:'natural'});
     const origin=works[fromKey]||null;
     if(origin){
@@ -5935,6 +5989,8 @@ updateCmpBadge();
     attr('#tryWorkBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#sourceTryonBackPill','aria-label',isEnglish?'Choose the nail set again':'チップを選び直す');
     if(typeof refreshSourceFinish==='function'&&document.getElementById('sourceConfirm').classList.contains('open'))refreshSourceFinish();
+    text('#sourceCatSample',isEnglish?'TRY WITH A CAT PHOTO':'猫の写真で試す');
+    attr('#sourceCatConfirmPhoto','alt',isEnglish?'Rendered example of five nail tips based on the cat photo':'猫の写真をもとにデザインした5本のチップのイメージ');
     attr('#sourceConfirmBack','aria-label',isEnglish?'Return to nail selection':'チップ選択へ戻る');
     attr('#nailSetClose','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
     attr('#nailSetBack','aria-label',isEnglish?'Return to the work':'作品ページへ戻る');
