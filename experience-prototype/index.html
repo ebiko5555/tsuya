@@ -1826,8 +1826,7 @@ body.access-mode:not(.hub-mode):not(.art-page) #siteHome{display:flex}
 @media (max-width:819px){
   body.art-page #workLayer{overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain}
   body.art-page #workLayer::after,
-  body.art-page #siteHome,body.art-page #globalBack,body.art-page #languageSwitch,
-  body.art-page #photoTrialLabel{display:none}
+  body.art-page #siteHome,body.art-page #globalBack,body.art-page #languageSwitch{display:none}
   body.art-page #workLayer .work-gallery-stage{
     display:flex; flex-direction:column; height:100vh; height:100svh; background:#08090c;
     box-sizing:border-box; padding-top:env(safe-area-inset-top);
@@ -1896,7 +1895,7 @@ html[data-language="en"] #workLayer .artwork-try-entry{font-family:var(--tsuya-t
 #workLayer .source-entry .source-entry-arrow::after{font-size:36px}
 </style>
 </head>
-<body><div id="photoTrialLabel" style="position:fixed;z-index:250;bottom:3px;left:8px;pointer-events:none;background:#121619dd;color:white;font:10px system-ui;padding:2px 6px;border-radius:4px">試着プレビュー</div>
+<body>
 <header>
   <div class="overline">Hand &amp; Light Atelier</div>
   <div class="rule"></div>
